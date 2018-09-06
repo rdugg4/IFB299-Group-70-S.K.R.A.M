@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+/* Style inputs with type="text", select elements and textareas */
+pt {
+	font-size: 40px;
+	text-align: center;
+}
+
+
+input[type=text], select, textarea {
+	width: 50%; 
+    padding: 10px; /* Some padding */  
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 10px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
+	text-align: left;
+	
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+    background-color: #C52225;
+    color: white;
+    padding: 10px 100px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+    background-color: #D9484B;
+}
+
+/* Add a background color and some padding around the form */
+.container {
+    border-radius: 10px;
+    background-color: #D5DBE5;
+    padding: 80px;
+	width: 1500px;
+    /* Change this value to customize the content area*/
+    margin: 0 auto;
+}
+
+pTY{
+	font-family:verdana;
+	font-size: 15px;
+	color:green;
+}
