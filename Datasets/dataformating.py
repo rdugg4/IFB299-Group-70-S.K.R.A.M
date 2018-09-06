@@ -27,7 +27,7 @@ dataSet = noNullData[0:(height-nullCounter)]
 storeData = [[0 for x in range(6)] for y in range(len(dataSet)*2)]
 carData = [[0 for x in range(15)] for y in range(len(dataSet))]
 customerData = [[0 for x in range(9)] for y in range(len(dataSet))]
-orderData = [[0 for x in range(8)] for y in range(len(dataSet))]
+orderData = [[0 for x in range(9)] for y in range(len(dataSet))]
 for i in range(0, len(dataSet)):
     for j in range(0, len(data[0])):
         if (j >= 0 and j < 4):
@@ -39,11 +39,11 @@ for i in range(0, len(dataSet)):
         if (j >= 10 and j < 16):
             storeData[2*i+1][j-10] = dataSet[i][j]
         if (j == 16):
-            orderData[i][j-10] = dataSet[i][j]
+            orderData[i][j-9] = dataSet[i][j]
         if (j >= 16 and j < 23):
             customerData[i][j-16] = dataSet[i][j]
         if (j == 23):
-            orderData[i][j-16] = dataSet[i][j]
+            orderData[i][j-15] = dataSet[i][j]
         if (j >= 23 and j < 38):
             carData[i][j-23] = dataSet[i][j]
 
@@ -66,7 +66,7 @@ storeDataFinal = storeDataNoDuplicates[0:(len(storeDataNoDuplicates)-duplicateCo
 #Remove Duplicates from the customer and car data sets
 carDataNoDuplicates = [[0 for x in range(15)] for y in range(len(dataSet))]
 customerDataNoDuplicates = [[0 for x in range(9)] for y in range(len(dataSet))]
-orderDataNoDuplicates = [[0 for x in range(8)] for y in range(len(dataSet))]
+orderDataNoDuplicates = [[0 for x in range(9)] for y in range(len(dataSet))]
 duplicateCounter_car = 0
 duplicateCounter_customer = 0
 duplicateCounter_order = 0
@@ -80,7 +80,7 @@ for i in range(0, len(dataSet)):
         if (customerData[i][0] == customerData[j][0]):
             alreadyExists_customer = True
         if (orderData[i][0] == orderData[j][0]):
-            alreadyExists_order = True  
+            alreadyExists_order = True
     if (alreadyExists_car):
         duplicateCounter_car = duplicateCounter_car + 1
     else:
@@ -95,14 +95,14 @@ for i in range(0, len(dataSet)):
         duplicateCounter_order = duplicateCounter_order + 1
     else:
         orderDataNoDuplicates[i - duplicateCounter_order] = orderData[i]
+        orderDataNoDuplicates[i - duplicateCounter_order][6] = 'True'
 carDataFinal = carDataNoDuplicates[0:(len(carDataNoDuplicates)-duplicateCounter_car)]
 customerDataFinal = customerDataNoDuplicates[0:(len(customerDataNoDuplicates)-duplicateCounter_customer)]
 orderDataFinal = orderDataNoDuplicates[0:(len(orderDataNoDuplicates)-duplicateCounter_order)]
 
-print(type(customerDataFinal[88][1]))
-
 customerDataFinal[0][7] = 'Username'
 customerDataFinal[0][8] = 'Password'
+orderDataFinal[0][6] = 'Dropped Off'
 
 #Write the CSV files for each data set
 with open('customer.csv', 'w', newline='') as csvfile:

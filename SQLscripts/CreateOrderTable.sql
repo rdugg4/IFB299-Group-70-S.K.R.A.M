@@ -6,6 +6,7 @@ CREATE table Orders (
     PickupStore INT,
     ReturnDate INT,
     ReturnStore INT,
+    DroppedOff VARCHAR(255),
     CustomerID INT,
     CarID INT
 );
