@@ -1,0 +1,1 @@
+CREATE USER 'Website'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password';

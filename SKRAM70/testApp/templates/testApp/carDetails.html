@@ -1,0 +1,8 @@
+{% if CarInfo %}
+    {% for car in CarInfo %}
+        <h6>1{{ car.car_makename }}</h6>
+    {% endfor %}
+{% else %}
+    <p> FUCK IT FAILED </p>
+{% endif %}
+<p> IT WORKS </p>
