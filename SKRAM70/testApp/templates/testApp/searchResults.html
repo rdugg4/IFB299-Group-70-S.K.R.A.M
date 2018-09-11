@@ -1,0 +1,10 @@
+{% if resultantCars %}
+    {% for car in resultantCars %}
+        <h6>{{ car.car_makename }}</h6>
+        <p>{{ car.car_wheelbase }}</p>
+        <a href="/testApp/{{ car.id }}/">{{ car.car_model }}</a>
+    {% endfor %}
+{% else %}
+    <p> FUCK IT FAILED </p>
+{% endif %}
+<p> IT WORKS </p>
