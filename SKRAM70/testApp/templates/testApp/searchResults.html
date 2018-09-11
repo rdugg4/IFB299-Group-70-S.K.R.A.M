@@ -2,7 +2,7 @@
     {% for car in resultantCars %}
         <h6>{{ car.car_makename }}</h6>
         <p>{{ car.car_wheelbase }}</p>
-        <a href="/testApp/{{ car.id }}/">{{ car.car_model }}</a>
+        <a href="/CRC/{{ car.id }}/">{{ car.car_model }}</a>
     {% endfor %}
 {% else %}
     <p> FUCK IT FAILED </p>
