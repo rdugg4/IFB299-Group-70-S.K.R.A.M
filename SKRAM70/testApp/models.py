@@ -5,6 +5,7 @@
 from django.db import models
 
 class Cars(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
     car_makename = models.CharField(db_column='Car_MakeName', max_length=255)  # Field name made lowercase.
     car_model = models.CharField(db_column='Car_Model', max_length=255)  # Field name made lowercase.
     car_series = models.CharField(db_column='Car_Series', max_length=255)  # Field name made lowercase.
@@ -22,9 +23,6 @@ class Cars(models.Model):
 
     class Meta:
         db_table = 'cars'
-
-    def __str__(self):
-        return self.car_makename
 
 class Customers(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
