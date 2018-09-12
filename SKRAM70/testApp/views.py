@@ -15,8 +15,10 @@ def detail(request, car_id):
     context = {'CarInfo': carInfo}
     return render(request, 'testApp/carDetails.html', context)
 
-def accounts(request):
-    return render(request, 'testApp/signup.html')
+def accounts(request, customer_id):
+    customer = Customers.objects.filter(id=customer_id)
+    context = {'Customer': customer}
+    return render(request, 'testApp/signup.html', context)
 
 def search(request):
     resultantCars = Cars.objects.none()

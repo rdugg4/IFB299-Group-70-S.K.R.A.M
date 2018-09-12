@@ -6,6 +6,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('<int:car_id>/', views.detail, name='detail'),
-    path('create_account/', views.accounts, name='Accounts'),
+    path('create_account/<int:customer_id>/', views.accounts, name='Accounts'),
     url(r'^search/$', views.search),
 ]
