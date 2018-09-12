@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Cars
+from .models import Customers
 from .models import Stores
 from .models import Orders
 from django.http import HttpResponse
@@ -14,9 +15,14 @@ def detail(request, car_id):
     context = {'CarInfo': carInfo}
     return render(request, 'testApp/carDetails.html', context)
 
+def accounts(request, customer_id):
+    customerInfo = Customers.objects.filter(id=customer_id)
+    context = {'CustomerInfo': customerInfo}
+    return render(request, 'testApp/signup.html', context)
+
 def search(request):
     resultantCars = Cars.objects.none()
-    pickupDateSet = ('pickupDate' in request.GET) and 
+    pickupDateSet = ('pickupDate' in request.GET) and
     if ('pickupLocation' in request.GET) and (request.GET['pickupLocation']) and (isfloat(request.GET['pickupLocation'])):
         ordersWithCarsInLocation = Orders.objects.filter(returnstore=request.GET['pickupLocation'])
         for order in ordersWithCarsInLocation:
