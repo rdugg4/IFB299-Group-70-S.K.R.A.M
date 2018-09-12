@@ -3,6 +3,7 @@ from .models import Cars
 from .models import Customers
 from .models import Stores
 from .models import Orders
+import datetime
 from django.http import HttpResponse
 
 def index(request):
@@ -21,32 +22,52 @@ def accounts(request, customer_id):
     return render(request, 'testApp/signup.html', context)
 
 def search(request):
-    resultantCars = Cars.objects.none()
+    resultantCars = Cars.objects.all()
+    resultantOrders = Orders.objects.all()
+    ordersToExclude = resultantOrders.none()
     pickupDateSet = (('pickupDate' in request.GET) and (request.GET['pickupDate']) and (isint(request.GET['pickupDate'][0:4]))
         and (isint(request.GET['pickupDate'][5:7])) and (isint(request.GET['pickupDate'][8:10])))
-    dropoffDataSet = (('dropoffDate' in request.GET) and (request.GET['dropoffDate']) and (isint(request.GET['dropoffDate'][0:4]))
+    dropoffDateSet = (('dropoffDate' in request.GET) and (request.GET['dropoffDate']) and (isint(request.GET['dropoffDate'][0:4]))
         and (isint(request.GET['dropoffDate'][5:7])) and (isint(request.GET['dropoffDate'][8:10])))
-    if ('pickupLocation' in request.GET) and (request.GET['pickupLocation']) and (isint(request.GET['pickupLocation'])):
-        ordersWithCarsInLocation = Orders.objects.filter(returnstore=request.GET['pickupLocation'])
-        for order in ordersWithCarsInLocation:
-            # carsHaveBeenReturned = ((int(request.GET['pickupDate'][0:4]) > int(str(order.returndate)[0:4])) or
-            #     ((int(request.GET['pickupDate'][0:4]) == int(str(order.returndate)[0:4]))
-            #     and (int(request.GET['pickupDate'][5:7]) > int(str(order.returndate)[4:6]))) or
-            #     ((int(request.GET['pickupDate'][0:4]) == int(str(order.returndate)[0:4]))
-            #     and (int(request.GET['pickupDate'][5:7]) == int(str(order.returndate)[4:6]))
-            #     and (int(request.GET['pickupDate'][8:10]) >= int(str(order.returndate)[6:8]))))
-            # carNotOrdered = ((int(request.GET['dropoffDate'][0:4]) > int(str(order.pickupdate)[0:4])) or
-            #     ((int(request.GET['dropoffDate'][0:4]) == int(str(order.pickupdate)[0:4]))
-            #     and (int(request.GET['dropoffDate'][5:7]) > int(str(order.pickupdate)[4:6]))) or
-            #     ((int(request.GET['dropoffDate'][0:4]) == int(str(order.pickupdate)[0:4]))
-            #     and (int(request.GET['dropoffDate'][5:7]) == int(str(order.pickupdate)[4:6]))
-            #     and (int(request.GET['dropoffDate'][8:10]) >= int(str(order.pickupdate)[6:8]))))
-            # if (carsHaveBeenReturned):
-            temp = Cars.objects.filter(id=order.carid_id)
-            resultantCars = resultantCars | temp
+    pickupLocationSet = (('pickupLocation' in request.GET) and (request.GET['pickupLocation'])
+        and (isint(request.GET['pickupLocation'])))
+    now = datetime.datetime.now()
+    pickupDate_int = 0
+    if pickupDateSet:
+        pickupDate_string = request.GET['pickupDate'][0:4] + request.GET['pickupDate'][5:7] + request.GET['pickupDate'][8:10]
+        pickupDate_int = int(pickupDate_string)
     else:
-        resultantCars = Cars.objects.all()
+        pickupDate_int = int(str(now.year)+str(now.month)+str(now.day))
 
+    if dropoffDateSet:
+        dropoffDate_string = request.GET['dropoffDate'][0:4] + request.GET['dropoffDate'][5:7] + request.GET['dropoffDate'][8:10]
+        dropoffDate_int = int(dropoffDate_string)
+    else:
+        dropoffDate_int == 30000101
+
+    if pickupLocationSet:
+        ordersFinishedAtPickupLocation = resultantOrders.filter(returnstore=request.GET['pickupLocation'])
+        # for order in ordersFinishedAtPickupLocation:
+        #     carID = order.carid_id
+        #     ordersUsingAParticularCar = resultantOrders.filter(carid_id=carID)
+        #     mostRecentID = 0
+        #     mostRecentDate = 0
+        #     for order2 in ordersUsingAParticularCar:
+        #         if (order2.returndate > mostRecentDate and order2.returndate < pickupDate_int):
+        #             mostRecentID = order2.id
+        #             mostRecentDate = order2.returndate
+        ordersToExclude = resultantOrders.exclude(id__in=ordersFinishedAtPickupLocation)
+
+
+
+    ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=pickupDate_int, pickupdate__lte=pickupDate_int)
+    ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=dropoffDate_int, pickupdate__lte=dropoffDate_int)
+
+    for order in ordersToExclude:
+        resultantCars = resultantCars.exclude(id=order.carid_id)
+
+    context = {'testing': resultantCars}
+    return render(request, 'testApp/test.html', context)
 
     if ('seats' in request.GET) and (request.GET['seats']) and (isint(request.GET['seats'])):
         if int(request.GET['seats']) == 8:
