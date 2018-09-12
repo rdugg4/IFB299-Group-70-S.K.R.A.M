@@ -15,15 +15,16 @@ def detail(request, car_id):
     context = {'CarInfo': carInfo}
     return render(request, 'testApp/carDetails.html', context)
 
-def accounts(request, customer_id):
-    customerInfo = Customers.objects.filter(id=customer_id)
-    context = {'CustomerInfo': customerInfo}
-    return render(request, 'testApp/signup.html', context)
+def accounts(request):
+    return render(request, 'testApp/signup.html')
 
 def search(request):
     resultantCars = Cars.objects.none()
-    pickupDateSet = ('pickupDate' in request.GET) and
-    if ('pickupLocation' in request.GET) and (request.GET['pickupLocation']) and (isfloat(request.GET['pickupLocation'])):
+    pickupDateSet = (('pickupDate' in request.GET) and (request.GET['pickupDate']) and (isint(request.GET['pickupDate'][0:4]))
+        and (isint(request.GET['pickupDate'][5:7])) and (isint(request.GET['pickupDate'][8:10])))
+    dropoffDataSet = (('dropoffDate' in request.GET) and (request.GET['dropoffDate']) and (isint(request.GET['dropoffDate'][0:4]))
+        and (isint(request.GET['dropoffDate'][5:7])) and (isint(request.GET['dropoffDate'][8:10])))
+    if ('pickupLocation' in request.GET) and (request.GET['pickupLocation']) and (isint(request.GET['pickupLocation'])):
         ordersWithCarsInLocation = Orders.objects.filter(returnstore=request.GET['pickupLocation'])
         for order in ordersWithCarsInLocation:
             # carsHaveBeenReturned = ((int(request.GET['pickupDate'][0:4]) > int(str(order.returndate)[0:4])) or
@@ -45,7 +46,7 @@ def search(request):
         resultantCars = Cars.objects.all()
 
 
-    if ('seats' in request.GET) and (request.GET['seats']) and (isfloat(request.GET['seats'])):
+    if ('seats' in request.GET) and (request.GET['seats']) and (isint(request.GET['seats'])):
         if int(request.GET['seats']) == 8:
             resultantCars = resultantCars.filter(car_seatingcapacity__gte=request.GET['seats'])
         elif int(request.GET['seats']) == 3:
@@ -68,9 +69,9 @@ def search(request):
     context = {'resultantCars': resultantCars}
     return render(request, 'testApp/searchResults.html', context)
 
-def isfloat(value):
+def isint(value):
     try:
-        float(value)
+        int(value)
         return True
     except ValueError:
         return False
