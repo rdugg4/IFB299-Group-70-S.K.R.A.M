@@ -1,8 +1,9 @@
 {% if resultantCars %}
     {% for car in resultantCars %}
         <h6>{{ car.car_makename }}</h6>
-        <p>{{ car.car_wheelbase }}</p>
         <a href="/CRC/{{ car.id }}/">{{ car.car_model }}</a>
+        <p>{{ car.car_seatingcapacity }}</p>
+        <p>{{ car.car_drive }}</p>
     {% endfor %}
 {% else %}
     <p> No results </p>

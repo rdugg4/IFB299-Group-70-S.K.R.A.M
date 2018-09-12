@@ -15,33 +15,56 @@ def detail(request, car_id):
     return render(request, 'testApp/carDetails.html', context)
 
 def search(request):
-    if 'q' in request.GET:
-        resultantCars = Cars.objects.filter(car_makename=request.GET['q'])
-        context = {'resultantCars': resultantCars}
-        return render(request, 'testApp/searchResults.html', context)
-    # else:
-    #     message = 'You submitted an empty form.'
-    #     return HttpResponse(message)
-
-    if 'pickupLocation' in request.GET:
+    resultantCars = Cars.objects.none()
+    pickupDateSet = ('pickupDate' in request.GET) and 
+    if ('pickupLocation' in request.GET) and (request.GET['pickupLocation']) and (isfloat(request.GET['pickupLocation'])):
         ordersWithCarsInLocation = Orders.objects.filter(returnstore=request.GET['pickupLocation'])
-        resultantCars = Cars.objects.none()
         for order in ordersWithCarsInLocation:
-            # return HttpResponse(int(str(order.returndate)[6:8]))
-            carsHaveBeenReturned = ((int(request.GET['pickupDate'][0:4]) > int(str(order.returndate)[0:4])) or
-                ((int(request.GET['pickupDate'][0:4]) == int(str(order.returndate)[0:4]))
-                and (int(request.GET['pickupDate'][5:7]) > int(str(order.returndate)[4:6]))) or
-                ((int(request.GET['pickupDate'][0:4]) == int(str(order.returndate)[0:4]))
-                and (int(request.GET['pickupDate'][5:7]) == int(str(order.returndate)[4:6]))
-                and (int(request.GET['pickupDate'][8:10]) >= int(str(order.returndate)[6:8]))))
+            # carsHaveBeenReturned = ((int(request.GET['pickupDate'][0:4]) > int(str(order.returndate)[0:4])) or
+            #     ((int(request.GET['pickupDate'][0:4]) == int(str(order.returndate)[0:4]))
+            #     and (int(request.GET['pickupDate'][5:7]) > int(str(order.returndate)[4:6]))) or
+            #     ((int(request.GET['pickupDate'][0:4]) == int(str(order.returndate)[0:4]))
+            #     and (int(request.GET['pickupDate'][5:7]) == int(str(order.returndate)[4:6]))
+            #     and (int(request.GET['pickupDate'][8:10]) >= int(str(order.returndate)[6:8]))))
             # carNotOrdered = ((int(request.GET['dropoffDate'][0:4]) > int(str(order.pickupdate)[0:4])) or
             #     ((int(request.GET['dropoffDate'][0:4]) == int(str(order.pickupdate)[0:4]))
             #     and (int(request.GET['dropoffDate'][5:7]) > int(str(order.pickupdate)[4:6]))) or
             #     ((int(request.GET['dropoffDate'][0:4]) == int(str(order.pickupdate)[0:4]))
             #     and (int(request.GET['dropoffDate'][5:7]) == int(str(order.pickupdate)[4:6]))
             #     and (int(request.GET['dropoffDate'][8:10]) >= int(str(order.pickupdate)[6:8]))))
-            if (carsHaveBeenReturned):
-                temp = Cars.objects.filter(id=order.carid_id)
-                resultantCars = resultantCars | temp
-        context = {'resultantCars': resultantCars}
-        return render(request, 'testApp/searchResults.html', context)
+            # if (carsHaveBeenReturned):
+            temp = Cars.objects.filter(id=order.carid_id)
+            resultantCars = resultantCars | temp
+    else:
+        resultantCars = Cars.objects.all()
+
+
+    if ('seats' in request.GET) and (request.GET['seats']) and (isfloat(request.GET['seats'])):
+        if int(request.GET['seats']) == 8:
+            resultantCars = resultantCars.filter(car_seatingcapacity__gte=request.GET['seats'])
+        elif int(request.GET['seats']) == 3:
+            resultantCars = resultantCars.filter(car_seatingcapacity__lte=request.GET['seats'])
+        else:
+            resultantCars = resultantCars.filter(car_seatingcapacity=request.GET['seats'])
+
+    if ('driveType' in request.GET) and (request.GET['driveType']):
+        resultantCars = resultantCars.filter(car_drive__icontains=request.GET['driveType'])
+
+    if ('makeOfCar' in request.GET) and (request.GET['makeOfCar']):
+        resultantCars = resultantCars.filter(car_makename__icontains=request.GET['makeOfCar'])
+
+    if ('carModel' in request.GET) and (request.GET['carModel']):
+        resultantCars = resultantCars.filter(car_model__icontains=request.GET['carModel'])
+
+    if ('bodyType' in request.GET) and (request.GET['bodyType']):
+        resultantCars = resultantCars.filter(car_bodytype__icontains=request.GET['bodyType'])
+
+    context = {'resultantCars': resultantCars}
+    return render(request, 'testApp/searchResults.html', context)
+
+def isfloat(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
