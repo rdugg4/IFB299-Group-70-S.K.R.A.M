@@ -21,6 +21,12 @@ def accounts(request, customer_id):
     context = {'Customer': customer}
     return render(request, 'testApp/signup.html', context)
 
+def staffPortal(request):
+    return render(request, 'testApp/staffPortal.html')
+
+def returnPage(request):
+    return render(request, 'testApp/returnPage.html')
+
 def search(request):
     resultantOrders = Orders.objects.all()
     ordersToExclude = resultantOrders.none()

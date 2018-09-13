@@ -8,4 +8,6 @@ urlpatterns = [
     path('<int:car_id>/', views.detail, name='detail'),
     path('create_account/<int:customer_id>/', views.accounts, name='Accounts'),
     url(r'^search/$', views.search),
+    path('staffPortal', views.staffPortal, name='staffPortal'),
+    path('staffPortal/vehicleReturns', views.returnPage, name='vehicleReturns')
 ]
