@@ -17,8 +17,22 @@ def detail(request, car_id):
     return render(request, 'testApp/carDetails.html', context)
 
 def accounts(request):
-    
-    return render(request, 'testApp/signup.html')
+    if request.method == "POST":
+        if request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email') and request.POST.get('Password'):
+            post = Customers()
+            post.name = request.POST.get('Name')
+            post.phone = request.POST.get('Phone')
+            post.address = request.POST.get('Address')
+            post.dob = request.POST.get('DOB')
+            post.occupation = request.POST.get('Occupation')
+            post.gender = request.POST.get('Gender')
+            post.email = request.POST.get('Email')
+            post.password = request.POST.get('Password')
+            post.save()
+
+            return render(request, 'testApp/signup.html')
+        else:
+            return render(request,'testApp/signup.html')
 
 def staffPortal(request):
     return render(request, 'testApp/staffPortal.html')
