@@ -40,3 +40,8 @@
     <br><br>
     <input type="submit" value="search">
 </form>
+
+<form action="/CRC/search/" method="post"> {% csrf_token %}
+    <input type="text" value="11010" style="display:none" name="userid">
+    <input type="submit" value="Recommend Cars">
+</form>

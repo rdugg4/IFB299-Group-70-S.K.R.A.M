@@ -43,7 +43,7 @@ def search(request):
         dropoffDate_string = request.GET['dropoffDate'][0:4] + request.GET['dropoffDate'][5:7] + request.GET['dropoffDate'][8:10]
         dropoffDate_int = int(dropoffDate_string)
     else:
-        dropoffDate_int == 30000101
+        dropoffDate_int = 30000101
 
     if pickupLocationSet:
         ordersFinishedAtPickupLocation = resultantOrders.filter(returnstore=request.GET['pickupLocation'])
@@ -66,8 +66,8 @@ def search(request):
     for order in ordersToExclude:
         resultantCars = resultantCars.exclude(id=order.carid_id)
 
-    context = {'testing': resultantCars}
-    return render(request, 'testApp/test.html', context)
+    # context = {'testing': resultantCars}
+    # return render(request, 'testApp/test.html', context)
 
     if ('seats' in request.GET) and (request.GET['seats']) and (isint(request.GET['seats'])):
         if int(request.GET['seats']) == 8:
@@ -89,7 +89,9 @@ def search(request):
     if ('bodyType' in request.GET) and (request.GET['bodyType']):
         resultantCars = resultantCars.filter(car_bodytype__icontains=request.GET['bodyType'])
 
-    context = {'resultantCars': resultantCars}
+    return HttpResponse(request.POST['userid'])
+    storelist = Stores.objects.all()
+    context = {'resultantCars': resultantCars, 'StoreList': storelist}
     return render(request, 'testApp/searchResults.html', context)
 
 def isint(value):
