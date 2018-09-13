@@ -1,5 +1,7 @@
 <h1> See cars that are to be returned </h1>
-
+<button>daily</button>
+<button>weekly</button>
+<button>monthly</button>
 {% if ordersToBeReturned %}
     {% for order in ordersToBeReturned %}
         <p>{{ order.id }}</p>
