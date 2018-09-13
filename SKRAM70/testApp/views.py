@@ -25,7 +25,12 @@ def staffPortal(request):
     return render(request, 'testApp/staffPortal.html')
 
 def returnPage(request):
-    return render(request, 'testApp/returnPage.html')
+    now = datetime.datetime.now()
+    # current_date = int(str(now.year)+str(now.month)+str(now.day))
+    current_date = 20050711
+    ordersToBeReturned = Orders.objects.filter(returndate__gte=current_date)
+    context = {'ordersToBeReturned': ordersToBeReturned}
+    return render(request, 'testApp/returnPage.html', context)
 
 def search(request):
     resultantOrders = Orders.objects.all()
