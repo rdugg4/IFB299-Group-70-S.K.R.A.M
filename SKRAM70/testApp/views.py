@@ -40,17 +40,52 @@ def staffPortal(request):
     return render(request, 'testApp/staffPortal.html')
 
 def returnPage(request):
-    now = datetime.datetime.now()
-    # current_date = int(str(now.year)+str(now.month)+str(now.day))
+
+    year = 0
+    month = 0
+    day = 0
     start_date = []
-    start_date.append(20050711)
-    end_date = 20060111
-    sortLength = 100
-    ordersToBeReturned = Orders.objects.filter(returndate__gte=start_date[0], returndate__lte=end_date)
+    if (('start_date' in request.GET) and (request.GET['start_date']) and (isint(request.GET['start_date'][0:4]))
+        and (isint(request.GET['start_date'][5:7])) and (isint(request.GET['start_date'][8:10]))):
+        year = int(request.GET['start_date'][0:4])
+        month = int(request.GET['start_date'][5:7])
+        day = int(request.GET['start_date'][8:10])
+    else:
+        now = datetime.datetime.now()
+        year = now.year
+        month = now.month
+        day = now.day
+    start_date.append(int(str(year)+str(month)+str(day)))
+
+    # testing variables
+    start_date[0] = 20050712
+    year = 2005
+    month = 7
+    day = 12
+    # end testing variables decliration
+
+    ordersToBeReturned = Orders.objects.filter(returndate__gte=start_date[0])
+    if ('returnStore' in request.GET) and (request.GET['returnStore']) and (isint(request.GET['returnStore'])):
+        ordersToBeReturned = ordersToBeReturned.filter(returnstore=request.GET['returnStore'])
     ordersToBeReturned = ordersToBeReturned.order_by('returndate')
+
+    if ('ordering' in request.GET) and (request.GET['ordering']):
+        if request.GET['ordering'] == 'daily':
+            sortLength = 1
+            start_date[0] = start_date[0] + sortLength
+        elif request.GET['ordering'] == 'monthly':
+            sortLength = 100
+            start_date[0] = start_date[0] + (sortLength - sortLength/2)
+        else:
+            sortLength = 7
+            weekday = datetime.datetime(year, month, day).weekday()
+            start_date[0] = start_date[0] + (sortLength - weekday)
+    else:
+        sortLength = 7
+        weekday = datetime.datetime(year, month, day).weekday()
+        start_date[0] = start_date[0] + (sortLength - weekday)
+
     counter = 0
-    start_date[0] = start_date[0] + sortLength
-    firstTimePeriodPassed = false
     for order in ordersToBeReturned:
         difference = order.returndate - start_date[counter]
         if difference <= 0:
@@ -59,7 +94,8 @@ def returnPage(request):
             start_date.append(start_date[counter] + math.ceil(difference/sortLength)*sortLength)
         counter = counter + 1
     zippedResults = zip(ordersToBeReturned, start_date)
-    context = {'zippedResults': zippedResults}
+    storelist = Stores.objects.all()
+    context = {'zippedResults': zippedResults, 'StoreList': storelist}
     return render(request, 'testApp/returnPage.html', context)
 
 def search(request):
