@@ -4,6 +4,7 @@ from .models import Customers
 from .models import Stores
 from .models import Orders
 import datetime
+import math
 from django.http import HttpResponse
 
 def index(request):
@@ -41,9 +42,23 @@ def staffPortal(request):
 def returnPage(request):
     now = datetime.datetime.now()
     # current_date = int(str(now.year)+str(now.month)+str(now.day))
-    current_date = 20050711
-    ordersToBeReturned = Orders.objects.filter(returndate__gte=current_date)
-    context = {'ordersToBeReturned': ordersToBeReturned}
+    start_date = []
+    start_date.append(20050711)
+    end_date = 20060111
+    sortLength = 100
+    ordersToBeReturned = Orders.objects.filter(returndate__gte=start_date[0], returndate__lte=end_date)
+    ordersToBeReturned = ordersToBeReturned.order_by('returndate')
+    counter = 0
+    start_date[0] = start_date[0] + sortLength
+    for order in ordersToBeReturned:
+        difference = order.returndate - start_date[counter]
+        if difference <= 0:
+            start_date.append(start_date[counter])
+        else:
+            start_date.append(start_date[counter] + math.ceil(difference/sortLength)*sortLength)
+        counter = counter + 1
+    zippedResults = zip(ordersToBeReturned, start_date)
+    context = {'zippedResults': zippedResults}
     return render(request, 'testApp/returnPage.html', context)
 
 def search(request):

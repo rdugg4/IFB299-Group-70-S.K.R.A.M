@@ -2,12 +2,12 @@
 <button>daily</button>
 <button>weekly</button>
 <button>monthly</button>
-{% if ordersToBeReturned %}
-    {% for order in ordersToBeReturned %}
-        <p>{{ order.id }}</p>
-        <p>{{ order.returndate }}</p>
-        <p>{{ order.returnstore }}</p>
-    {% endfor %}
-{% else %}
+{% for order, timeperiod_startDate in zippedResults %}
+    {% if order.returndate > timeperiod_startDate %}
+        <br><br><br>
+    {% endif %}
+    {{ timeperiod_startDate }}
+    <p>{{ order.id }}, {{ order.returndate }}, {{ order.returnstore }}</p>
+{% empty %}
     <p> No cars to be returned </p>
-{% endif %}
+{% endfor %}
