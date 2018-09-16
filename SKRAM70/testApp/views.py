@@ -5,6 +5,7 @@ from .models import Stores
 from .models import Orders
 import datetime
 import math
+from django.db.models import Max
 from django.http import HttpResponse
 
 def index(request):
@@ -123,29 +124,23 @@ def search(request):
         else:
             dropoffDate_int = 30000101
 
+        carsFinalLocation = Orders.objects.none()
+        for car in Cars.objects.all():
+            maximum = resultantOrders.filter(carid_id=car.id).aggregate(max_date = Max('returndate'))['max_date']
+            carsFinalLocation = carsFinalLocation | resultantOrders.filter(carid_id=car.id, returndate=maximum)
+        resultantOrders = carsFinalLocation
+
         if pickupLocationSet:
             ordersFinishedAtPickupLocation = resultantOrders.filter(returnstore=request.GET['pickupLocation'])
-            # for order in ordersFinishedAtPickupLocation:
-            #     carID = order.carid_id
-            #     ordersUsingAParticularCar = resultantOrders.filter(carid_id=carID)
-            #     mostRecentID = 0
-            #     mostRecentDate = 0
-            #     for order2 in ordersUsingAParticularCar:
-            #         if (order2.returndate > mostRecentDate and order2.returndate < pickupDate_int):
-            #             mostRecentID = order2.id
-            #             mostRecentDate = order2.returndate
             ordersToExclude = resultantOrders.exclude(id__in=ordersFinishedAtPickupLocation)
-
-
 
         ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=pickupDate_int, pickupdate__lte=pickupDate_int)
         ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=dropoffDate_int, pickupdate__lte=dropoffDate_int)
 
-        for order in ordersToExclude:
-            resultantCars = resultantCars.exclude(id=order.carid_id)
-
-        # context = {'testing': resultantCars}
-        # return render(request, 'testApp/test.html', context)
+        ordersToBeReturned = resultantOrders.exclude(id__in=ordersToExclude)
+        resultantCars = Cars.objects.none()
+        for order in ordersToBeReturned:
+            resultantCars = resultantCars | Cars.objects.filter(id=order.carid_id)
 
         if ('seats' in request.GET) and (request.GET['seats']) and (isint(request.GET['seats'])):
             if int(request.GET['seats']) == 8:
