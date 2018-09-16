@@ -50,6 +50,7 @@ def returnPage(request):
     ordersToBeReturned = ordersToBeReturned.order_by('returndate')
     counter = 0
     start_date[0] = start_date[0] + sortLength
+    firstTimePeriodPassed = false
     for order in ordersToBeReturned:
         difference = order.returndate - start_date[counter]
         if difference <= 0:
