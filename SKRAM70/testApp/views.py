@@ -3,10 +3,11 @@ from .models import Cars
 from .models import Customers
 from .models import Stores
 from .models import Orders
-import datetime
 import math
 from django.db.models import Max
 from django.http import HttpResponse
+from .functions.timeobjects import *
+
 
 def index(request):
     storelist = Stores.objects.all()
@@ -42,28 +43,14 @@ def staffPortal(request):
 
 def returnPage(request):
 
-    year = 0
-    month = 0
-    day = 0
+    inputtedDate = timeObject(0)
     start_date = []
     if (('start_date' in request.GET) and (request.GET['start_date']) and (isint(request.GET['start_date'][0:4]))
         and (isint(request.GET['start_date'][5:7])) and (isint(request.GET['start_date'][8:10]))):
-        year = int(request.GET['start_date'][0:4])
-        month = int(request.GET['start_date'][5:7])
-        day = int(request.GET['start_date'][8:10])
+        inputtedDate = givenTime(request.GET['start_date'], 'YMD')
     else:
-        now = datetime.datetime.now()
-        year = now.year
-        month = now.month
-        day = now.day
-    start_date.append(int(str(year)+str(month)+str(day)))
-
-    # testing variables
-    start_date[0] = 20050712
-    year = 2005
-    month = 7
-    day = 12
-    # end testing variables decliration
+        inputtedDate = currentTime()
+    start_date.append(inputtedDate.getDate())
 
     ordersToBeReturned = Orders.objects.filter(returndate__gte=start_date[0])
     if ('returnStore' in request.GET) and (request.GET['returnStore']) and (isint(request.GET['returnStore'])):
@@ -79,11 +66,11 @@ def returnPage(request):
             start_date[0] = start_date[0] + (sortLength - sortLength/2)
         else:
             sortLength = 7
-            weekday = datetime.datetime(year, month, day).weekday()
+            weekday = inputtedDate.weekday()
             start_date[0] = start_date[0] + (sortLength - weekday)
     else:
         sortLength = 7
-        weekday = datetime.datetime(year, month, day).weekday()
+        weekday = inputtedDate.weekday()
         start_date[0] = start_date[0] + (sortLength - weekday)
 
     counter = 0
@@ -102,7 +89,6 @@ def returnPage(request):
 def search(request):
     resultantOrders = Orders.objects.all()
     ordersToExclude = resultantOrders.none()
-    now = datetime.datetime.now()
     if request.method == 'GET':
         resultantCars = Cars.objects.all()
         pickupDateSet = (('pickupDate' in request.GET) and (request.GET['pickupDate']) and (isint(request.GET['pickupDate'][0:4]))
@@ -111,18 +97,20 @@ def search(request):
             and (isint(request.GET['dropoffDate'][5:7])) and (isint(request.GET['dropoffDate'][8:10])))
         pickupLocationSet = (('pickupLocation' in request.GET) and (request.GET['pickupLocation'])
             and (isint(request.GET['pickupLocation'])))
-        pickupDate_int = 0
-        if pickupDateSet:
-            pickupDate_string = request.GET['pickupDate'][0:4] + request.GET['pickupDate'][5:7] + request.GET['pickupDate'][8:10]
-            pickupDate_int = int(pickupDate_string)
-        else:
-            pickupDate_int = int(str(now.year)+str(now.month)+str(now.day))
 
-        if dropoffDateSet:
-            dropoffDate_string = request.GET['dropoffDate'][0:4] + request.GET['dropoffDate'][5:7] + request.GET['dropoffDate'][8:10]
-            dropoffDate_int = int(dropoffDate_string)
+        inputtedDate = timeObject(0)
+        if pickupDateSet:
+            inputtedDate = givenTime(request.GET['pickupDate'], 'YMD')
         else:
-            dropoffDate_int = 30000101
+            inputtedDate = currentTime()
+        pickupDate_int = inputtedDate.getDate()
+
+        inputtedDropOffDate = timeObject(0)
+        if dropoffDateSet:
+            inputtedDropOffDate = givenTime(request.GET['dropoffDate'], 'YMD')
+        else:
+            inputtedDropOffDate = timeObject(30000101)
+        dropoffDate_int = inputtedDropOffDate.getDate()
 
         carsFinalLocation = Orders.objects.none()
         for car in Cars.objects.all():
@@ -166,18 +154,18 @@ def search(request):
         customer = Customers.objects.filter(id=request.POST['userid'])
         for aCustomer in customer:
             similar_customers = Customers.objects.filter(gender=aCustomer.gender, occupation=aCustomer.occupation)
-            aCustomerdob = int(aCustomer.dob[6:10] + aCustomer.dob[3:5] + aCustomer.dob[0:2])
+            aCustomerdob = givenTime(aCustomer.dob, 'DMY').getDate()
 
             for aCustomer2 in similar_customers:
-                aCustomer2dob = int(aCustomer2.dob[6:10] + aCustomer2.dob[3:5] + aCustomer2.dob[0:2])
+                aCustomer2dob = givenTime(aCustomer2.dob, 'DMY').getDate()
                 if (aCustomerdob <= (aCustomer2dob - 50000) or aCustomerdob >= (aCustomer2dob + 50000)):
                     similar_customers = similar_customers.exclude(id=aCustomer2.id)
 
         ordersBySimilarCustomers = Orders.objects.none()
         for aCustomer in similar_customers:
             ordersBySimilarCustomers = ordersBySimilarCustomers | Orders.objects.filter(customerid=aCustomer.id)
-        pickupDate_int = int(str(now.year)+str(now.month)+str(now.day))
-        dropoffDate_int = 30000101
+        pickupDate_int = currentTime().getDate()
+        dropoffDate_int = timeObject(30000101).getDate()
         ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=pickupDate_int, pickupdate__lte=pickupDate_int)
         ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=dropoffDate_int, pickupdate__lte=dropoffDate_int)
         resultantCars = Cars.objects.none()
