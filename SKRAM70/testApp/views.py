@@ -7,6 +7,8 @@ import math
 from django.db.models import Max
 from django.http import HttpResponse
 from .functions.timeobjects import *
+from .functions.search import *
+from .functions.inputVerification import *
 
 
 def index(request):
@@ -43,10 +45,8 @@ def staffPortal(request):
 
 def returnPage(request):
 
-    inputtedDate = timeObject(0)
     start_date = []
-    if (('start_date' in request.GET) and (request.GET['start_date']) and (isint(request.GET['start_date'][0:4]))
-        and (isint(request.GET['start_date'][5:7])) and (isint(request.GET['start_date'][8:10]))):
+    if (('start_date' in request.GET) and (request.GET['start_date']) and isdate(request.GET['start_date'])):
         inputtedDate = givenTime(request.GET['start_date'], 'YMD')
     else:
         inputtedDate = currentTime()
@@ -98,14 +98,12 @@ def search(request):
         pickupLocationSet = (('pickupLocation' in request.GET) and (request.GET['pickupLocation'])
             and (isint(request.GET['pickupLocation'])))
 
-        inputtedDate = timeObject(0)
         if pickupDateSet:
             inputtedDate = givenTime(request.GET['pickupDate'], 'YMD')
         else:
             inputtedDate = currentTime()
         pickupDate_int = inputtedDate.getDate()
 
-        inputtedDropOffDate = timeObject(0)
         if dropoffDateSet:
             inputtedDropOffDate = givenTime(request.GET['dropoffDate'], 'YMD')
         else:
@@ -177,10 +175,3 @@ def search(request):
     storelist = Stores.objects.all()
     context = {'resultantCars': resultantCars, 'StoreList': storelist}
     return render(request, 'testApp/searchResults.html', context)
-
-def isint(value):
-    try:
-        int(value)
-        return True
-    except ValueError:
-        return False
