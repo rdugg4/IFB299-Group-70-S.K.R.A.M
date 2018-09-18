@@ -9,5 +9,6 @@ urlpatterns = [
     path('create_account/', views.accounts, name='Accounts'),
     url(r'^search/$', views.search),
     path('staffPortal', views.staffPortal, name='staffPortal'),
-    url(r'^staffPortal/vehicleReturns/$', views.returnPage)
+    url(r'^staffPortal/vehicleReturns/$', views.returnPage),
+    url('ContactUs', views.contactUs, name='contactUS')
 ]

@@ -9,12 +9,9 @@ from django import forms
 from .functions.timeobjects import *
 from .functions.search import *
 from .functions.inputVerification import *
-<<<<<<< HEAD
 from django.contrib import messages
 from .forms import createAccount
-=======
 from .functions.vehicleReturns import *
->>>>>>> 6e1976f97cf5f253b07d4355a3a0686787349b73
 
 def index(request):
     storelist = Stores.objects.all()
@@ -25,6 +22,9 @@ def detail(request, car_id):
     carInfo = Cars.objects.filter(id=car_id)
     context = {'CarInfo': carInfo}
     return render(request, 'testApp/showcaroriginal.html', context)
+
+def contactUs(request):
+    return render(request, 'testApp/MikeContactPage draft.html')
 
 # def sign_up(request):
 #     if request.method == 'POST':
@@ -69,16 +69,16 @@ def accounts(request):
             return render(request,'testApp/signup.html')
     else:
         return render(request,'testApp/signup.html')
-    
+
 
 def staffPortal(request):
-    return render(request, 'testApp/staffPortal.html')
+    return render(request, 'testApp/MikeStaffHomePage.html')
 
 def returnPage(request):
     zippedResults = vehicleToBeReturned(request)
     storelist = Stores.objects.all()
-    context = {'zippedResults': zippedResults, 'StoreList': storelist}
-    return render(request, 'testApp/returnPage.html', context)
+    context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
+    return render(request, 'testApp/MikeCarReturnPage.html', context)
 
 def search(request):
     resultantCars = searchData(request)

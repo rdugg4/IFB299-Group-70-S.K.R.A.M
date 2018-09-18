@@ -2,6 +2,7 @@ from ..models import *
 from .inputVerification import *
 from .timeobjects import *
 import math
+from itertools import chain
 
 def vehicleToBeReturned(request):
     # Constants delaration
@@ -45,12 +46,18 @@ def vehicleToBeReturned(request):
         start_date[0] = start_date[0] + (sortLength - weekday)
 
     counter = 0
+    carInfo = []
+    customerInfo = []
+    storeInfo = []
     for order in ordersToBeReturned:
         difference = order.returndate - start_date[counter]
+        carInfo = list(chain(carInfo, Cars.objects.filter(id=order.carid_id)))
+        customerInfo = list(chain(customerInfo, Customers.objects.filter(id=order.customerid_id)))
+        storeInfo = list(chain(storeInfo, Stores.objects.filter(id=order.returnstore_id)))
         if difference <= 0:
             start_date.append(start_date[counter])
         else:
             start_date.append(start_date[counter] + math.ceil(difference/sortLength)*sortLength)
         counter = counter + 1
-    zippedResults = zip(ordersToBeReturned, start_date)
+    zippedResults = zip(ordersToBeReturned, start_date, carInfo, customerInfo, storeInfo)
     return zippedResults
