@@ -1,4 +1,5 @@
-<form>
+<form action = "" method = "POST">
+    {% csrf_token %}
     Name:<br>
     <input type="text" name="Name">
     <br>
@@ -29,4 +30,4 @@
     <br>
     <br>
     <input type="submit" value="Signup">
-  </form>
+</form>
