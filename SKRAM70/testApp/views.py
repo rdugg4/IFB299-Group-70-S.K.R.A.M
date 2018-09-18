@@ -3,9 +3,17 @@ from .models import Cars
 from .models import Customers
 from .models import Stores
 from .models import Orders
-import datetime
+import math
+from django.db.models import Max
 from django.http import HttpResponse
+<<<<<<< HEAD
 from django import forms
+=======
+from .functions.timeobjects import *
+from .functions.search import *
+from .functions.inputVerification import *
+
+>>>>>>> 8f81f6ede99a0b0346e228516ab36a79f59e770f
 
 def index(request):
     storelist = Stores.objects.all()
@@ -55,63 +63,111 @@ def staffPortal(request):
     return render(request, 'testApp/staffPortal.html')
 
 def returnPage(request):
-    now = datetime.datetime.now()
-    # current_date = int(str(now.year)+str(now.month)+str(now.day))
-    current_date = 20050711
-    ordersToBeReturned = Orders.objects.filter(returndate__gte=current_date)
-    context = {'ordersToBeReturned': ordersToBeReturned}
+
+    # Constants delaration
+    STARTDATE = 'start_date'
+    RETURNSTORE = 'returnStore'
+    ORDERING = 'ordering'
+    DATE = 'date'
+    NUM = 'num'
+    YMD = 'YMD'
+    RETURNDATE = 'returndate'
+    DAILY = 'daily'
+    MONTHLY = 'monthly'
+
+    start_date = []
+    inputVeriObj = inputVerification(request)
+    if inputVeriObj.checkFormGET(STARTDATE, DATE):
+        inputtedDate = givenTime(request.GET[STARTDATE], YMD)
+    else:
+        inputtedDate = currentTime()
+    start_date.append(inputtedDate.getDate())
+
+    ordersToBeReturned = Orders.objects.filter(returndate__gte=start_date[0])
+    if inputVeriObj.checkFormGET(RETURNSTORE, NUM):
+        ordersToBeReturned = ordersToBeReturned.filter(returnstore=request.GET[RETURNSTORE])
+    ordersToBeReturned = ordersToBeReturned.order_by(RETURNDATE)
+
+    if inputVeriObj.checkFormGET(ORDERING, ''):
+        if request.GET[ORDERING] == DAILY:
+            sortLength = 1
+            start_date[0] = start_date[0] + sortLength
+        elif request.GET[ORDERING] == MONTHLY:
+            sortLength = 100
+            start_date[0] = start_date[0] + (sortLength - sortLength/2)
+        else:
+            sortLength = 7
+            weekday = inputtedDate.weekday()
+            start_date[0] = start_date[0] + (sortLength - weekday)
+    else:
+        sortLength = 7
+        weekday = inputtedDate.weekday()
+        start_date[0] = start_date[0] + (sortLength - weekday)
+
+    counter = 0
+    for order in ordersToBeReturned:
+        difference = order.returndate - start_date[counter]
+        if difference <= 0:
+            start_date.append(start_date[counter])
+        else:
+            start_date.append(start_date[counter] + math.ceil(difference/sortLength)*sortLength)
+        counter = counter + 1
+    zippedResults = zip(ordersToBeReturned, start_date)
+    storelist = Stores.objects.all()
+    context = {'zippedResults': zippedResults, 'StoreList': storelist}
     return render(request, 'testApp/returnPage.html', context)
 
 def search(request):
     resultantOrders = Orders.objects.all()
     ordersToExclude = resultantOrders.none()
-    now = datetime.datetime.now()
     if request.method == 'GET':
+        # Constants declaration
+        PICKUPDATE = 'pickupDate'
+        DROPOFFDATE = 'dropoffDate'
+        PICKUPLOCATION = 'pickupLocation'
+        SEATS = 'seats'
+        DRIVETYPE = 'driveType'
+        MAKEOFCAR = 'makeOfCar'
+        CARMODEL = 'carModel'
+        BODYTYPE = 'bodyType'
+        DATE = 'date'
+        NUM = 'num'
+        YMD = 'YMD'
+
+        inputVeriObj = inputVerification(request)
         resultantCars = Cars.objects.all()
-        pickupDateSet = (('pickupDate' in request.GET) and (request.GET['pickupDate']) and (isint(request.GET['pickupDate'][0:4]))
-            and (isint(request.GET['pickupDate'][5:7])) and (isint(request.GET['pickupDate'][8:10])))
-        dropoffDateSet = (('dropoffDate' in request.GET) and (request.GET['dropoffDate']) and (isint(request.GET['dropoffDate'][0:4]))
-            and (isint(request.GET['dropoffDate'][5:7])) and (isint(request.GET['dropoffDate'][8:10])))
-        pickupLocationSet = (('pickupLocation' in request.GET) and (request.GET['pickupLocation'])
-            and (isint(request.GET['pickupLocation'])))
-        pickupDate_int = 0
-        if pickupDateSet:
-            pickupDate_string = request.GET['pickupDate'][0:4] + request.GET['pickupDate'][5:7] + request.GET['pickupDate'][8:10]
-            pickupDate_int = int(pickupDate_string)
-        else:
-            pickupDate_int = int(str(now.year)+str(now.month)+str(now.day))
 
-        if dropoffDateSet:
-            dropoffDate_string = request.GET['dropoffDate'][0:4] + request.GET['dropoffDate'][5:7] + request.GET['dropoffDate'][8:10]
-            dropoffDate_int = int(dropoffDate_string)
+        if inputVeriObj.checkFormGET(PICKUPDATE, DATE):
+            inputtedDate = givenTime(request.GET[PICKUPDATE], YMD)
         else:
-            dropoffDate_int = 30000101
+            inputtedDate = currentTime()
+        pickupDate_int = inputtedDate.getDate()
 
-        if pickupLocationSet:
+        if inputVeriObj.checkFormGET(DROPOFFDATE, DATE):
+            inputtedDropOffDate = givenTime(request.GET[DROPOFFDATE], YMD)
+        else:
+            inputtedDropOffDate = timeObject(30000101)
+        dropoffDate_int = inputtedDropOffDate.getDate()
+
+        carsFinalLocation = Orders.objects.none()
+        for car in Cars.objects.all():
+            maximum = resultantOrders.filter(carid_id=car.id).aggregate(max_date = Max('returndate'))['max_date']
+            carsFinalLocation = carsFinalLocation | resultantOrders.filter(carid_id=car.id, returndate=maximum)
+        resultantOrders = carsFinalLocation
+
+        if inputVeriObj.checkFormGET(PICKUPLOCATION, NUM):
             ordersFinishedAtPickupLocation = resultantOrders.filter(returnstore=request.GET['pickupLocation'])
-            # for order in ordersFinishedAtPickupLocation:
-            #     carID = order.carid_id
-            #     ordersUsingAParticularCar = resultantOrders.filter(carid_id=carID)
-            #     mostRecentID = 0
-            #     mostRecentDate = 0
-            #     for order2 in ordersUsingAParticularCar:
-            #         if (order2.returndate > mostRecentDate and order2.returndate < pickupDate_int):
-            #             mostRecentID = order2.id
-            #             mostRecentDate = order2.returndate
             ordersToExclude = resultantOrders.exclude(id__in=ordersFinishedAtPickupLocation)
-
-
 
         ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=pickupDate_int, pickupdate__lte=pickupDate_int)
         ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=dropoffDate_int, pickupdate__lte=dropoffDate_int)
 
-        for order in ordersToExclude:
-            resultantCars = resultantCars.exclude(id=order.carid_id)
+        ordersToBeReturned = resultantOrders.exclude(id__in=ordersToExclude)
+        resultantCars = Cars.objects.none()
+        for order in ordersToBeReturned:
+            resultantCars = resultantCars | Cars.objects.filter(id=order.carid_id)
 
-        # context = {'testing': resultantCars}
-        # return render(request, 'testApp/test.html', context)
-
-        if ('seats' in request.GET) and (request.GET['seats']) and (isint(request.GET['seats'])):
+        if inputVeriObj.checkFormGET(SEATS, NUM):
             if int(request.GET['seats']) == 8:
                 resultantCars = resultantCars.filter(car_seatingcapacity__gte=request.GET['seats'])
             elif int(request.GET['seats']) == 3:
@@ -119,34 +175,34 @@ def search(request):
             else:
                 resultantCars = resultantCars.filter(car_seatingcapacity=request.GET['seats'])
 
-        if ('driveType' in request.GET) and (request.GET['driveType']):
+        if inputVeriObj.checkFormGET(DRIVETYPE, ''):
             resultantCars = resultantCars.filter(car_drive__icontains=request.GET['driveType'])
 
-        if ('makeOfCar' in request.GET) and (request.GET['makeOfCar']):
+        if inputVeriObj.checkFormGET(MAKEOFCAR, ''):
             resultantCars = resultantCars.filter(car_makename__icontains=request.GET['makeOfCar'])
 
-        if ('carModel' in request.GET) and (request.GET['carModel']):
+        if inputVeriObj.checkFormGET(CARMODEL, ''):
             resultantCars = resultantCars.filter(car_model__icontains=request.GET['carModel'])
 
-        if ('bodyType' in request.GET) and (request.GET['bodyType']):
+        if inputVeriObj.checkFormGET(BODYTYPE, ''):
             resultantCars = resultantCars.filter(car_bodytype__icontains=request.GET['bodyType'])
 
     elif request.method == 'POST':
         customer = Customers.objects.filter(id=request.POST['userid'])
         for aCustomer in customer:
             similar_customers = Customers.objects.filter(gender=aCustomer.gender, occupation=aCustomer.occupation)
-            aCustomerdob = int(aCustomer.dob[6:10] + aCustomer.dob[3:5] + aCustomer.dob[0:2])
+            aCustomerdob = givenTime(aCustomer.dob, 'DMY').getDate()
 
             for aCustomer2 in similar_customers:
-                aCustomer2dob = int(aCustomer2.dob[6:10] + aCustomer2.dob[3:5] + aCustomer2.dob[0:2])
+                aCustomer2dob = givenTime(aCustomer2.dob, 'DMY').getDate()
                 if (aCustomerdob <= (aCustomer2dob - 50000) or aCustomerdob >= (aCustomer2dob + 50000)):
                     similar_customers = similar_customers.exclude(id=aCustomer2.id)
 
         ordersBySimilarCustomers = Orders.objects.none()
         for aCustomer in similar_customers:
             ordersBySimilarCustomers = ordersBySimilarCustomers | Orders.objects.filter(customerid=aCustomer.id)
-        pickupDate_int = int(str(now.year)+str(now.month)+str(now.day))
-        dropoffDate_int = 30000101
+        pickupDate_int = currentTime().getDate()
+        dropoffDate_int = timeObject(30000101).getDate()
         ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=pickupDate_int, pickupdate__lte=pickupDate_int)
         ordersToExclude = ordersToExclude | resultantOrders.filter(returndate__gte=dropoffDate_int, pickupdate__lte=dropoffDate_int)
         resultantCars = Cars.objects.none()
@@ -158,10 +214,3 @@ def search(request):
     storelist = Stores.objects.all()
     context = {'resultantCars': resultantCars, 'StoreList': storelist}
     return render(request, 'testApp/searchResults.html', context)
-
-def isint(value):
-    try:
-        int(value)
-        return True
-    except ValueError:
-        return False

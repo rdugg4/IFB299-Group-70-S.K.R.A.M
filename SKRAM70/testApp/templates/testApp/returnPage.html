@@ -1,13 +1,26 @@
 <h1> See cars that are to be returned </h1>
-<button>daily</button>
-<button>weekly</button>
-<button>monthly</button>
-{% if ordersToBeReturned %}
-    {% for order in ordersToBeReturned %}
-        <p>{{ order.id }}</p>
-        <p>{{ order.returndate }}</p>
-        <p>{{ order.returnstore }}</p>
-    {% endfor %}
-{% else %}
+<form action="/CRC/staffPortal/vehicleReturns" method="GET">
+    <select name="ordering">
+        <option value="daily">daily</option>
+        <option value="weekly">weekly</option>
+        <option value="monthly">monthly</option>
+    </select>
+    <br>
+    Return Date:<br>
+    <input type="date" name="start_date">
+    <select name="returnStore">
+        <option value="allStores">All stores</option>
+        {% for store in StoreList %}
+            <option value="{{store.id}}">{{store.name}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="refresh">
+</form>
+{% for order, timeperiod_startDate in zippedResults %}
+    {% if order.returndate > timeperiod_startDate %}
+        <br><br><br>
+    {% endif %}
+    <p>{{ order.id }}, {{ order.returndate }}, {{ order.returnstore }}</p>
+{% empty %}
     <p> No cars to be returned </p>
-{% endif %}
+{% endfor %}
