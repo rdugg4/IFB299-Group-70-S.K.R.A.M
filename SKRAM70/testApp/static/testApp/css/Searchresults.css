@@ -166,7 +166,8 @@ footer nav li:hover a {
 
 #reservenow {
 	position: relative;
-	background-color: #FEDE3F;
+	background-color: steelblue;
+	color: white;
 	width: 9em;
 	border: none;
 	text-align: center;
@@ -192,7 +193,7 @@ table {
     width: 100%;
     padding: 5px;
     line-height: 0.65em;
-    border-collapse: collapse;   
+    border-collapse: collapse;
 }
 
 td {
@@ -204,4 +205,3 @@ td {
     border: solid 1px #414141;
     background-color: #F6F5F5;
 }
-
