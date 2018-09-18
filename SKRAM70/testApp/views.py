@@ -45,23 +45,35 @@ def staffPortal(request):
 
 def returnPage(request):
 
+    # Constants delaration
+    STARTDATE = 'start_date'
+    RETURNSTORE = 'returnStore'
+    ORDERING = 'ordering'
+    DATE = 'date'
+    NUM = 'num'
+    YMD = 'YMD'
+    RETURNDATE = 'returndate'
+    DAILY = 'daily'
+    MONTHLY = 'monthly'
+
     start_date = []
-    if (('start_date' in request.GET) and (request.GET['start_date']) and isdate(request.GET['start_date'])):
-        inputtedDate = givenTime(request.GET['start_date'], 'YMD')
+    inputVeriObj = inputVerification(request)
+    if inputVeriObj.checkFormGET(STARTDATE, DATE):
+        inputtedDate = givenTime(request.GET[STARTDATE], YMD)
     else:
         inputtedDate = currentTime()
     start_date.append(inputtedDate.getDate())
 
     ordersToBeReturned = Orders.objects.filter(returndate__gte=start_date[0])
-    if ('returnStore' in request.GET) and (request.GET['returnStore']) and (isint(request.GET['returnStore'])):
-        ordersToBeReturned = ordersToBeReturned.filter(returnstore=request.GET['returnStore'])
-    ordersToBeReturned = ordersToBeReturned.order_by('returndate')
+    if inputVeriObj.checkFormGET(RETURNSTORE, NUM):
+        ordersToBeReturned = ordersToBeReturned.filter(returnstore=request.GET[RETURNSTORE])
+    ordersToBeReturned = ordersToBeReturned.order_by(RETURNDATE)
 
-    if ('ordering' in request.GET) and (request.GET['ordering']):
-        if request.GET['ordering'] == 'daily':
+    if inputVeriObj.checkFormGET(ORDERING, ''):
+        if request.GET[ORDERING] == DAILY:
             sortLength = 1
             start_date[0] = start_date[0] + sortLength
-        elif request.GET['ordering'] == 'monthly':
+        elif request.GET[ORDERING] == MONTHLY:
             sortLength = 100
             start_date[0] = start_date[0] + (sortLength - sortLength/2)
         else:
@@ -90,22 +102,30 @@ def search(request):
     resultantOrders = Orders.objects.all()
     ordersToExclude = resultantOrders.none()
     if request.method == 'GET':
-        resultantCars = Cars.objects.all()
-        pickupDateSet = (('pickupDate' in request.GET) and (request.GET['pickupDate']) and (isint(request.GET['pickupDate'][0:4]))
-            and (isint(request.GET['pickupDate'][5:7])) and (isint(request.GET['pickupDate'][8:10])))
-        dropoffDateSet = (('dropoffDate' in request.GET) and (request.GET['dropoffDate']) and (isint(request.GET['dropoffDate'][0:4]))
-            and (isint(request.GET['dropoffDate'][5:7])) and (isint(request.GET['dropoffDate'][8:10])))
-        pickupLocationSet = (('pickupLocation' in request.GET) and (request.GET['pickupLocation'])
-            and (isint(request.GET['pickupLocation'])))
+        # Constants declaration
+        PICKUPDATE = 'pickupDate'
+        DROPOFFDATE = 'dropoffDate'
+        PICKUPLOCATION = 'pickupLocation'
+        SEATS = 'seats'
+        DRIVETYPE = 'driveType'
+        MAKEOFCAR = 'makeOfCar'
+        CARMODEL = 'carModel'
+        BODYTYPE = 'bodyType'
+        DATE = 'date'
+        NUM = 'num'
+        YMD = 'YMD'
 
-        if pickupDateSet:
-            inputtedDate = givenTime(request.GET['pickupDate'], 'YMD')
+        inputVeriObj = inputVerification(request)
+        resultantCars = Cars.objects.all()
+
+        if inputVeriObj.checkFormGET(PICKUPDATE, DATE):
+            inputtedDate = givenTime(request.GET[PICKUPDATE], YMD)
         else:
             inputtedDate = currentTime()
         pickupDate_int = inputtedDate.getDate()
 
-        if dropoffDateSet:
-            inputtedDropOffDate = givenTime(request.GET['dropoffDate'], 'YMD')
+        if inputVeriObj.checkFormGET(DROPOFFDATE, DATE):
+            inputtedDropOffDate = givenTime(request.GET[DROPOFFDATE], YMD)
         else:
             inputtedDropOffDate = timeObject(30000101)
         dropoffDate_int = inputtedDropOffDate.getDate()
@@ -116,7 +136,7 @@ def search(request):
             carsFinalLocation = carsFinalLocation | resultantOrders.filter(carid_id=car.id, returndate=maximum)
         resultantOrders = carsFinalLocation
 
-        if pickupLocationSet:
+        if inputVeriObj.checkFormGET(PICKUPLOCATION, NUM):
             ordersFinishedAtPickupLocation = resultantOrders.filter(returnstore=request.GET['pickupLocation'])
             ordersToExclude = resultantOrders.exclude(id__in=ordersFinishedAtPickupLocation)
 
@@ -128,7 +148,7 @@ def search(request):
         for order in ordersToBeReturned:
             resultantCars = resultantCars | Cars.objects.filter(id=order.carid_id)
 
-        if ('seats' in request.GET) and (request.GET['seats']) and (isint(request.GET['seats'])):
+        if inputVeriObj.checkFormGET(SEATS, NUM):
             if int(request.GET['seats']) == 8:
                 resultantCars = resultantCars.filter(car_seatingcapacity__gte=request.GET['seats'])
             elif int(request.GET['seats']) == 3:
@@ -136,16 +156,16 @@ def search(request):
             else:
                 resultantCars = resultantCars.filter(car_seatingcapacity=request.GET['seats'])
 
-        if ('driveType' in request.GET) and (request.GET['driveType']):
+        if inputVeriObj.checkFormGET(DRIVETYPE, ''):
             resultantCars = resultantCars.filter(car_drive__icontains=request.GET['driveType'])
 
-        if ('makeOfCar' in request.GET) and (request.GET['makeOfCar']):
+        if inputVeriObj.checkFormGET(MAKEOFCAR, ''):
             resultantCars = resultantCars.filter(car_makename__icontains=request.GET['makeOfCar'])
 
-        if ('carModel' in request.GET) and (request.GET['carModel']):
+        if inputVeriObj.checkFormGET(CARMODEL, ''):
             resultantCars = resultantCars.filter(car_model__icontains=request.GET['carModel'])
 
-        if ('bodyType' in request.GET) and (request.GET['bodyType']):
+        if inputVeriObj.checkFormGET(BODYTYPE, ''):
             resultantCars = resultantCars.filter(car_bodytype__icontains=request.GET['bodyType'])
 
     elif request.method == 'POST':
