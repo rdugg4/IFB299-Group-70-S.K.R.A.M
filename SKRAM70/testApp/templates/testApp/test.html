@@ -1,9 +1,2 @@
-{% if testing %}
-    {% for car in testing %}
-        <p>{{ car.car_makename }}</p>
-        <p>{{ car.id }}</p>
-        <p>{{ car.carid }}</p>
-    {% endfor %}
-{% else %}
-    <p> No results </p>
-{% endif %}
+{% load static %}
+<img src="{% static "testApp/googleLogo.jpg" %}" alt="logo">

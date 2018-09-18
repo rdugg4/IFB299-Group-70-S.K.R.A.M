@@ -19,7 +19,7 @@ def index(request):
 def detail(request, car_id):
     carInfo = Cars.objects.filter(id=car_id)
     context = {'CarInfo': carInfo}
-    return render(request, 'testApp/carDetails.html', context)
+    return render(request, 'testApp/showcaroriginal.html', context)
 
 # def clean(self):
 #     name = self.cleaned_data.get('Name')
