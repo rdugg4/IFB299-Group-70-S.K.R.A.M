@@ -5,6 +5,7 @@ from .models import Stores
 from .models import Orders
 import datetime
 from django.http import HttpResponse
+from django import forms
 
 def index(request):
     storelist = Stores.objects.all()
@@ -16,18 +17,33 @@ def detail(request, car_id):
     context = {'CarInfo': carInfo}
     return render(request, 'testApp/carDetails.html', context)
 
+# def clean(self):
+#     name = self.cleaned_data.get('Name')
+
+#     if name:
+#         msg=forms.ValidationError("This field is required.")
+#         self.add_erreo('name', msg)
+
+#     else:
+#         self.cleaned_data['name'] = ''
+    
+#     return self.cleaned_data
+
 def accounts(request):
     if request.method == "POST":
         if (request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email') and request.POST.get('Password')):
+            
             post = Customers()
-            post.name = request.POST.get('Name')
-            post.phone = request.POST.get('Phone')
-            post.address = request.POST.get('Address')
-            post.dob = request.POST.get('DOB')
-            post.occupation = request.POST.get('Occupation')
-            post.gender = request.POST.get('Gender')
-            post.email = request.POST.get('Email')
-            post.password = request.POST.get('Password')
+            f = forms.CharField()
+            f.clean(request.POST.get('Name'))
+            post.name = f.clean(request.POST.get('Name'))
+            post.phone = f.clean( request.POST.get('Phone'))
+            post.address = f.clean( request.POST.get('Address'))
+            post.dob = f.clean( request.POST.get('DOB'))
+            post.occupation = f.clean( request.POST.get('Occupation'))
+            post.gender = f.clean( request.POST.get('Gender'))
+            post.email = f.clean(request.POST.get('Email'))
+            post.password = f.clean(request.POST.get('Password'))
             post.save()
             return render(request, 'testApp/signup.html')
         else:
