@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Navbar </title>
+		<link rel="stylesheet" href="./public/css/navbar-style.css">
+		<link href="https://fonts.googleapis.com/css?family=Poppins"
+		rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	  rel="stylesheet">
+	</head>
+
+	<body>
+
+		<header>
+		    <div class="topnav"> <img src="#" alt="logo" class="logo">
+		    <nav>
+			<ul class="menu-main">
+			    <li><a href="#"> Home </a></li>
+			    <li><a href="#"> Locations </a></li>
+			    <li><a href="#"> Hire Cars </a></li>
+			    <li><a href="#"> Help </a>
+	          <div class="menu-sub">
+	            <ul>
+	              <li><a href="#"> FAQ </a></li>
+	      				<li><a href="#"> Contact Us </a></li>
+	            </ul>
+	          </div>
+			    <li><a href="#"> EN </a></li>
+			    <li><a href="#"> <i class="material-icons"
+	          style="vertical-align:middle">person_outline</i>Sign In </a>
+			    	<div class="menu-sub">
+				    <ul>
+					<li><a href="#"> Sign In </a></li>
+					<li><a href="#"> Create New Account </a></li>
+				    </ul>
+				</div>
+			    </li>
+			</ul>
+		    </nav>
+		    </div>
+		</header>
+
+<!-- Search section goes here -->
+		<section>
+			<div class="row">
+				<div class="leftcolumn">
+
+					<h1 align="center" style="padding-top:30px;"> Start Your Search
+						Here </h1>
+					<form action="/action_page.php" target="_blank">
+						<input type="text" name="pickup" placeholder="Enter Pick Up Location Here">
+						<br>
+						Drop off location is same as pick up? <input type="checkbox"
+						name="dropoff" value="droplocation">
+					<!-- Don't know how to make this checked by default? Also if this
+					isn't checked another box will have to appear
+					asking for drop off location (same as pick up). Maybe consider
+					having a "sorry we don't have any rentals in that area" if people
+					just type in the location that can't be matched with any in the data -->
+					<br><br>
+					Pick Up Date:
+					<input type="date" name="pickdate"><br>
+					Drop Off Date:
+					<input type="date" name="dropdate">
+					<!-- drop off date should have an error message if the date is before
+					pick up -->
+					<input type="submit" value="Search">
+				</div>
+			</div>
+		</section>
+
+
+		<footer>
+			<div class="footer-main">
+				<nav>
+					<ul>
+						<li><a href="#">Need help?</a></li>
+					</ul>
+				</nav>
+			</div>
+		</footer>
+
+	</body>
+</html>
