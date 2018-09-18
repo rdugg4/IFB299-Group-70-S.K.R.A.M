@@ -55,4 +55,4 @@ def search(request):
     resultantCars = searchData(request)
     storelist = Stores.objects.all()
     context = {'resultantCars': resultantCars, 'StoreList': storelist}
-    return render(request, 'testApp/searchResults.html', context)
+    return render(request, 'testApp/ShaleenSearchresults.html', context)

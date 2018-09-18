@@ -72,39 +72,13 @@
                 <p>Wheel base: {{car.car_wheelbase}}</p>
               </div>
             </div>
+            <!-- Need to fix this as it doesn't quite align in the center, align is
+            not working?? -->
+            <a href="" class="btn" style="margin-left:50%"> Reserve now! </a>
         {% empty %}
-            <p> The Car you are referencing does not exist </p>
+            <h1 align="center" style="padding-top:20px;"> The Car you are referencing does not exist </h1>
         {% endfor %}
-    <!-- This will be dynamic and refer to database -->
-    <!-- <h1 align="center" style="padding-top:20px;"> Example Car </h1> -->
-    <!-- <br>
-    <div class="row">
-      <div class="reviewcontainer">
-        <div class="fakeimg" style="height:200px;">Image</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="leftcolumn">
-        <h2> Specific Information</h2>
-        <p>Transmission</p>
-        <p>Seats</p>
-        <p>Engine</p>
-        <p>Tank Capacity</p>
-      </div>
-      <div class ="rightcolumn">
-        <br>
-        <br>
-        <p>Power</p>
-        <p>Body</p>
-        <p>Drive</p>
-      </div>
-    </div> -->
-
-<!-- Need to fix this as it doesn't quite align in the center, align is
-not working?? -->
-      <a href="" class="btn" style="margin-left:50%"> Reserve now! </a>
-
-
+        
     <div class="row">
       <div class="leftcolumn">
         <h2> Reviews </h2>
