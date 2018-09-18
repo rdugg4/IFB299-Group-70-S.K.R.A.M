@@ -4,15 +4,13 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-class ConfirmDate(forms.Form):
-    date_confirmation = forms.DateField(help_text="Enter a date in the future")
+class createAccount(forms.Form):
+    name = forms.CharField(label='Name', max_length=255)  # Field name made lowercase.
+    phone = forms.CharField(label='Phone', max_length=20)  # Field name made lowercase.
+    address = forms.CharField(label='Address', max_length=255)  # Field name made lowercase.
+    dob = forms.CharField(label='DOB', max_length=20)  # Field name made lowercase.
+    occupation = forms.CharField(label='Occupation', max_length=255)  # Field name made lowercase.
+    gender = forms.CharField(label='Gender', max_length=3)  # Field name made lowercase.
+    email = forms.CharField(label='Email', max_length=255)  # Field name made lowercase.
+    password = forms.CharField(label='Password', max_length=255)  # Field name made lowercase.
 
-    def clean_renewal_date(self):
-        data = self.cleaned_data['date_confirmation']
-
-        # Check if a date is not in the past.
-        if data < datetime.date.today():
-            raise ValidationError(_('Invalid date - renewal in past'))
-
-        # Remember to always return the cleaned data.
-        return data

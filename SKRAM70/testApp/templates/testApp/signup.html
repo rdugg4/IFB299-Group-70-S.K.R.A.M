@@ -1,32 +1,32 @@
-<form action = "" method = "POST">
+<form action = "/CRC/create_account/" method = "POST">
     {% csrf_token %}
-    Name:<br>
-    <input type="text" name="Name">
+    <label for ="name">Name:</label><br>
+    <input id="name" type="text" name="Name" maxlength="225" required>
     <br>
-    Phone:<br>
-    <input type="Phone" name="Phone">
+    <label for ="phone">Phone:</label><br>
+    <input id = "phone" type="Phone" name="Phone" maxlength="20" required>
     <br>
-    Address:<br>
-    <input type="text" name="Address">
+    <label for ="address">Address:</label><br>
+    <input id="address" type="text" name="Address" maxlength="255" required>
     <br>
-    DOB:<br>
-    <input type="date" name="DOB">
+    <label for ="dob">DOB:</label><br>
+    <input id ="dob" type="date" name="DOB" maxlength="20" required>
     <br>
-    Occupation:<br>
-    <input type="text" name="Occupation">
+    <label for ="occupation">Occupation:</label><br>
+    <input id="occupation" type="text" name="Occupation" maxlength="255" required>
     <br>
-    Gender:<br>
-    <input type="radio" name="Gender" value="M" checked> Male<br>
-    <input type="radio" name="Gender" value="F"> Female
+    <label for ="gender">Gender:</label><br>
+    <input id="gender" type="radio" name="Gender" value="M" checked maxlength="3" required> Male<br>
+    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" re> Female
     <br>
-    Email:<br>
-    <input type="email" name="Email" placeholder="abcd123@example.com">
+    <label for ="email">Email:</label><br>
+    <input id="email" type="email" name="Email" placeholder="abcd123@example.com" maxlength="255" required> 
     <br>
-    Password:<br>
-    <input type="password" name="Password" placeholder="abcd@1234">
+    <label for ="pwd">Password:</label><br>
+    <input type="password" name="Password" placeholder="abcd@1234" maxlength="255" required onchange="form.pwd2">
     <br>
-    Confirm Password:<br>
-    <input type="password" name="Password" placeholder="abcd@1234">
+    <label for ="pwd">Confirm Password:</label><br>
+    <input id="pwd" type="password" name="pwd2" required>
     <br>
     <br>
     <input type="submit" value="Signup">

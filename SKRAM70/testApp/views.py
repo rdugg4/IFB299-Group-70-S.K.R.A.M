@@ -6,10 +6,13 @@ from .models import Orders
 import math
 from django.db.models import Max
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django import forms
 from .functions.timeobjects import *
 from .functions.search import *
 from .functions.inputVerification import *
+from django.contrib import messages
+from .forms import createAccount
 
 def index(request):
     storelist = Stores.objects.all()
@@ -33,13 +36,35 @@ def detail(request, car_id):
 
 #     return self.cleaned_data
 
+# def sign_up(request):
+#     if request.method == 'POST':
+#         form = createAccount(request.POST)
+#         if form.is_valid():
+#             post = Customers()
+#             post.name = form.cleaned_data['Name']
+#             post.phone = form.cleaned_data['Phone']
+#             post.address = form.cleaned_data['Address']
+#             post.dob = form.cleaned_data['DOB']
+#             post.occupation = form.cleaned_data['Occupation']
+#             post.gender = form.cleaned_data['Gender']
+#             post.email = form.cleaned_data['Email']
+#             post.password = form.cleaned_data['Password']
+#             post.save()
+#             return HttpResponse('it worked')
+#             return HttpResponseRedirect('/CRC/')
+#         else:
+#             return HttpResponse('NOT WORKING')
+#             form = createAccount()
+#         return render(request, 'testApp/signup.html', {'form': form,})
+#     else:
+#         return render(request,'testApp/signup.html')
+
 def accounts(request):
     if request.method == "POST":
         if (request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email') and request.POST.get('Password')):
 
             post = Customers()
             f = forms.CharField()
-            f.clean(request.POST.get('Name'))
             post.name = f.clean(request.POST.get('Name'))
             post.phone = f.clean( request.POST.get('Phone'))
             post.address = f.clean( request.POST.get('Address'))
@@ -54,6 +79,7 @@ def accounts(request):
             return render(request,'testApp/signup.html')
     else:
         return render(request,'testApp/signup.html')
+    
 
 def staffPortal(request):
     return render(request, 'testApp/staffPortal.html')
