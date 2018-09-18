@@ -20,7 +20,6 @@
     {% if order.returndate > timeperiod_startDate %}
         <br><br><br>
     {% endif %}
-    {{ timeperiod_startDate }}
     <p>{{ order.id }}, {{ order.returndate }}, {{ order.returnstore }}</p>
 {% empty %}
     <p> No cars to be returned </p>
