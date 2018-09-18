@@ -1,35 +1,13 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Vehicle Return views</title>
-		<link href="./public/css/MikeCarReturnCSS.css" rel="stylesheet" type="text/css">
-		<style>
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 10px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: gray; 
-    border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
-}
-</style>
-	</head>
-	<body>
-		<header>
+    <head>
+	<meta charset="UTF-8">
+	<title> Vechicle Return views</title>
+	<link rel="stylesheet" href="./public/css/MikeCarReturnCSS.css">
+    </head>
+	
+    <body>
+	<header>
 	    <div class="topnav"> <img src="#" alt="logo" class="logo">
 	    <nav>
 		<ul class="menu-main">
@@ -45,24 +23,24 @@
           </div>
 		    <li><a href="#"> EN </a></li>
 		    <li><a href="#"> <i class="material-icons"
-          style="vertical-align:middle"></i>Sign In </a>
+          style="vertical-align:middle"></i>Sign Out </a>
 		    	<div class="menu-sub">
 			    <ul>
-				<li><a href="#"> Sign out </a></li>
+				<li><a href="#"> Sign In </a></li>
 				<li><a href="#"> Create New Account </a></li>
-			    </ul>
-			</div>
-		    </li>
 		</ul>
 	    </nav>
 	    </div>
-	</header>	
+	</header>
+	
 	<section>
-
-
 <div class="row">
-  <div class="column left";>
-<div class = "listbox1" align="center"> 
+  <div class="column left">
+<div class = "listbox1" align="center">
+	<br>
+	<br>
+	<br>
+	<br>
 	<h2>Please select your preference</h2>
        	    <select>
   			<option value="Daily">View by: Daily</option>
@@ -134,12 +112,13 @@
            </div>
 
   </div>
-  <div class="column right" align="left";>
-	<div class="Returncontainer">
-	    <h1> Return Schedule</h1><hr>
-	    <table id="CarReturntable">
+
+    <div class="column right">
+	<div class="searchcontainer">
+	    <h2> Return Schedule</h2><hr>
+	    <table id="table">
 		<tr id="box">
-		    <td><b>Return Date:</b>
+		<td><b>Return Date:</b>
 		    <p>23/4/2025</p>
 		    <td><p><b>Car ID:</b>14818</p>
 		    	<p><b>Brand</b>: Land Rover</p>
@@ -151,7 +130,6 @@
 		    	<p><b>Customer Name: </b>Gilbert R</p>
 		    	<p><b>Customer Phone: </b>1 (11) 543 535-012*</p>
 		    	<p><b>Customer gender: </b>Female</p>
-
 		</tr>
 		<td></td>
 		<tr id="box">
@@ -185,10 +163,9 @@
 		</tr>
 		<td></td>
 	    </table>
-  </div>
-  </div>
-</div>
-
+	</div>
+	</div>
+	
 	</section>
 
 	<footer>
@@ -199,8 +176,7 @@
 		    </ul>
 		</nav>
 	    </div>
-	</footer>		
-	
+	</footer>
 
-</body>
+	</body>
 </html>
