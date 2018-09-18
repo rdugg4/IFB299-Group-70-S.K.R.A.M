@@ -6,14 +6,10 @@ from .models import Orders
 import math
 from django.db.models import Max
 from django.http import HttpResponse
-<<<<<<< HEAD
 from django import forms
-=======
 from .functions.timeobjects import *
 from .functions.search import *
 from .functions.inputVerification import *
-
->>>>>>> 8f81f6ede99a0b0346e228516ab36a79f59e770f
 
 def index(request):
     storelist = Stores.objects.all()
@@ -34,13 +30,13 @@ def detail(request, car_id):
 
 #     else:
 #         self.cleaned_data['name'] = ''
-    
+
 #     return self.cleaned_data
 
 def accounts(request):
     if request.method == "POST":
         if (request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email') and request.POST.get('Password')):
-            
+
             post = Customers()
             f = forms.CharField()
             f.clean(request.POST.get('Name'))
