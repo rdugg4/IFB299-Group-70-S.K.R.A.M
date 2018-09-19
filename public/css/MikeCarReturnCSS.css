@@ -24,6 +24,8 @@ header::after {
 .logo {
 	float:left;
 	padding: 25px 0;
+	height:40px;
+	width:160px;
 }
 
 header nav {
@@ -157,7 +159,7 @@ footer nav li:hover a {
 
 table {
     width: 90%;
-    border-collapse: collapse;   
+    border-collapse: collapse;
 }
 
 td {
@@ -203,19 +205,19 @@ td {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+    box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: gray; 
+    background: gray;
     border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
+    background: #b30000;
 }
 
 /* print button */
@@ -231,4 +233,3 @@ input[type=submit] {
 /* When moving the mouse over the submit button, add a darker green color */
 input[type=submit]:hover {
     background-color: #AAAAAA;
-

@@ -23,7 +23,9 @@ header::after {
 
 .logo {
 	float:left;
-	padding: 25px 0;
+	padding: 15px 0;
+	height:40px;
+	width:160px;
 }
 
 header nav {
@@ -192,7 +194,7 @@ table {
     width: 100%;
     padding: 5px;
     line-height: 0.65em;
-    border-collapse: collapse;   
+    border-collapse: collapse;
 }
 
 td {
@@ -204,4 +206,3 @@ td {
     border: solid 1px #414141;
     background-color: #F6F5F5;
 }
-

@@ -27,7 +27,9 @@ header::after {
 
 .logo {
 	float:left;
-	padding: 25px 0;
+	padding: 15px 0;
+	height:40px;
+	width:160px;
 }
 
 header nav {
@@ -135,8 +137,8 @@ footer nav li:hover a {
 }
 
 input[type=text], select, textarea {
-	width: 50%; 
-    padding: 10px; /* Some padding */  
+	width: 50%;
+    padding: 10px; /* Some padding */
     border: 1px solid #ccc; /* Gray border */
     border-radius: 4px; /* Rounded borders */
     box-sizing: border-box; /* Make sure that padding and width stays in place */
@@ -144,7 +146,7 @@ input[type=text], select, textarea {
     margin-bottom: 16px; /* Bottom margin */
     resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
 	text-align: left;
-	
+
 }
 
 /* Style the submit button with a specific background color etc */
