@@ -63,13 +63,10 @@
   			</select>
   				<br>
   				<br>
-			<input type="submit" value="Refresh">
+			<input type="submit" name="refresh"value="Refresh">
+            <br><br>
+            <input type="submit" name="pdf" value="Create PDF of results">
            </div>
-       </form>
-       <br>
-       <form action="/CRC/staffPortal/vehicleReturns/" method="POST">
-           {% csrf_token %}
-           <input type="submit" value="Create PDF of results">
        </form>
   </div>
 
@@ -80,7 +77,8 @@
             {% for order, timeperiod_startDate, car, customer, store in zippedResults %}
                 {% if order.returndate > timeperiod_startDate %}
                     {% if not forloop.first %}
-                        <td>{{timeperiod_startDate}}</td>
+                        <td></td>
+                        <td></td>
                     {% endif %}
                 {% endif %}
                 <tr id="box">
@@ -97,7 +95,6 @@
         		    	<p><b>Customer Phone: </b>{{customer.phone}}</p>
         		    	<p><b>Customer gender: </b>{{customer.gender}}</p>
         		</td></td></tr>
-        		<td></td>
             {% empty %}
                 <p> No cars to be returned </p>
             {% endfor %}

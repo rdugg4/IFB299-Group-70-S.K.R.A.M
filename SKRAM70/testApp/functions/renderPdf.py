@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 import xhtml2pdf.pisa as pisa
 
-def renderPDF(path: str, params: dict):
+def renderPDF(path, context):
     template = get_template(path)
-    html = template.render(params)
+    html = template.render(context)
     response = BytesIO()
     pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), response)
     if not pdf.err:

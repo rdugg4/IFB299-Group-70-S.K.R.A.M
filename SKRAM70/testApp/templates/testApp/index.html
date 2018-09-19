@@ -1,6 +1,7 @@
 <form action="/CRC/search" method="get">
     Pickup Location:<br>
     <select name="pickupLocation">
+        <option value="allStores">Any Location</option>
         {% for store in StoreList %}
             <option value="{{store.id}}">{{store.city}}</option>
         {% endfor %}

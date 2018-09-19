@@ -18,7 +18,7 @@ from .functions.renderPdf import renderPDF
 def index(request):
     storelist = Stores.objects.all()
     context = {'StoreList': storelist}
-    return render(request, 'testApp/index.html', context)
+    return render(request, 'testApp/AlanaCustomerHomepage.html', context)
 
 def detail(request, car_id):
     carInfo = Cars.objects.filter(id=car_id)
@@ -93,8 +93,8 @@ def returnPage(request):
     zippedResults = vehicleToBeReturned(request)
     storelist = Stores.objects.all()
     context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
-    if request.method == 'POST':
-        return renderPDF('testApp/test.html', context)
+    if request.method == 'GET' and 'pdf' in request.GET:
+        return renderPDF('testApp/pdf.html', context)
     return render(request, 'testApp/MikeCarReturnPage.html', context)
 
 def search(request):

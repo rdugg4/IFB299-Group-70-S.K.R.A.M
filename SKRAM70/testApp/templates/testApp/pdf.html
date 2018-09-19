@@ -13,7 +13,8 @@
                 {% for order, timeperiod_startDate, car, customer, store in zippedResults %}
                     {% if order.returndate > timeperiod_startDate %}
                         {% if not forloop.first %}
-                            <td>{{timeperiod_startDate}}</td>
+                            <td></td>
+                            <td></td>
                         {% endif %}
                     {% endif %}
                     <tr id="box">
@@ -30,7 +31,7 @@
             		    	<p><b>Customer Phone: </b>{{customer.phone}}</p>
             		    	<p><b>Customer gender: </b>{{customer.gender}}</p>
             		</td></td></tr>
-            		<td></td>
+            		<!-- <td></td> -->
                 {% empty %}
                     <p> No cars to be returned </p>
                 {% endfor %}
