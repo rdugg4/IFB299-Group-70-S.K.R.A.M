@@ -13,6 +13,7 @@ from django.contrib import messages
 from .forms import *
 from .functions.vehicleReturns import *
 from django.core.mail import send_mail
+from .functions.renderPdf import renderPDF
 
 def index(request):
     storelist = Stores.objects.all()
@@ -25,6 +26,7 @@ def detail(request, car_id):
     return render(request, 'testApp/showcaroriginal.html', context)
 
 def contactUs(request):
+    querySuccesfullySubmitted = False
     if request.method == 'POST':
         form = CustomerQuery(request.POST)
         if form.is_valid():
@@ -33,12 +35,11 @@ def contactUs(request):
             message = form.cleaned_data['question']
             recipients = ['companyEmail@noreply.com']
             send_mail(subject, message, sender, recipients)
-            return HttpResponse('IT WORKED')
+            querySuccesfullySubmitted = True
     else:
         form = CustomerQuery()
-    context = {'form': form}
+    context = {'form': form, 'querySuccesfullySubmitted': querySuccesfullySubmitted}
     return render(request, 'testApp/MikeContactPage draft.html', context)
-    # return render(request, 'testApp/MikeContactPage draft.html')
 
 # def sign_up(request):
 #     if request.method == 'POST':
@@ -92,6 +93,8 @@ def returnPage(request):
     zippedResults = vehicleToBeReturned(request)
     storelist = Stores.objects.all()
     context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
+    if request.method == 'POST':
+        return renderPDF('testApp/test.html', context)
     return render(request, 'testApp/MikeCarReturnPage.html', context)
 
 def search(request):

@@ -16,15 +16,22 @@
 			    <li><a href="\CRC"> Home </a></li>
 			    <li><a href="#"> Locations </a></li>
 			    <li><a href="#"> Hire Cars </a></li>
-			    <li><a href="\CRC\ContactUs"> Help </a>
+			    <li><a href="#"> Help </a>
+					<div class="menu-sub">
+	                    <ul>
+	                        <li><a href="#"> FAQ </a></li>
+	      				    <li><a href="\CRC\ContactUs"> Contact Us </a></li>
+	                    </ul>
+	                </div>
+				</li>
 			    <li><a href="#"> EN </a></li>
 			    <li><a href="#"> Sign In </a>
 			    	<div class="menu-sub">
-				    <ul>
-					<li><a href="#"> Sign In </a></li>
-					<li><a href="\CRC\create_account"> Create New Account </a></li>
-				    </ul>
-				</div>
+					    <ul>
+							<li><a href="#"> Sign In </a></li>
+							<li><a href="\CRC\create_account"> Create New Account </a></li>
+					    </ul>
+					</div>
 			    </li>
 			</ul>
 	    </nav>
@@ -67,7 +74,9 @@
       <input type="submit" value="Submit">
     </p>
     <pty>
-	  <label for="Thanks for submitting!">Thanks for submitting!</label>
+		{% if querySuccesfullySubmitted %}
+	  	<label for="Thanks for submitting!">Thanks for submitting!</label>
+		{% endif %}
 
     </pty>
 		</form>

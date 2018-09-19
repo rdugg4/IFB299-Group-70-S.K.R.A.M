@@ -11,21 +11,24 @@
 	<header>
 	    <div class="topnav"> <img src="#" alt="logo" class="logo">
 	    <nav>
-		<ul class="menu-main">
-		    <li><a href="\CRC"> Home </a></li>
-		    <li><a href="#"> Locations </a></li>
-		    <li><a href="#"> Hire Cars </a></li>
-		    <li><a href="\CRC\ContactUs"> Help </a>
-          <div class="menu-sub">
-            <ul>
-              <li><a href="#"> FAQ </a></li>
-      				<li><a href="#"> Contact Us </a></li>
+    		<ul class="menu-main">
+    		    <li><a href="\CRC"> Home </a></li>
+    		    <li><a href="#"> Locations </a></li>
+    		    <li><a href="#"> Hire Cars </a></li>
+    		    <li><a href="#"> Help </a>
+                    <div class="menu-sub">
+                        <ul>
+                            <li><a href="#"> FAQ </a></li>
+          				    <li><a href="\CRC\ContactUs"> Contact Us </a></li>
+                        </ul>
+                    </div>
+                </li>
+    		    <li><a href="#"> EN </a></li>
+    		    <li><a href="#">
+                    <i class="material-icons" style="vertical-align:middle"></i>
+                    Sign Out </a></li>
             </ul>
-          </div>
-		    <li><a href="#"> EN </a></li>
-		    <li><a href="#"> <i class="material-icons"
-          style="vertical-align:middle"></i>Sign Out </a>
-      </ul>
+        </nav>
 	</header>
 
 	<section>
@@ -63,7 +66,11 @@
 			<input type="submit" value="Refresh">
            </div>
        </form>
-
+       <br>
+       <form action="/CRC/staffPortal/vehicleReturns/" method="POST">
+           {% csrf_token %}
+           <input type="submit" value="Create PDF of results">
+       </form>
   </div>
 
     <div class="column right">
