@@ -2,7 +2,7 @@
     Pickup Location:<br>
     <select name="pickupLocation">
         {% for store in StoreList %}
-            <option value="{{store.id}}">{{store.name}}</option>
+            <option value="{{store.id}}">{{store.city}}</option>
         {% endfor %}
     </select>
     <br>

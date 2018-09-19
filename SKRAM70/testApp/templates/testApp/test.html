@@ -1,2 +1,5 @@
-{% load static %}
-<img src="{% static "testApp/googleLogo.jpg" %}" alt="logo">
+<form action="/CRC/ContactUs" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="OK">
+</form>

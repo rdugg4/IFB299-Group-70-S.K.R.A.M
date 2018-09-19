@@ -10,8 +10,9 @@ from .functions.timeobjects import *
 from .functions.search import *
 from .functions.inputVerification import *
 from django.contrib import messages
-from .forms import createAccount
+from .forms import *
 from .functions.vehicleReturns import *
+from django.core.mail import send_mail
 
 def index(request):
     storelist = Stores.objects.all()
@@ -24,7 +25,20 @@ def detail(request, car_id):
     return render(request, 'testApp/showcaroriginal.html', context)
 
 def contactUs(request):
-    return render(request, 'testApp/MikeContactPage draft.html')
+    if request.method == 'POST':
+        form = CustomerQuery(request.POST)
+        if form.is_valid():
+            subject = "issue from: " + form.cleaned_data['your_name']
+            sender = form.cleaned_data['email']
+            message = form.cleaned_data['question']
+            recipients = ['companyEmail@noreply.com']
+            send_mail(subject, message, sender, recipients)
+            return HttpResponse('IT WORKED')
+    else:
+        form = CustomerQuery()
+    context = {'form': form}
+    return render(request, 'testApp/MikeContactPage draft.html', context)
+    # return render(request, 'testApp/MikeContactPage draft.html')
 
 # def sign_up(request):
 #     if request.method == 'POST':

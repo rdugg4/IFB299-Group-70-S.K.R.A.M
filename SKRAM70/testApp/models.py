@@ -63,3 +63,12 @@ class Orders(models.Model):
 
     class Meta:
         db_table = 'orders'
+
+# class cusHelp(models.Model):
+#     id = models.AutoField(db_column='id', primary_key=True)
+#     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)
+#     email = models.CharField(db_column='Email', max_length=255, blank=True, null=True)
+#     question = models.CharField(db_column='Question', max_length=255, blank=True, null=True)
+#
+#     class Meta:
+#         db_table = 'CusHelp'

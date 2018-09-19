@@ -38,23 +38,26 @@
 
   <H1><strong>Contact us today!</strong></H1>
     <ptb>
-    <label for="Firstname">First Name</label>
+    <label for="Firstname">Name</label>
     </ptb>
+	<form action="/CRC/ContactUs" method="post">
+	{% csrf_token %}
     <p>
-      <input type="text" id="fname" name="firstname" placeholder="Please type your First name">
-      <label for="Lastname"><br>Last Name<br></label>
-      <input type="text" id="lname" name="lastname" placeholder="Please type your last name">
+	  {{ form.your_name.errors }}
+	  {{ form.your_name }}
 
-      <label for="Your Email"><br>Your Email<br>
-      </label>
-      <input type="text" id="youremail" name="youremail" placeholder="Please type your your Email account">
+      <label for="Your Email"><br>Your Email<br></label>
+	  {{ form.email.errors }}
+	  {{ form.email }}
+      <!-- <input type="text" id="youremail" name="youremail" placeholder="Please type your your Email account"> -->
     </p>
     <p>
-      <label for="subject">Subject<br>
-      </label>
-      <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
+      <label for="subject">Your Message<br></label>
+	  {{ form.question.errors }}
+	  {{ form.question }}
 
       <label for="Thanks for submitting!">
+	</form>
 	<ptextarea>
 	</ptextarea>
 

@@ -55,7 +55,7 @@
        	    <select name="returnStore">
                 <option value="allStores">All stores</option>
                 {% for store in StoreList %}
-                    <option value="{{store.id}}">{{store.name}}</option>
+                    <option value="{{store.id}}">{{store.city}}</option>
                 {% endfor %}
   			</select>
   				<br>
@@ -84,7 +84,7 @@
         		    	<p><b>Model</b>: {{car.car_model}}</p>
         		    	<p><b>Series</b>: {{car.car_series}}</p>
         		    	<p><b>Year</b>: {{car.car_seriesyear}}</p>
-        		    </td><td><p><b>Return store: </b>{{store.name}}</p>
+        		    </td><td><p><b>Return store: </b>{{store.city}}</p>
         		    	<p><b>Customer ID: </b>{{customer.id}}</p>
         		    	<p><b>Customer Name: </b>{{customer.name}}</p>
         		    	<p><b>Customer Phone: </b>{{customer.phone}}</p>
