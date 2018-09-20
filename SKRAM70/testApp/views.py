@@ -13,8 +13,7 @@ from django.contrib import messages
 from .forms import *
 from .functions.vehicleReturns import *
 from django.core.mail import send_mail
-# from .functions.renderPdf import renderPDF
-
+from .functions.renderPdf import renderPDF
 
 def index(request):
     storelist = Stores.objects.all()
