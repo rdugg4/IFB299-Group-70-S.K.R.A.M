@@ -39,15 +39,16 @@
 	</header>
 
 	<section>
-<form action="action_page.php">
+<form action="/CRC/create_account/" method="POST">
+	{% csrf_token %}
   <div class="container">
     <h1 id="createaccount">Create New Account</h1>
     <hr>
 
     <label for="name"><b>Name</b></label>
-    <span>*</span> <input type="text" placeholder="First Name" name="name" required>
-    <input type="text" placeholder="Middle Name" name="name">
-    <span>*</span> <input type="text" placeholder="Last Name" name="name" required>
+    <span>*</span> <input type="text" placeholder="First Name" name="firstname" required>
+    <input type="text" placeholder="Middle Name" name="middlename">
+    <span>*</span> <input type="text" placeholder="Last Name" name="lastname" required>
 
     <label for="tel"><b>Phone Number</b></label>
     <input type="tel" placeholder="Enter Phone Number" name="tel">
@@ -60,13 +61,13 @@
     <input type="date" placeholder="Birth Date" name="bday">
     <p></p>
 
-    <label for="psw"><b>Password</b></label>
-    <span>*</span> <input type="password" placeholder="Enter Password" name="psw" size="35" required>
+    <label for="Password"><b>Password</b></label>
+    <span>*</span> <input id="password" name="Password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" required>
     <label id="comment">(Must have 1st letter as uppercase, no more than 16 characters)</label>
     <p></p>
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <span>*</span> <input type="password" placeholder="Repeat Password" name="psw-repeat" size="35" required>
+    <label for="Password"><b>Repeat Password</b></label>
+    <span>*</span> <input id="password_two" name="Confirm Password:" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" required>
     <input type="checkbox" placeholder="Remmber me" name="checkbox"> Remember me
     <p></p>
 
