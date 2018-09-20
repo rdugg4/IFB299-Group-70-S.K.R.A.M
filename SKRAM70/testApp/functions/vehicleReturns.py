@@ -24,9 +24,6 @@ def vehicleToBeReturned(request):
         inputtedDate = currentTime()
     start_date.append(inputtedDate.getDate())
 
-    # test values NEEDS TO BE DELETED
-    start_date[0] = 20050711
-    
     ordersToBeReturned = Orders.objects.filter(returndate__gte=start_date[0])
     if inputVeriObj.checkFormGET(RETURNSTORE, NUM):
         ordersToBeReturned = ordersToBeReturned.filter(returnstore=request.GET[RETURNSTORE])
