@@ -10,15 +10,10 @@ from .functions.timeobjects import *
 from .functions.search import *
 from .functions.inputVerification import *
 from django.contrib import messages
-<<<<<<< HEAD
-from .forms import createAccount
-from .functions.vehicleReturns import *
-=======
 from .forms import *
 from .functions.vehicleReturns import *
 from django.core.mail import send_mail
 from .functions.renderPdf import renderPDF
->>>>>>> 3e9dcce143fdabcab248029d70ca05a33f5ac8a9
 
 def index(request):
     storelist = Stores.objects.all()
