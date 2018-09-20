@@ -15,7 +15,7 @@
 
 		<header>
 		    <div class="topnav"> <img src="./public/images/NewCarLogo.png"
-					alt="logo" class="logo" height="40px" width="160px">
+					alt="logo" class="logo">
 		    <nav>
 			<ul class="menu-main">
 			    <li><a href="#"> Home </a></li>
@@ -46,29 +46,39 @@
 <!-- Search section goes here -->
 		<section>
 			<div class="row">
-				<div class="leftcolumn">
-
-					<h1 align="center" style="padding-top:30px;"> Start Your Search
-						Here </h1>
+				<h1 align="center" style="margin-top:8%;"> Start Your Search
+					Here </h1>
 					<form action="/action_page.php" target="_blank">
-						<input type="text" name="pickup" placeholder="Enter Pick Up Location Here">
+						<input type="text" name="pickup"
+						placeholder="Enter Pick Up Location Here" class="inputsearch">
 						<br>
-						Drop off location is same as pick up? <input type="checkbox"
-						name="dropoff" value="droplocation">
+						<p class="droptext"> Drop off location is same as pick up? <input type="checkbox"
+						name="dropoff" value="droplocation"></p>
 					<!-- Don't know how to make this checked by default? Also if this
 					isn't checked another box will have to appear
 					asking for drop off location (same as pick up). Maybe consider
 					having a "sorry we don't have any rentals in that area" if people
 					just type in the location that can't be matched with any in the data -->
-					<br><br>
-					Pick Up Date:
+					<br>
+				<br>
+			</div>
+
+			<div class="row">
+				<div class="leftcolumn">
+					<h2 class="datetext">Pick Up Date:</h2>
 					<input type="date" name="pickdate"><br>
-					Drop Off Date:
+				</div>
+
+				<div class="rightcolumn">
+					<h2 class="datetext">Drop Off Date:</h2>
 					<input type="date" name="dropdate">
 					<!-- drop off date should have an error message if the date is before
 					pick up -->
-					<input type="submit" value="Search">
 				</div>
+			</div>
+
+			<div class="row">
+				<button type="submit" class="submitbtn"> Search </button>
 			</div>
 		</section>
 
