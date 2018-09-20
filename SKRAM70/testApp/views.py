@@ -9,12 +9,9 @@ from django import forms
 from .functions.timeobjects import *
 from .functions.search import *
 from .functions.inputVerification import *
-<<<<<<< HEAD
 from django.contrib import messages
 from .forms import createAccount
-=======
 from .functions.vehicleReturns import *
->>>>>>> 6e1976f97cf5f253b07d4355a3a0686787349b73
 
 def index(request):
     storelist = Stores.objects.all()
