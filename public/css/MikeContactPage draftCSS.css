@@ -167,7 +167,6 @@ input[type=submit]:hover {
 /* Add a background color and some padding around the form */
 .container {
     border-radius: 8px;
-    background-color: #D5DBE5;
     padding: 80px;
 	width: 1000px;
     /* Change this value to customize the content area*/
@@ -187,7 +186,6 @@ pty{
 
 /* Create two unequal columns that floats next to each other */
 .column {
-	background-color: #D5DBE5;
     float: left;
     padding: 10px;
     height: 300px; /* Should be removed. Only for demonstration */
@@ -196,11 +194,9 @@ pty{
 .left {
   width: 50%;
   text-align: center;
-  background-color: #D5DBE5;
 }
 
 .right {
   width: 50%;
   text-align: center;
-  background-color: #D5DBE5;
 }
