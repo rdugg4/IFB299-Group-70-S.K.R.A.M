@@ -77,6 +77,11 @@
 		{% if querySuccesfullySubmitted %}
 	  	<label for="Thanks for submitting!">Thanks for submitting!</label>
 		{% endif %}
+		{% if failedToSubmit %}
+	  	<label for="Sorry your problem could not be submitted for some reason">
+			Sorry your problem could not be submitted for some reason
+		</label>
+		{% endif %}
 
     </pty>
 		</form>

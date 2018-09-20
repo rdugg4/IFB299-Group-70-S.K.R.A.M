@@ -27,6 +27,7 @@ def detail(request, car_id):
 
 def contactUs(request):
     querySuccesfullySubmitted = False
+    failedToSubmit = False
     if request.method == 'POST':
         form = CustomerQuery(request.POST)
         if form.is_valid():
@@ -36,9 +37,10 @@ def contactUs(request):
             recipients = ['companyEmail@noreply.com']
             send_mail(subject, message, sender, recipients)
             querySuccesfullySubmitted = True
+        failedToSubmit = True
     else:
         form = CustomerQuery()
-    context = {'form': form, 'querySuccesfullySubmitted': querySuccesfullySubmitted}
+    context = {'form': form, 'querySuccesfullySubmitted': querySuccesfullySubmitted, 'failedToSubmit': failedToSubmit}
     return render(request, 'testApp/MikeContactPage draft.html', context)
 
 # def sign_up(request):
