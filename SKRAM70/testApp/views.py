@@ -10,15 +10,11 @@ from .functions.timeobjects import *
 from .functions.search import *
 from .functions.inputVerification import *
 from django.contrib import messages
-<<<<<<< HEAD
-from .forms import createAccount
-from .functions.vehicleReturns import *
-=======
 from .forms import *
 from .functions.vehicleReturns import *
 from django.core.mail import send_mail
-from .functions.renderPdf import renderPDF
->>>>>>> 3e9dcce143fdabcab248029d70ca05a33f5ac8a9
+# from .functions.renderPdf import renderPDF
+
 
 def index(request):
     storelist = Stores.objects.all()
@@ -73,24 +69,22 @@ def contactUs(request):
 
 def accounts(request):
     if request.method == "POST":
-        if (request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email') and request.POST.get('Password')):
+        if (request.POST.get('firstname') and request.POST.get('middlename') and request.POST.get('lastname') and request.POST.get('tel') and request.POST.get('bday') and request.POST.get('email') and request.POST.get('Password')):
 
             post = Customers()
             f = forms.CharField()
-            post.name = f.clean(request.POST.get('Name'))
-            post.phone = f.clean( request.POST.get('Phone'))
-            post.address = f.clean( request.POST.get('Address'))
-            post.dob = f.clean( request.POST.get('DOB'))
-            post.occupation = f.clean( request.POST.get('Occupation'))
-            post.gender = f.clean( request.POST.get('Gender'))
-            post.email = f.clean(request.POST.get('Email'))
+            post.name = (f.clean(request.POST.get('firstname')) + ' ' + f.clean(request.POST.get('middlename')) + ' ' + f.clean(request.POST.get('lastname')))
+            post.phone = f.clean( request.POST.get('tel'))
+            # post.address = f.clean( request.POST.get('Address'))
+            post.dob = f.clean( request.POST.get('bday'))
+            post.email = f.clean(request.POST.get('email'))
             post.password = f.clean(request.POST.get('Password'))
             post.save()
-            return render(request, 'testApp/signup.html')
+            return render(request, 'testApp/ShaleenCreateYourAccountPage.html')
         else:
-            return render(request,'testApp/signup.html')
+            return render(request,'testApp/ShaleenCreateYourAccountPage.html')
     else:
-        return render(request,'testApp/signup.html')
+        return render(request,'testApp/ShaleenCreateYourAccountPage.html')
 
 
 def staffPortal(request):
@@ -100,8 +94,8 @@ def returnPage(request):
     zippedResults = vehicleToBeReturned(request)
     storelist = Stores.objects.all()
     context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
-    if request.method == 'GET' and 'pdf' in request.GET:
-        return renderPDF('testApp/pdf.html', context)
+    # if request.method == 'GET' and 'pdf' in request.GET:
+        # return renderPDF('testApp/pdf.html', context)
     return render(request, 'testApp/MikeCarReturnPage.html', context)
 
 def search(request):
