@@ -14,3 +14,7 @@ class createAccount(forms.Form):
     email = forms.CharField(label='Email', max_length=255)  # Field name made lowercase.
     password = forms.CharField(label='Password', max_length=255)  # Field name made lowercase.
 
+class CustomerQuery(forms.Form):
+    your_name = forms.CharField(label='Your name', max_length=100, help_text='Write here your message!')
+    email = forms.EmailField(label='Email', max_length=254)
+    question = forms.CharField(label='Question', max_length=2000)

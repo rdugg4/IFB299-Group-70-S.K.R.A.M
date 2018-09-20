@@ -146,62 +146,89 @@ footer nav li:hover a {
 	clear: both;
 }
 
-/* Searh Results starts here */
-
-#sortbyfilter {
-	position: relative;
-	background-color: #FEDE3F;
-	padding-right: 28px;
-	padding-top:5px;
-	padding-bottom:4px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 13px;
-	margin-top: -10px;
-	border: solid 1px #414141;
-	border-radius: 4px;
-
-}
-
-#reservenow {
-	position: relative;
-	background-color: #FEDE3F;
-	width: 9em;
-	border: none;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size:14px;
-	font-weight: 500;
-	border:  solid 1px #414141;
-	border-radius: 4px;
-}
-
+/* return car*/
 .searchcontainer {
-    width: auto;
-    max-width: 90%;
+    width: 90%;
     position: relative;
-    margin: 3%;
-    padding-left: 5%;
-    padding-right: 3%;
-    overflow: scroll;
+    padding-left: 10%;
+    padding-right: 5%;
+
 }
 
 table {
-    width: 100%;
-    padding: 5px;
-    line-height: 0.65em;
+    width: 90%;
     border-collapse: collapse;   
 }
 
 td {
     text-align: left;
-    padding: 20px;
+    padding: 10px;
 }
 
 #box {
-    border: solid 1px #414141;
-    background-color: #F6F5F5;
+    border: solid 2px gray;
+    background-color: white;
 }
+
+
+* {
+    box-sizing: border-box;
+}
+
+/* Create two columns */
+.column {
+    float: left;
+    padding: 10px;
+
+}
+
+.left {
+  width: 20%;
+}
+
+.right {
+  width: 80%;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*Scroll bar*/
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: gray; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+}
+
+/* print button */
+input[type=submit] {
+    background-color: pink;
+    color: white;
+    padding: 10px 50px;
+    border: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+    background-color: #AAAAAA;
 

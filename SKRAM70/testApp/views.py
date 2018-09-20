@@ -10,18 +10,43 @@ from .functions.timeobjects import *
 from .functions.search import *
 from .functions.inputVerification import *
 from django.contrib import messages
+<<<<<<< HEAD
 from .forms import createAccount
 from .functions.vehicleReturns import *
+=======
+from .forms import *
+from .functions.vehicleReturns import *
+from django.core.mail import send_mail
+from .functions.renderPdf import renderPDF
+>>>>>>> 3e9dcce143fdabcab248029d70ca05a33f5ac8a9
 
 def index(request):
     storelist = Stores.objects.all()
     context = {'StoreList': storelist}
-    return render(request, 'testApp/index.html', context)
+    return render(request, 'testApp/AlanaCustomerHomepage.html', context)
 
 def detail(request, car_id):
     carInfo = Cars.objects.filter(id=car_id)
     context = {'CarInfo': carInfo}
     return render(request, 'testApp/showcaroriginal.html', context)
+
+def contactUs(request):
+    querySuccesfullySubmitted = False
+    failedToSubmit = False
+    if request.method == 'POST':
+        form = CustomerQuery(request.POST)
+        if form.is_valid():
+            subject = "issue from: " + form.cleaned_data['your_name']
+            sender = form.cleaned_data['email']
+            message = form.cleaned_data['question']
+            recipients = ['companyEmail@noreply.com']
+            send_mail(subject, message, sender, recipients)
+            querySuccesfullySubmitted = True
+        failedToSubmit = True
+    else:
+        form = CustomerQuery()
+    context = {'form': form, 'querySuccesfullySubmitted': querySuccesfullySubmitted, 'failedToSubmit': failedToSubmit}
+    return render(request, 'testApp/MikeContactPage draft.html', context)
 
 # def sign_up(request):
 #     if request.method == 'POST':
@@ -66,16 +91,18 @@ def accounts(request):
             return render(request,'testApp/signup.html')
     else:
         return render(request,'testApp/signup.html')
-    
+
 
 def staffPortal(request):
-    return render(request, 'testApp/staffPortal.html')
+    return render(request, 'testApp/MikeStaffHomePage.html')
 
 def returnPage(request):
     zippedResults = vehicleToBeReturned(request)
     storelist = Stores.objects.all()
-    context = {'zippedResults': zippedResults, 'StoreList': storelist}
-    return render(request, 'testApp/returnPage.html', context)
+    context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
+    if request.method == 'GET' and 'pdf' in request.GET:
+        return renderPDF('testApp/pdf.html', context)
+    return render(request, 'testApp/MikeCarReturnPage.html', context)
 
 def search(request):
     resultantCars = searchData(request)

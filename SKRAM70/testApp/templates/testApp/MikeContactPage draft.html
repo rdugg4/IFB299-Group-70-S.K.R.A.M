@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>contact us</title>
+{% load static %}
+<link href="{% static "testApp/css/MikeContactPage draftCSS.css" %}" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>
+		<header>
+	    <div class="topnav"> <img src="#" alt="logo" class="logo">
+	    <nav>
+			<ul class="menu-main">
+			    <li><a href="\CRC"> Home </a></li>
+			    <li><a href="#"> Locations </a></li>
+			    <li><a href="#"> Hire Cars </a></li>
+			    <li><a href="#"> Help </a>
+					<div class="menu-sub">
+	                    <ul>
+	                        <li><a href="#"> FAQ </a></li>
+	      				    <li><a href="\CRC\ContactUs"> Contact Us </a></li>
+	                    </ul>
+	                </div>
+				</li>
+			    <li><a href="#"> EN </a></li>
+			    <li><a href="#"> Sign In </a>
+			    	<div class="menu-sub">
+					    <ul>
+							<li><a href="\CRC\staffPortal"> Sign In </a></li>
+							<li><a href="\CRC\create_account"> Create New Account </a></li>
+					    </ul>
+					</div>
+			    </li>
+			</ul>
+	    </nav>
+	    </div>
+	</header>
+	<section>
+
+<div class="row">
+	<div class="column left" style="background-color:#D5DBE5;">
+	<div class="container">
+
+  <H1><strong>Contact us today!</strong></H1>
+    <ptb>
+    <label for="Firstname">Name</label>
+    </ptb>
+	<form action="/CRC/ContactUs" method="post">
+	{% csrf_token %}
+    <p>
+	  {{ form.your_name.errors }}
+	  {{ form.your_name }}
+
+      <label for="Your Email"><br>Your Email<br></label>
+	  {{ form.email.errors }}
+	  {{ form.email }}
+      <!-- <input type="text" id="youremail" name="youremail" placeholder="Please type your your Email account"> -->
+    </p>
+    <p>
+      <label for="subject">Your Message<br></label>
+	  {{ form.question.errors }}
+	  {{ form.question }}
+
+      <label for="Thanks for submitting!">
+	</form>
+	<ptextarea>
+	</ptextarea>
+
+        <br>
+      </label>
+
+      <input type="submit" value="Submit">
+    </p>
+    <pty>
+		{% if querySuccesfullySubmitted %}
+	  	<label for="Thanks for submitting!">Thanks for submitting!</label>
+		{% endif %}
+		{% if failedToSubmit %}
+	  	<label for="Sorry your problem could not be submitted for some reason">
+			Sorry your problem could not be submitted for some reason
+		</label>
+		{% endif %}
+
+    </pty>
+		</form>
+</div>
+	    </div>
+</div>
+
+<div class="column right" style="background-color:#D5DBE5">
+    <h2>Contact information</h2>
+    <p>Feel free to contact with us</p>
+	<br /> <br />
+	<P><span><b>Store name: </b></span>Darlinghurst Store</p>
+	<P><span><b>Store address: </b></span>5844 Linden Land</p>
+	<b>Telephone</b>
+	<p>tel: 1(11)543 5350184</p>
+	<b>Email</b>
+	<p>zrx724548549@gmail.com</p>
+	<br />
+	<P><span><b>Store name: </b></span>Hervey Bay Store</p>
+	<P><span><b>Store address: </b></span>8734 Oxford Place</p>
+	<b>Telephone</b>
+	<p>tel: 746-535-0186</p>
+	<b>Email</b>
+	<p>mayuzumi0093@icloud.com</p>
+
+
+  </div>
+</div>
+
+	</section>
+
+	<footer>
+	    <div class="footer-main">
+		<nav>
+		    <ul>
+			<li><a href="#">Need help?</a></li>
+		    </ul>
+		</nav>
+	    </div>
+	</footer>
+</body>
+</html>
