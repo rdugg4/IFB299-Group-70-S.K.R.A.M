@@ -255,12 +255,9 @@ Car Information' page */
 }
 
 
-* {
-    box-sizing: border-box;
-}
-
 /* Create two columns here */
 .column {
+	box-sizing: border-box;
     float: left;
     padding: 10px;
     height: 300px; /* Should be removed. Only for demonstration */

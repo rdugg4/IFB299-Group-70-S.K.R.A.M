@@ -173,12 +173,10 @@ td {
 }
 
 
-* {
-    box-sizing: border-box;
-}
 
 /* Create two columns */
 .column {
+	box-sizing: border-box;
     float: left;
     padding: 10px;
 
