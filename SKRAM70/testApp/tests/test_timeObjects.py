@@ -1,8 +1,12 @@
 from django.test import TestCase
 from ..functions.timeobjects import *
 
-class test_timeObject(TestCase):
+from unittest import mock
+import datetime
 
+# test timeObject class
+class test_timeObject(TestCase):
+    # test the getDate function for timeObject
     def test_getDate(self):
         date = 20180917
         self.assertEqual(timeObject(date).getDate(), date)
@@ -13,6 +17,7 @@ class test_timeObject(TestCase):
         date = 00000000
         self.assertEqual(timeObject(date).getDate(), date)
 
+    # test the weekday function for timeObject
     def test_weekday(self):
         date = 20180917 # Monday
         self.assertEqual(timeObject(date).weekday(), 0)
@@ -29,8 +34,9 @@ class test_timeObject(TestCase):
         date = 20180930 # Sunday
         self.assertEqual(timeObject(date).weekday(), 6)
 
+# test givenTime object
 class test_givenTime(TestCase):
-
+    # test the creation of the givenTime object with YMD type
     def test_givenTimeCreationYMD(self):
         inputtedDate = '2018-09-17'
         date = 20180917
@@ -45,6 +51,7 @@ class test_givenTime(TestCase):
         date = 00000000
         self.assertEqual(givenTime(inputtedDate, "YMD").getDate(), date)
 
+    # test the creation of the givenTime object with DMY type
     def test_givenTimeCreationDMY(self):
         inputtedDate = '17-09-2018'
         date = 20180917
@@ -58,3 +65,21 @@ class test_givenTime(TestCase):
         inputtedDate = '00X00P0000'
         date = 00000000
         self.assertEqual(givenTime(inputtedDate, "DMY").getDate(), date)
+
+class test_currentTime(TestCase):
+    # @patch('datetime.datetime', mock_time)
+    # @mock.patch('datetime.date')
+    # def test():
+    #     datetime.date.today.return_value = date(2010, 1, 1)
+
+    def test_currentTimeCreation(self):
+        with mock.patch('datetime.datetime') as mock_time:
+            mock_time.now.return_value = datetime.datetime(2016, 8, 4)
+            # mock_time.now.year.return_value = 2016
+            # mock_time.now.month.return_value = 8
+            # mock_time.now.day.return_value = 4
+
+            date = 20160804
+            # self.assertEqual(datetime.datetime(2016, 8, 4).now().year, datetime.datetime.now().year)
+            # self.assertEqual(currentTime().getDate(), date)
+            self.assertEqual(datetime.datetime(2016, 8, 4), datetime.datetime.now())

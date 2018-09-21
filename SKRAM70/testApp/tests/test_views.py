@@ -47,7 +47,7 @@ class test_carDetailView(TestCase):
             for carDB in carDBs:
                 self.assertEqual(car.id, carDB.id)
 
-class test_searchResults(TestCase):
+class test_searchResultsView(TestCase):
     @classmethod
     def setUpTestData(cls):
         numOfResults = 20
@@ -75,13 +75,3 @@ class test_searchResults(TestCase):
         response = self.client.get('/CRC/search/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/ShaleenSearchresults.html')
-
-    # def test_Context(self):
-    #     carDBs = Cars.objects.filter(id=1)
-    #     response = self.client.get('/CRC/1/')
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTrue('CarInfo' in response.context)
-    #     self.assertEqual(response.context['CarInfo'].count(), 1)
-    #     for car in response.context['CarInfo']:
-    #         for carDB in carDBs:
-    #             self.assertEqual(car.id, carDB.id)
