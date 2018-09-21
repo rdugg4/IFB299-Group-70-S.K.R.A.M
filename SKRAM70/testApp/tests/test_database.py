@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from testApp.models import *
 import datetime
 
 class test_createAccountView(TestCase):
