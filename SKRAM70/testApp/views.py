@@ -43,29 +43,6 @@ def contactUs(request):
     context = {'form': form, 'querySuccesfullySubmitted': querySuccesfullySubmitted, 'failedToSubmit': failedToSubmit}
     return render(request, 'testApp/MikeContactPage draft.html', context)
 
-# def sign_up(request):
-#     if request.method == 'POST':
-#         form = createAccount(request.POST)
-#         if form.is_valid():
-#             post = Customers()
-#             post.name = form.cleaned_data['Name']
-#             post.phone = form.cleaned_data['Phone']
-#             post.address = form.cleaned_data['Address']
-#             post.dob = form.cleaned_data['DOB']
-#             post.occupation = form.cleaned_data['Occupation']
-#             post.gender = form.cleaned_data['Gender']
-#             post.email = form.cleaned_data['Email']
-#             post.password = form.cleaned_data['Password']
-#             post.save()
-#             return HttpResponse('it worked')
-#             return HttpResponseRedirect('/CRC/')
-#         else:
-#             return HttpResponse('NOT WORKING')
-#             form = createAccount()
-#         return render(request, 'testApp/signup.html', {'form': form,})
-#     else:
-#         return render(request,'testApp/signup.html')
-
 def accounts(request):
     if request.method == "POST":
         if (request.POST.get('firstname') and request.POST.get('middlename') and request.POST.get('lastname') and request.POST.get('tel') and request.POST.get('bday') and request.POST.get('email') and request.POST.get('Password')):
