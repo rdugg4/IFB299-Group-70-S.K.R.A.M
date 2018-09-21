@@ -67,15 +67,21 @@ def staffPortal(request):
     return render(request, 'testApp/MikeStaffHomePage.html')
 
 def returnPage(request):
-    zippedResults = vehicleToBeReturned(request)
+    zippedResults = VehicleReturns.vehicleToBeReturned(request)
     storelist = Stores.objects.all()
     context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
-    # if request.method == 'GET' and 'pdf' in request.GET:
-        # return renderPDF('testApp/pdf.html', context)
+    if request.method == 'GET' and 'pdf' in request.GET:
+        return renderPDF('testApp/pdf.html', context)
     return render(request, 'testApp/MikeCarReturnPage.html', context)
 
 def search(request):
-    resultantCars = searchData(request)
+    if request.method == 'GET':
+        resultantCars = carSets.searchData(request)
+    elif request.method == 'POST':
+        resultantCars = carSets.reccomendCars(request)
+    else:
+        resultantCars = Cars.objects.all()
+
     storelist = Stores.objects.all()
     context = {'resultantCars': resultantCars, 'StoreList': storelist}
     return render(request, 'testApp/ShaleenSearchresults.html', context)

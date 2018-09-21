@@ -16,11 +16,12 @@ class timeObject(object):
 
 class currentTime(timeObject):
     def __init__(self):
-        now = datetime.datetime.now()
-        if (now.month < 10):
-            self.date = int(str(now.year) + "0" + str(now.month) + str(now.day))
-        else:
-            self.date = int(str(now.year) + str(now.month) + str(now.day))
+        now = datetime.datetime.now().strftime('%Y%m%d')
+        self.date = int(now)
+        # if (now.month < 10):
+        #     self.date = int(str(now.year) + "0" + str(now.month) + str(now.day))
+        # else:
+        #     self.date = int(str(now.year) + str(now.month) + str(now.day))
         timeObject.__init__(self, self.date)
 
 class givenTime(timeObject):

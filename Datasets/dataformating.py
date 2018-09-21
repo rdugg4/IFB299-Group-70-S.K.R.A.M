@@ -1,4 +1,4 @@
-#Read CSV file into the python file
+# Read CSV file into the python file
 import csv
 with open('InitialDataSet.csv', newline='') as csvfile:
     data = list(csv.reader(csvfile))
@@ -20,10 +20,10 @@ for i in range(0, len(data)):
     else:
         nullCounter = nullCounter + 1
 
-#Create the a correctly size array conatining the dataset without NULL values
+# Create the a correctly size array conatining the dataset without NULL values
 dataSet = noNullData[0:(height-nullCounter)]
 
-#Split the data up ready for entry to each table in the database
+# Split the data up ready for entry to each table in the database
 storeData = [[0 for x in range(6)] for y in range(len(dataSet)*2)]
 carData = [[0 for x in range(15)] for y in range(len(dataSet))]
 customerData = [[0 for x in range(9)] for y in range(len(dataSet))]
@@ -47,7 +47,7 @@ for i in range(0, len(dataSet)):
         if (j >= 23 and j < 38):
             carData[i][j-23] = dataSet[i][j]
 
-#Remove Duplicates from the store data set
+# Remove Duplicates from the store data set
 storeDataNoDuplicates = [[0 for x in range(6)] for y in range(len(dataSet)*2)]
 duplicateCounter = 0
 for i in range(0, len(storeData)):
@@ -63,7 +63,7 @@ for i in range(0, len(storeData)):
         storeDataNoDuplicates[i - duplicateCounter] = storeData[i]
 storeDataFinal = storeDataNoDuplicates[0:(len(storeDataNoDuplicates)-duplicateCounter)]
 
-#Remove Duplicates from the customer and car data sets
+# Remove Duplicates from the customer and car data sets
 carDataNoDuplicates = [[0 for x in range(15)] for y in range(len(dataSet))]
 customerDataNoDuplicates = [[0 for x in range(9)] for y in range(len(dataSet))]
 orderDataNoDuplicates = [[0 for x in range(9)] for y in range(len(dataSet))]
@@ -75,12 +75,14 @@ for i in range(0, len(dataSet)):
     alreadyExists_customer = False
     alreadyExists_order = False
     for j in range(0, i):
+        # Check if a particular line of data already exists in final dataset
         if (carData[i][0] == carData[j][0]):
             alreadyExists_car = True
         if (customerData[i][0] == customerData[j][0]):
             alreadyExists_customer = True
         if (orderData[i][0] == orderData[j][0]):
             alreadyExists_order = True
+    # Update the amount of data duplicates or add the data to the non-dulipcate set
     if (alreadyExists_car):
         duplicateCounter_car = duplicateCounter_car + 1
     else:
@@ -100,11 +102,12 @@ carDataFinal = carDataNoDuplicates[0:(len(carDataNoDuplicates)-duplicateCounter_
 customerDataFinal = customerDataNoDuplicates[0:(len(customerDataNoDuplicates)-duplicateCounter_customer)]
 orderDataFinal = orderDataNoDuplicates[0:(len(orderDataNoDuplicates)-duplicateCounter_order)]
 
+# Define the titles of some new columns
 customerDataFinal[0][7] = 'Username'
 customerDataFinal[0][8] = 'Password'
 orderDataFinal[0][6] = 'Dropped Off'
 
-#Write the CSV files for each data set
+# Write the CSV files for each data set
 with open('customer.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter=',',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)

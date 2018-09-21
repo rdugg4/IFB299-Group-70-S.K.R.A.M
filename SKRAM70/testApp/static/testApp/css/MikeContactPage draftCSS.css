@@ -27,7 +27,7 @@ header::after {
 
 .logo {
 	float:left;
-	padding: 25px 0;
+	padding: 15px 0;
 }
 
 header nav {
@@ -177,27 +177,21 @@ pty{
 	color:green;
 }
 
-
-* {
-    box-sizing: border-box;
-}
-
 /* Create two unequal columns that floats next to each other */
 .column {
 	background-color: #D5DBE5;
     float: left;
     padding: 10px;
     height: 300px; /* Should be removed. Only for demonstration */
+	box-sizing: border-box;
 }
 
 .left {
   width: 50%;
   text-align: center;
-  background-color: #D5DBE5;
 }
 
 .right {
   width: 50%;
   text-align: center;
-  background-color: #D5DBE5;
 }
