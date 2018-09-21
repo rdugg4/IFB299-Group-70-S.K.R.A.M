@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+import datetime
 
 class test_createAccountView(TestCase):
     
@@ -12,7 +13,7 @@ class test_customerDetailView(TestCase):
     def setUpTestData(cls):
         Customers.objects.create(firstname='Kaushal', middlename='Kishorbhai', lastname='Limbasiya',
         tel = 1234567890,
-        bday = 09/09/1997,
+        bday = 19970909,
         email = 'abcd@gmail.com',
         Password = 'abcd1234')
         
