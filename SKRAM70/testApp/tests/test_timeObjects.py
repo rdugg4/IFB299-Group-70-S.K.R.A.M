@@ -67,19 +67,21 @@ class test_givenTime(TestCase):
         self.assertEqual(givenTime(inputtedDate, "DMY").getDate(), date)
 
 class test_currentTime(TestCase):
-    # @patch('datetime.datetime', mock_time)
-    # @mock.patch('datetime.date')
-    # def test():
-    #     datetime.date.today.return_value = date(2010, 1, 1)
 
     def test_currentTimeCreation(self):
-        with mock.patch('datetime.datetime') as mock_time:
-            mock_time.now.return_value = datetime.datetime(2016, 8, 4)
-            # mock_time.now.year.return_value = 2016
-            # mock_time.now.month.return_value = 8
-            # mock_time.now.day.return_value = 4
+        with mock.patch('datetime.datetime') as dt_mock:
+            dt_mock.now.return_value.strftime.return_value = '20060204'
+            date = 20060204
+            self.assertEqual(currentTime().getDate(), date)
 
-            date = 20160804
-            # self.assertEqual(datetime.datetime(2016, 8, 4).now().year, datetime.datetime.now().year)
-            # self.assertEqual(currentTime().getDate(), date)
-            self.assertEqual(datetime.datetime(2016, 8, 4), datetime.datetime.now())
+            dt_mock.now.return_value.strftime.return_value = '30061201'
+            date = 30061201
+            self.assertEqual(currentTime().getDate(), date)
+
+            dt_mock.now.return_value.strftime.return_value = '23060131'
+            date = 23060131
+            self.assertEqual(currentTime().getDate(), date)
+
+            dt_mock.now.return_value.strftime.return_value = '20180917'
+            date = 20180917
+            self.assertEqual(currentTime().getDate(), date)
