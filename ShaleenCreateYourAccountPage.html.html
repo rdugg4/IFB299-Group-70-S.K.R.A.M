@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+	<title> Create Your Account </title>
+	<link href="./public/css/Createyouraccount.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    </head>
+
+    <body>
+	<header>
+	    <div class="topnav"> <img src="./public/images/NewCarLogo.png"
+        alt="logo" class="logo">
+	    <nav>
+		<ul class="menu-main">
+		    <li><a href="#"> Home </a></li>
+		    <li><a href="#"> Locations </a></li>
+		    <li><a href="#"> Hire Cars </a></li>
+		    <li><a href="#"> Help </a>
+		    <li><a href="#"> EN </a></li>
+		    <li><a href="#"> Sign In </a>
+		    	<div class="menu-sub">
+			    <ul>
+				<li><a href="#"> Sign In </a></li>
+				<li><a href="#"> Create New Account </a></li>
+			    </ul>
+			</div>
+		    </li>
+		</ul>
+	    </nav>
+	    </div>
+	</header>
+
+	<section>
+<form action="action_page.php">
+  <div class="container">
+    <h1 id="createaccount">Create New Account</h1>
+    <hr>
+
+    <label for="name"><b>Name</b></label>
+    <span>*</span> <input type="text" placeholder="First Name" name="name" required>
+    <input type="text" placeholder="Middle Name" name="name">
+    <span>*</span> <input type="text" placeholder="Last Name" name="name" required>
+
+    <label for="tel"><b>Phone Number</b></label>
+    <input type="tel" placeholder="Enter Phone Number" name="tel">
+    <p></p>
+
+    <label for="email"><b>Email</b></label>
+    <span>*</span> <input type="text" placeholder="Enter Email" name="email" size="67" required>
+
+    <label for="date"><b>Birth Date</b></label>
+    <input type="date" placeholder="Birth Date" name="bday">
+    <p></p>
+
+    <label for="psw"><b>Password</b></label>
+    <span>*</span> <input type="password" placeholder="Enter Password" name="psw" size="35" required>
+    <label id="comment">(Must have 1st letter as uppercase, no more than 16 characters)</label>
+    <p></p>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <span>*</span> <input type="password" placeholder="Repeat Password" name="psw-repeat" size="35" required>
+    <input type="checkbox" placeholder="Remmber me" name="checkbox"> Remember me
+    <p></p>
+
+    <button type="submit" class="submit">Create Account</button>
+    <p id="tc">By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+  </div>
+
+</form>
+
+	</section>
+
+	<footer>
+	    <div class="footer-main">
+		<nav>
+		    <ul>
+			<li><a href="#">Need help?</a></li>
+		    </ul>
+		</nav>
+	    </div>
+	</footer>
+
+	</body>
+</html>

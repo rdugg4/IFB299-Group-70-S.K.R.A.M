@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Navbar </title>
+		<link rel="stylesheet" href="./public/css/navbar-style.css">
+		<link href="https://fonts.googleapis.com/css?family=Poppins"
+		rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	  rel="stylesheet">
+
+	</head>
+
+	<body>
+
+		<header>
+		    <div class="topnav"> <img src="./public/images/NewCarLogo.png"
+					alt="logo" class="logo">
+		    <nav>
+			<ul class="menu-main">
+			    <li><a href="#"> Home </a></li>
+			    <li><a href="#"> Locations </a></li>
+			    <li><a href="#"> Hire Cars </a></li>
+			    <li><a href="#"> Help </a>
+	          <div class="menu-sub">
+	            <ul>
+	              <li><a href="#"> FAQ </a></li>
+	      				<li><a href="#"> Contact Us </a></li>
+	            </ul>
+	          </div>
+			    <li><a href="#"> EN </a></li>
+			    <li><a href="#"> <i class="material-icons"
+	          style="vertical-align:middle">person_outline</i>Sign In </a>
+			    	<div class="menu-sub">
+				    <ul>
+					<li><a href="#"> Sign In </a></li>
+					<li><a href="#"> Create New Account </a></li>
+				    </ul>
+				</div>
+			    </li>
+			</ul>
+		    </nav>
+		    </div>
+		</header>
+
+<!-- Search section goes here -->
+		<section>
+			<div class="row">
+				<h1 align="center" style="margin-top:8%;"> Start Your Search
+					Here </h1>
+					<form action="/action_page.php" target="_blank">
+						<input type="text" name="pickup"
+						placeholder="Enter Pick Up Location Here" class="inputsearch">
+						<br>
+						<p class="droptext"> Drop off location is same as pick up? <input type="checkbox"
+						name="dropoff" value="droplocation"></p>
+					<!-- Don't know how to make this checked by default? Also if this
+					isn't checked another box will have to appear
+					asking for drop off location (same as pick up). Maybe consider
+					having a "sorry we don't have any rentals in that area" if people
+					just type in the location that can't be matched with any in the data -->
+					<br>
+				<br>
+			</div>
+
+			<div class="row">
+				<div class="leftcolumn">
+					<h2 class="datetext">Pick Up Date:</h2>
+					<input type="date" name="pickdate"><br>
+				</div>
+
+				<div class="rightcolumn">
+					<h2 class="datetext">Drop Off Date:</h2>
+					<input type="date" name="dropdate">
+					<!-- drop off date should have an error message if the date is before
+					pick up -->
+				</div>
+			</div>
+
+			<div class="row">
+				<button type="submit" class="submitbtn"> Search </button>
+			</div>
+		</section>
+
+
+		<footer>
+			<div class="footer-main">
+				<nav>
+					<ul>
+						<li><a href="#">Need help?</a></li>
+					</ul>
+				</nav>
+			</div>
+		</footer>
+
+	</body>
+</html>
