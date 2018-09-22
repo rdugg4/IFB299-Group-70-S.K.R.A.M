@@ -1,0 +1,57 @@
+<form action="/CRC/search" method="get">
+    Pickup Location:<br>
+    <select name="pickupLocation">
+        {% for store in StoreList %}
+            <option value="{{store.id}}">{{store.name}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    Pickup Date:<br>
+    <input type="date" name="pickupDate">
+    <br>
+    Drop Off Date:<br>
+    <input type="date" name="dropoffDate">
+    <br>
+    number of seats:<br>
+    <select name="seats">
+        <option value="3">below 4</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8 and above</option>
+    </select>
+    <br>
+    Make of car:<br>
+    <input type="text" name="makeOfCar">
+    <br>
+    Model of car:<br>
+    <input type="text" name="carModel">
+    <br>
+    Body type:<br>
+    <input type="text" name="bodyType">
+    <br>
+    Drive:<br>
+    <select name="driveType">
+        <option value="4WD">4WD</option>
+        <option value="FWD">FWD</option>
+        <option value="RWD">RWD</option>
+    </select>
+    <br><br>
+    <input type="submit" value="search">
+</form>
+{% if resultantCars %}
+    {% for car in resultantCars %}
+        <h6>{{ car.car_makename }}</h6>
+        <a href="/CRC/{{ car.id }}/">{{ car.car_model }}</a>
+        <p>{{ car.car_seatingcapacity }}</p>
+        <p>{{ car.car_drive }}</p>
+        <p>{{ car.id }}</p>
+    {% endfor %}
+{% else %}
+    <p> No results </p>
+{% endif %}
+
+<!-- {% for order in OrdersWithCarsInLocation %}
+    <h6>{{ order.carid }}</h6>
+{% endfor %} -->

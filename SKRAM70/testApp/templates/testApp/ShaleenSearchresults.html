@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+	<title> Search Results </title>
+    {% load static %}
+	<link rel="stylesheet" href="{% static "testApp/css/Searchresults.css" %}">
+	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    </head>
+
+    <body>
+	<header>
+	    <div class="topnav">
+            <img src="{% static "testApp/images/NewCarLogo.png" %}" alt="logo" class="logo" height="40px" width="160px">
+            <nav>
+    			<ul class="menu-main">
+    			    <li><a href="\CRC"> Home </a></li>
+    			    <li><a href="#"> Locations </a></li>
+    			    <li><a href="#"> Hire Cars </a></li>
+    			    <li><a href="#"> Help </a>
+    					<div class="menu-sub">
+    	                    <ul>
+    	                        <li><a href="#"> FAQ </a></li>
+    	      				    <li><a href="\CRC\ContactUs"> Contact Us </a></li>
+    	                    </ul>
+    	                </div>
+    				</li>
+    			    <li><a href="#"> EN </a></li>
+    			    <li><a href="#"> Sign In </a>
+    			    	<div class="menu-sub">
+    					    <ul>
+    							<li><a href="\CRC\staffPortal"> Sign In </a></li>
+    							<li><a href="\CRC\create_account"> Create New Account </a></li>
+    					    </ul>
+    					</div>
+    			    </li>
+    			</ul>
+    	    </nav>
+	    </div>
+	</header>
+
+	<section>
+	<div class="searchcontainer">
+	    <h2> Here are the results!</h2><hr>
+
+	    <table id="searchtable">
+        {% for car in resultantCars %}
+		<tr id="box">
+		    <td><b>{{car.car_makename}}, {{car.car_model}}</b>
+		    <p>{{car.car_seatingcapacity}} passengers</p>
+		    <p>Tank size: {{car.car_tankcapacity}}</p>
+		    <p>{{car.car_drive}}</p>
+		    <p>{{car.car_fuelsystem}}</p>
+		    <p><a href="/CRC/{{ car.id }}/">[+] Vehicle Details</a></p></td>
+		    <td><p><button id="reservenow" onclick="">Reserve now!</button></p></td>
+		</tr>
+		<td></td>
+        {% empty %}
+        <p> No results for the searched terms </p>
+        {% endfor %}
+	    </table>
+	</div>
+
+	</section>
+
+	<footer>
+	    <div class="footer-main">
+		<nav>
+		    <ul>
+			<li><a href="#">Need help?</a></li>
+		    </ul>
+		</nav>
+	    </div>
+	</footer>
+
+	</body>
+</html>

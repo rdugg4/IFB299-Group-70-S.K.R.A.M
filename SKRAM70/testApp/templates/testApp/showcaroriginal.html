@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+	<title> Car Information </title>
+    {% load static %}
+	<link href="{% static "testApp/css/navbar-style.css" %}" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+    </head>
+
+    <body>
+	<header>
+	    <div class="topnav">
+            <img src="{% static "testApp/images/NewCarLogo.png" %}" alt="logo" class="logo" height="40px" width="160px">
+            <nav>
+    			<ul class="menu-main">
+    			    <li><a href="\CRC"> Home </a></li>
+    			    <li><a href="#"> Locations </a></li>
+    			    <li><a href="#"> Hire Cars </a></li>
+    			    <li><a href="#"> Help </a>
+    					<div class="menu-sub">
+    	                    <ul>
+    	                        <li><a href="#"> FAQ </a></li>
+    	      				    <li><a href="\CRC\ContactUs"> Contact Us </a></li>
+    	                    </ul>
+    	                </div>
+    				</li>
+    			    <li><a href="#"> EN </a></li>
+    			    <li><a href="#"> Sign In </a>
+    			    	<div class="menu-sub">
+    					    <ul>
+    							<li><a href="\CRC\staffPortal"> Sign In </a></li>
+    							<li><a href="\CRC\create_account"> Create New Account </a></li>
+    					    </ul>
+    					</div>
+    			    </li>
+    			</ul>
+    	    </nav>
+	    </div>
+	</header>
+
+	<section>
+        {% for car in CarInfo %}
+            <h1 align="center" style="padding-top:20px;"> {{car.car_makename}}, {{car.car_model}} </h1>
+            <br> <!-- need a break in between image box and specific info -->
+            <div class="row">
+              <div class="reviewcontainer">
+                <div class="fakeimg" style="height:200px;">Image</div>
+              </div>
+            </div>
+
+            <!--This is where the information that is pulled from the database absolute
+            the car will be filled in -->
+            <div class="row">
+              <div class="leftcolumn">
+                <h2> Specific Information</h2>
+                <p>Series: {{car.car_series}}</p>
+                <p>Series Year: {{car.car_seriesyear}}</p>
+                <p>Transmission: {{car.car_standardtransmission}}</p>
+                <p>Number of seats: {{car.car_seatingcapacity}}</p>
+                <p>Engine: {{car.car_enginesize}}</p>
+                <p>Tank Capacity: {{car.car_tankcapacity}}</p>
+              </div>
+              <div class ="rightcolumn">
+                <br>
+                <br>
+                <p>Power: {{car.car_power}}</p>
+                <p>Body: {{car.car_bodytype}}</p>
+                <p>Drive: {{car.car_drive}}</p>
+                <p>Fuel System: {{car.car_fuelsystem}}</p>
+                <p>Wheel base: {{car.car_wheelbase}}</p>
+              </div>
+            </div>
+            <!-- Need to fix this as it doesn't quite align in the center, align is
+            not working?? -->
+            <a href="" class="btn" style="margin-left:50%"> Reserve now! </a>
+        {% empty %}
+            <h1 align="center" style="padding-top:20px;"> The Car you are referencing does not exist </h1>
+        {% endfor %}
+
+    <div class="row">
+      <div class="leftcolumn">
+        <h2> Reviews </h2>
+        <p> See what our customers think! </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="reviewcontainer">
+        <h3><i> Love it! </i></h3>
+        <p><span> John D </span></p>
+        <br>
+        <p>Great car, very fuel efficient. Would definitely hire again </p>
+      </div>
+    </div>
+
+	</section>
+
+	<footer>
+	    <div class="footer-main">
+		<nav>
+		    <ul>
+			<li><a href="#">Need help?</a></li>
+		    </ul>
+		</nav>
+	    </div>
+	</footer>
+
+	</body>
+</html>
