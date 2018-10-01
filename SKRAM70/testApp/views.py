@@ -37,7 +37,8 @@ def contactUs(request):
             recipients = ['companyEmail@noreply.com']
             send_mail(subject, message, sender, recipients)
             querySuccesfullySubmitted = True
-        failedToSubmit = True
+        else:
+            failedToSubmit = True
     else:
         form = CustomerQuery()
     context = {'form': form, 'querySuccesfullySubmitted': querySuccesfullySubmitted, 'failedToSubmit': failedToSubmit}
