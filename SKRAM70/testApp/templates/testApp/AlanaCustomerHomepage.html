@@ -30,14 +30,18 @@
 			                </div>
 						</li>
 					    <li><a href="#"> EN </a></li>
-					    <li><a href="#"> Sign In </a>
-					    	<div class="menu-sub">
-							    <ul>
-									<li><a href="\staffPortal"> Sign In </a></li>
+						{% if user.is_authenticated %}
+						<li><a href="{% url 'logout' %}"> Sign Out </a></li>
+						{% else %}
+						<li><a href="#"> Sign In </a>
+							<div class="menu-sub">
+								<ul>
+									<li><a href="{% url 'login' %}"> Sign In </a></li>
 									<li><a href="\create_account"> Create New Account </a></li>
-							    </ul>
+								</ul>
 							</div>
-					    </li>
+						</li>
+						{% endif %}
 					</ul>
 			    </nav>
 		    </div>

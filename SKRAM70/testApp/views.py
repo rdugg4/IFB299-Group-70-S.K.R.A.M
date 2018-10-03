@@ -14,6 +14,8 @@ from .forms import *
 from .functions.vehicleReturns import *
 from django.core.mail import send_mail
 from .functions.renderPdf import renderPDF
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 def index(request):
     storelist = Stores.objects.all()
@@ -86,3 +88,7 @@ def search(request):
     storelist = Stores.objects.all()
     context = {'resultantCars': resultantCars, 'StoreList': storelist}
     return render(request, 'testApp/ShaleenSearchresults.html', context)
+
+def logoutView(request):
+    logout(request)
+    return redirect('/ContactUs')
