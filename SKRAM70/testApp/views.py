@@ -92,3 +92,10 @@ def search(request):
 def logoutView(request):
     logout(request)
     return redirect('/ContactUs')
+
+def successfulLogin(request):
+    # if request.user.groups.filter(name="boardMember_group").exists() or request.user.groups.filter(name="staff_group").exists():
+    #     return redirect("staffPortal")
+    # else:
+    #     return redirect("index")
+    return redirect("index")

@@ -29,7 +29,9 @@
 			                    </ul>
 			                </div>
 						</li>
+						{% if perms.auth.staff_member %}
 					    <li><a href="#"> EN </a></li>
+						{% endif %}
 						{% if user.is_authenticated %}
 						<li><a href="{% url 'logout' %}"> Sign Out </a></li>
 						{% else %}
