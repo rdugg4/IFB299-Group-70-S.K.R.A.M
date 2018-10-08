@@ -94,8 +94,13 @@ def logoutView(request):
     return redirect('/ContactUs')
 
 def successfulLogin(request):
-    # if request.user.groups.filter(name="boardMember_group").exists() or request.user.groups.filter(name="staff_group").exists():
-    #     return redirect("staffPortal")
-    # else:
-    #     return redirect("index")
-    return redirect("index")
+    if request.user.groups.filter(name='boardMember_group').exists() or request.user.groups.filter(name='staff_group').exists():
+        return redirect("/staffPortal")
+    else:
+        return redirect("/")
+
+def FAQView(request):
+    return render(request, 'testApp/FAQpage.html')
+
+def LocationsView(request):
+    return render(request, 'testApp/LocationsPage.html')
