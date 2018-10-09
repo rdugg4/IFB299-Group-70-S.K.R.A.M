@@ -16,6 +16,9 @@ from django.core.mail import send_mail
 from .functions.renderPdf import renderPDF
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from django.contrib.auth.models import Group
+from .models import Profile
+
 
 def index(request):
     storelist = Stores.objects.all()
@@ -47,23 +50,31 @@ def contactUs(request):
     return render(request, 'testApp/MikeContactPage draft.html', context)
 
 def accounts(request):
-    if request.method == "POST":
-        if (request.POST.get('firstname') and request.POST.get('middlename') and request.POST.get('lastname') and request.POST.get('tel') and request.POST.get('bday') and request.POST.get('email') and request.POST.get('Password')):
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            if (request.POST.get('firstname') and request.POST.get('middlename') and request.POST.get('lastname') and request.POST.get('tel') and request.POST.get('bday') and request.POST.get('email') and request.POST.get('Password')):
 
-            post = Customers()
-            f = forms.CharField()
-            post.name = (f.clean(request.POST.get('firstname')) + ' ' + f.clean(request.POST.get('middlename')) + ' ' + f.clean(request.POST.get('lastname')))
-            post.phone = f.clean( request.POST.get('tel'))
-            # post.address = f.clean( request.POST.get('Address'))
-            post.dob = f.clean( request.POST.get('bday'))
-            post.email = f.clean(request.POST.get('email'))
-            post.password = f.clean(request.POST.get('Password'))
-            post.save()
-            return render(request, 'testApp/ShaleenCreateYourAccountPage.html')
+                post = Customers()
+                f = forms.CharField()
+                post.name = (f.clean(request.POST.get('firstname')) + ' ' + f.clean(request.POST.get('middlename')) + ' ' + f.clean(request.POST.get('lastname')))
+                post.phone = f.clean( request.POST.get('tel'))
+                post.dob = f.clean( request.POST.get('bday'))
+                post.email = f.clean(request.POST.get('email'))
+                post.save()
+                customerUser = User.objects.create_user(username = f.clean(request.POST.get('email')), email = f.clean(request.POST.get('email')), password = f.clean(request.POST.get('Password')))
+                customer_group = Group.objects.get(name = 'customer_group')
+                customer_group.user_set.add(customerUser)
+                customer = Profile(user=customerUser, customerid=post)
+                customer.save()
+                return redirect("/")
+            else:
+                return render(request,'testApp/ShaleenCreateYourAccountPage.html')
         else:
             return render(request,'testApp/ShaleenCreateYourAccountPage.html')
     else:
-        return render(request,'testApp/ShaleenCreateYourAccountPage.html')
+        return redirect("/")
+
+def editUser(request)
 
 
 def staffPortal(request):

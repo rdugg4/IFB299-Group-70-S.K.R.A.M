@@ -22,3 +22,5 @@ class test_customerDetailView(TestCase):
     def test_Location(self):
         response = self.client.post('/CRC/create_account/')
         self.assertEqual(response.status_code, 200)
+
+        
