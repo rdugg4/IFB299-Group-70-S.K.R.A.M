@@ -11,5 +11,7 @@ urlpatterns = [
     path('staffPortal', views.staffPortal, name='staffPortal'),
     url(r'^staffPortal/vehicleReturns/$', views.returnPage),
     url('ContactUs', views.contactUs, name='contactUS'),
-    path('successfulLogin', views.successfulLogin, name='successfulLogin')
+    path('successfulLogin', views.successfulLogin, name='successfulLogin'),
+    path('Locations', views.LocationsView, name="Locations"),
+    path('FrequentlyAskedQuestions', views.FAQView, name="FAQ")
 ]

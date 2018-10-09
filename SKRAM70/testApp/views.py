@@ -74,7 +74,7 @@ def accounts(request):
     else:
         return redirect("/")
 
-def editUser(request)
+# def editUser(request)
 
 
 def staffPortal(request):
