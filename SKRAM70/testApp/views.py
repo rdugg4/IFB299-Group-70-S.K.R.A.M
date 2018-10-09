@@ -74,7 +74,40 @@ def accounts(request):
     else:
         return redirect("/")
 
-# def editUser(request)
+def editUser(request):
+    if not request.user.groups.filter(name = 'customer_group').exists():
+        return redirect("/")
+    # id = 11010
+    # request.user
+    userProfile = Profile.objects.get(user = request.user)
+    # return HttpResponse(userProfiles.count())
+    # for userProfile in userProfiles:
+    #     return HttpResponse(userProfile.customerid)
+    # # r
+    post = Customers.objects.get(pk = userProfile.customerid_id)
+    if request.method == 'POST':
+        if (request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email')):
+            # post = Customers()
+            f = forms.CharField()
+            post.name = f.clean(request.POST.get('Name'))
+            post.phone = f.clean(request.POST.get('Phone'))
+            post.address = f.clean(request.POST.get('Address'))
+            post.dob = f.clean(request.POST.get('DOB'))
+            post.occupation = f.clean(request.POST.get('Occupation'))
+            post.gender = f.clean(request.POST.get('Gender'))
+            post.email = f.clean(request.POST.get('Email'))
+            post.save()
+            return render(request,'testApp/NotInUsesignup.html')
+    dob = post.dob
+    if len(post.dob) == 9:
+        if int(dob[6:8]) < 20:
+            dob = "20" + dob[6:8] + "-" + dob[3:5] + "-" + dob[0:2]
+        else:
+            dob = "19" + dob[6:8] + "-" + dob[3:5] + "-" + dob[0:2]
+
+    context = {'customer': post, 'dob': dob}
+    return render(request,'testApp/NotInUsesignup.html', context)
+
 
 
 def staffPortal(request):
