@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
+from .models import Profile, Customers
 
 def CreateUsers():
     User.objects.all().delete()
@@ -23,3 +24,15 @@ def CreateUsers():
                                    content_type = ct)
     boardMember_group.permissions.add(boardMember_permission)
     boardMember_group.user_set.add(boardMemberUser)
+
+    customer_group, created = Group.objects.get_or_create(name='customer_group')
+    customer_permission = Permission.objects.create(codename='customer',
+                                   name='Customer',
+                                   content_type = ct)
+    customer_group.permissions.add(customer_permission)
+    customer_group.user_set.add(customerUser)
+
+    customerObject = Customers.objects.filter(id=11010)
+    for customer in customerObject:
+        customer = Profile(user=customerUser, customerid=customer)
+    customer.save()

@@ -3,6 +3,7 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib.auth.models import User
 
 class Cars(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
@@ -38,6 +39,9 @@ class Customers(models.Model):
     class Meta:
         db_table = 'customers'
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    customerid = models.ForeignKey(Customers, models.DO_NOTHING, db_column='CustomerID', blank=True, null=True)
 
 class Stores(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -63,12 +67,3 @@ class Orders(models.Model):
 
     class Meta:
         db_table = 'orders'
-
-# class cusHelp(models.Model):
-#     id = models.AutoField(db_column='id', primary_key=True)
-#     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)
-#     email = models.CharField(db_column='Email', max_length=255, blank=True, null=True)
-#     question = models.CharField(db_column='Question', max_length=255, blank=True, null=True)
-#
-#     class Meta:
-#         db_table = 'CusHelp'
