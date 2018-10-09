@@ -49,8 +49,10 @@
 					    <br>
 					    <input type="submit" value="search">
 					</form>
+					{% if request.user.is_authenticated %}
 					<h1 align="center" style="padding-top:30px;"> Or get recommendations Based on your profile </h1>
 					<button onclick="location.href='/RecommendCars'">Recommend Cars</button>
+					{% endif %}
 			</div>
 		</section>
 		{% include "../includes/footer.html"%}

@@ -129,3 +129,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = 'successfulLogin'
 LOGOUT_REDIRECT_URL = 'index'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

@@ -3,3 +3,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<title> CRC </title>
+		{% if messages %}
+	        {% for message in messages %}
+	        <script type="text/javascript">
+	        function popupMessage() {
+	            alert("{{ message }}");
+	        }
+	        window.onload = popupMessage;
+	        </script>
+	        {% endfor %}
+	    {% endif %}

@@ -1,4 +1,16 @@
 <!-- templates/registration/login.html -->
+<head>
+    {% if messages %}
+        {% for message in messages %}
+        <script type="text/javascript">
+        function popupMessage() {
+            alert("{{ message }}");
+        }
+        window.onload = popupMessage;
+        </script>
+        {% endfor %}
+    {% endif %}
+    </head>
 <h2>Login</h2>
 <form method="post">
     {% csrf_token %}

@@ -16,6 +16,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import Group
 from .models import Profile
 from .functions.userVerification import *
+from django.contrib import messages
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
 def index(request):
@@ -70,6 +72,7 @@ def accounts(request):
         else:
             return render(request,'testApp/ShaleenCreateYourAccountPage.html')
     else:
+        messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")
 
 def editUser(request):
@@ -104,6 +107,7 @@ def staffPortal(request):
     if UserVerification.StaffLoggedIn(request):
         return render(request, 'testApp/MikeStaffHomePage.html')
     else:
+        messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")
 
 
@@ -116,6 +120,7 @@ def returnPage(request):
             return renderPDF('testApp/pdf.html', context)
         return render(request, 'testApp/MikeCarReturnPage.html', context)
     else:
+        messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")
 
 def search(request):
@@ -133,6 +138,7 @@ def logoutView(request):
     return redirect('/ContactUs')
 
 def successfulLogin(request):
+    messages.add_message(request, messages.SUCCESS, 'Login successful')
     if UserVerification.StaffLoggedIn(request):
         return redirect("/staffPortal")
     else:
@@ -148,7 +154,11 @@ def carRecomView(request):
     if UserVerification.CustomerLoggedIn(request):
         resultantCars = carSets.reccomendCars(request)
         storelist = Stores.objects.all()
+        paginator = Paginator(resultantCars, 10)
+        page = 2
+        resultantCars = paginator.get_page(page)
         context = {'resultantCars': resultantCars, 'StoreList': storelist}
         return render(request, 'testApp/ShaleenSearchresults.html', context)
     else:
+        messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")
