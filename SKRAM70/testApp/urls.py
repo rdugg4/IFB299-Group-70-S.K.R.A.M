@@ -14,5 +14,6 @@ urlpatterns = [
     path('successfulLogin', views.successfulLogin, name='successfulLogin'),
     path('editUser/', views.editUser, name = 'Edit'),
     path('Locations', views.LocationsView, name="Locations"),
-    path('FrequentlyAskedQuestions', views.FAQView, name="FAQs")
+    path('FrequentlyAskedQuestions', views.FAQView, name="FAQs"),
+    path('RecommendCars', views.carRecomView, name="RecommendCars")
 ]

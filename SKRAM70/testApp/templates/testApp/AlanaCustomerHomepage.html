@@ -50,11 +50,7 @@
 					    <input type="submit" value="search">
 					</form>
 					<h1 align="center" style="padding-top:30px;"> Or get recommendations Based on your profile </h1>
-					<form action="/search/" method="post"> {% csrf_token %}
-					    <input type="text" value="11010" style="display:none" name="userid">
-					    <input type="submit" value="Recommend Cars">
-					</form>
-				<!-- </div> -->
+					<button onclick="location.href='/RecommendCars'">Recommend Cars</button>
 			</div>
 		</section>
 		{% include "../includes/footer.html"%}

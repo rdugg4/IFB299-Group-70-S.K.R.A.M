@@ -1,8 +1,5 @@
 from django.shortcuts import render
-from .models import Cars
-from .models import Customers
-from .models import Stores
-from .models import Orders
+from .models import Cars, Customers, Stores, Orders
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django import forms
@@ -18,6 +15,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.models import Group
 from .models import Profile
+from .functions.userVerification import *
 
 
 def index(request):
@@ -50,7 +48,7 @@ def contactUs(request):
     return render(request, 'testApp/MikeContactPage draft.html', context)
 
 def accounts(request):
-    if not request.user.is_authenticated:
+    if not UserVerification.LoggedIn(request):
         if request.method == "POST":
             if (request.POST.get('firstname') and request.POST.get('middlename') and request.POST.get('lastname') and request.POST.get('tel') and request.POST.get('bday') and request.POST.get('email') and request.POST.get('Password')):
 
@@ -72,18 +70,12 @@ def accounts(request):
         else:
             return render(request,'testApp/ShaleenCreateYourAccountPage.html')
     else:
-        return redirect("/")
+        return redirect("/accounts/login/")
 
 def editUser(request):
-    if not request.user.groups.filter(name = 'customer_group').exists():
+    if not UserVerification.CustomerLoggedIn(request):
         return redirect("/")
-    # id = 11010
-    # request.user
     userProfile = Profile.objects.get(user = request.user)
-    # return HttpResponse(userProfiles.count())
-    # for userProfile in userProfiles:
-    #     return HttpResponse(userProfile.customerid)
-    # # r
     post = Customers.objects.get(pk = userProfile.customerid_id)
     if request.method == 'POST':
         if (request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email')):
@@ -108,24 +100,27 @@ def editUser(request):
     context = {'customer': post, 'dob': dob}
     return render(request,'testApp/NotInUsesignup.html', context)
 
-
-
 def staffPortal(request):
-    return render(request, 'testApp/MikeStaffHomePage.html')
+    if UserVerification.StaffLoggedIn(request):
+        return render(request, 'testApp/MikeStaffHomePage.html')
+    else:
+        return redirect("/accounts/login/")
+
 
 def returnPage(request):
-    zippedResults = VehicleReturns.vehicleToBeReturned(request)
-    storelist = Stores.objects.all()
-    context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
-    if request.method == 'GET' and 'pdf' in request.GET:
-        return renderPDF('testApp/pdf.html', context)
-    return render(request, 'testApp/MikeCarReturnPage.html', context)
+    if UserVerification.StaffLoggedIn(request):
+        zippedResults = VehicleReturns.vehicleToBeReturned(request)
+        storelist = Stores.objects.all()
+        context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
+        if request.method == 'GET' and 'pdf' in request.GET:
+            return renderPDF('testApp/pdf.html', context)
+        return render(request, 'testApp/MikeCarReturnPage.html', context)
+    else:
+        return redirect("/accounts/login/")
 
 def search(request):
     if request.method == 'GET':
         resultantCars = carSets.searchData(request)
-    elif request.method == 'POST':
-        resultantCars = carSets.reccomendCars(request)
     else:
         resultantCars = Cars.objects.all()
 
@@ -138,7 +133,7 @@ def logoutView(request):
     return redirect('/ContactUs')
 
 def successfulLogin(request):
-    if request.user.groups.filter(name='boardMember_group').exists() or request.user.groups.filter(name='staff_group').exists():
+    if UserVerification.StaffLoggedIn(request):
         return redirect("/staffPortal")
     else:
         return redirect("/")
@@ -148,3 +143,12 @@ def FAQView(request):
 
 def LocationsView(request):
     return render(request, 'testApp/LocationsPage.html')
+
+def carRecomView(request):
+    if UserVerification.CustomerLoggedIn(request):
+        resultantCars = carSets.reccomendCars(request)
+        storelist = Stores.objects.all()
+        context = {'resultantCars': resultantCars, 'StoreList': storelist}
+        return render(request, 'testApp/ShaleenSearchresults.html', context)
+    else:
+        return redirect("/accounts/login/")

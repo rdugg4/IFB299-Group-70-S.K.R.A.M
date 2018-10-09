@@ -92,15 +92,14 @@ class carSets(object):
     def reccomendCars(request):
         resultantOrders = Orders.objects.all()
         ordersToExclude = resultantOrders.none()
-        customer = Customers.objects.filter(id=request.POST['userid'])
-        for aCustomer in customer:
-            similar_customers = Customers.objects.filter(gender=aCustomer.gender, occupation=aCustomer.occupation)
+        userProfile = Profile.objects.get(user = request.user)
+        customer = Customers.objects.get(pk = userProfile.customerid_id)
+        similar_customers = Customers.objects.filter(gender=customer.gender, occupation=customer.occupation)
+        customerdob = givenTime(customer.dob, 'DMY').getDate()
+        for aCustomer in similar_customers:
             aCustomerdob = givenTime(aCustomer.dob, 'DMY').getDate()
-
-            for aCustomer2 in similar_customers:
-                aCustomer2dob = givenTime(aCustomer2.dob, 'DMY').getDate()
-                if (aCustomerdob <= (aCustomer2dob - 50000) or aCustomerdob >= (aCustomer2dob + 50000)):
-                    similar_customers = similar_customers.exclude(id=aCustomer2.id)
+            if (customerdob <= (aCustomerdob - 50000) or customerdob >= (aCustomerdob + 50000)):
+                similar_customers = similar_customers.exclude(id=aCustomer.id)
 
         ordersBySimilarCustomers = Orders.objects.none()
         for aCustomer in similar_customers:
