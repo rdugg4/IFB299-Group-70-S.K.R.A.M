@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django import forms
 from .functions.timeobjects import *
+from .functions.CarPopularity import *
 from .functions.search import *
 from .functions.inputVerification import *
 from django.contrib import messages
@@ -164,9 +165,10 @@ def carRecomView(request):
         return redirect("/accounts/login/")
 
 def CarPopularityView(request):
-    if UserVerification.StaffLoggedIn(request):
-        
-        return render(request, 'testApp/testCarpopularity.html')
+    if UserVerification.BoardMemberLoggedIn(request):
+        counterAndNames, graphTitle, graphType = CarPopularity.CountCars(request)
+        context = {'counterAndNames': counterAndNames, 'graphTitle': graphTitle, 'graphType': graphType}
+        return render(request, 'testApp/testCarpopularity.html', context)
     else:
         messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")
