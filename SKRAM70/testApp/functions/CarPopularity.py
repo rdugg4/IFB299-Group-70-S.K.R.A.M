@@ -13,7 +13,7 @@ class CarPopularity(object):
         graphTitle = "Number of Car rentals"
 
         # Define Graph Type
-        graphType = "Pie"
+        graphType = "Column"
         if inputVeriObj.checkFormGET('Graph', 'string'):
             graphType = request.GET['Graph']
             if graphType != 'Column' and graphType != 'Pie':
@@ -25,7 +25,7 @@ class CarPopularity(object):
             catagory = request.GET['Catagory']
             if catagory == 'seats':
                 carGroups.append(carsWithAnnotation.filter(car_seatingcapacity__lte = 3))
-                setNames.append("<3")
+                setNames.append("Less than 3")
                 carGroups.append(carsWithAnnotation.filter(car_seatingcapacity = 4))
                 setNames.append("4")
                 carGroups.append(carsWithAnnotation.filter(car_seatingcapacity = 5))
@@ -35,7 +35,7 @@ class CarPopularity(object):
                 carGroups.append(carsWithAnnotation.filter(car_seatingcapacity = 7))
                 setNames.append("7")
                 carGroups.append(carsWithAnnotation.filter(car_seatingcapacity__gte = 8))
-                setNames.append(">8")
+                setNames.append("Greater than 8")
                 graphTitle = graphTitle + ' divided into seat number groups'
             elif catagory == 'price':
                 maximumPrice = Cars.objects.aggregate(max_price = Max('car_pricenew'))['max_price'] + 1

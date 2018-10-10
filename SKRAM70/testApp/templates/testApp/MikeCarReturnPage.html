@@ -1,42 +1,50 @@
-<!DOCTYPE html>
-<html>
-    <head>
-	<meta charset="UTF-8">
-	<title> Vechicle Return views</title>
-    {% load static %}
-	<link rel="stylesheet" href="{% static "testApp/css/MikeCarReturnCSS.css" %}">
-    </head>
+        {% include "../includes/HTMLOpener.html" %}
+        <title> Vechicle Return views</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static "testApp/css/MikeCarReturnCSS.css" %}">
+        {% if counterAndNames %}
+        {% for count, name in counterAndNames %}
+            {{name}}, {{count}}
+        {% endfor %}
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
 
-    <body>
-        <header>
-            <div class="topnav">
-                <img src="{% static "testApp/images/NewCarLogo.png" %}" alt="logo" class="logo" height="40px" width="160px">
-                <nav>
-                    <ul class="menu-main">
-                        <li><a href="\"> Home </a></li>
-                        <li><a href="#"> Locations </a></li>
-                        <li><a href="#"> Hire Cars </a></li>
-                        <li><a href="#"> Help </a>
-                            <div class="menu-sub">
-                                <ul>
-                                    <li><a href="#"> FAQ </a></li>
-                                    <li><a href="\ContactUs"> Contact Us </a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li><a href="#"> EN </a></li>
-    		    <li><a href="#">
-                    <!-- <i class="material-icons" style="vertical-align:middle"></i> -->
-                    Sign Out </a></li>
-            </ul>
-        </nav>
-    </div>
-	</header>
+            // Draw the chart and set the chart values
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Test', 'Cars to be returned'],
+                    {% for count, name in counterAndNames %}
+                    {% if forloop.last %}
+                        ['{{name}}', {{count}}]
+                    {% else %}
+                        ['{{name}}', {{count}}],
+                    {% endif %}
+                    {% endfor %}
+            ]);
+
+            var options = {'title':'{{graphTitle}}', 'width':550, 'height':400};
+            {% if graphType == 'Pie'%}
+            var chart = new google.visualization.PieChart(document.getElementById('chart'));
+            {% elif graphType == 'Column' %}
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+            {% endif %}
+            chart.draw(data, options);
+        }
+        </script>
+        {% else %}
+        test123
+        {% endif %}
+        test123
+
+        {% include "../includes/Header.html" %}
 
 	<section>
-<div class="row">
-  <div class="column left">
-<div class = "listbox1" align="center">
+    <div class="row">
+    <div class="column left">
+    <div class = "listbox1" align="center">
 	<br>
 	<br>
 	<br>
@@ -44,9 +52,9 @@
 	<h2>Please select your preference</h2>
     <form action="/staffPortal/vehicleReturns" method="GET">
        	    <select name="ordering">
-  			<option value="daily">View by: Daily</option>
-  			<option value="weekly">View by: weekly</option>
-            <option value="monthly">View by: monthly</option>
+      			<option value="daily">View by: Daily</option>
+      			<option value="weekly">View by: weekly</option>
+                <option value="monthly">View by: monthly</option>
 			</select>
 			<br>
 			<br>
@@ -55,7 +63,7 @@
 
     		<br>
     		<br>
-    		<b>Select <br>Return City(optional)</b>
+    		<b>Select Return City</b>
     		<nav class = "listbox2" align="center">
        	    <select name="returnStore">
                 <option value="allStores">All stores</option>
@@ -63,6 +71,14 @@
                     <option value="{{store.id}}">{{store.city}}</option>
                 {% endfor %}
   			</select>
+            <br>
+    		<br>
+            <b>Type of Graph</b><br>
+            <select name="Graph">
+                <option value="None">No Graph</option>
+                <option value="Column">Column Graph</option>
+                <option value="Pie">Pie Graph</option>
+            </select>
   				<br>
   				<br>
 			<input type="submit" name="refresh"value="Refresh">
@@ -71,32 +87,32 @@
            </div>
        </form>
   </div>
-
     <div class="column right">
+
 	<div class="searchcontainer">
-	    <h2> Return Schedule</h2><hr>
-	    <table id="table">
-            {% for order, timeperiod_startDate, car, customer, store in zippedResults %}
-                {% if order.returndate > timeperiod_startDate %}
-                    {% if not forloop.first %}
-                        <td></td>
-                        <td></td>
-                    {% endif %}
-                {% endif %}
-                <tr id="box">
-        		<td><b>Return Date:</b>
-        		    <p>{{order.returndate}}</p>
-        		    <td><p><b>Car ID:</b>{{order.carid_id}}</p>
-        		    	<p><b>Brand</b>: {{car.car_makename}}</p>
-        		    	<p><b>Model</b>: {{car.car_model}}</p>
-        		    	<p><b>Series</b>: {{car.car_series}}</p>
-        		    	<p><b>Year</b>: {{car.car_seriesyear}}</p>
-        		    </td><td><p><b>Return store: </b>{{store.city}}</p>
-        		    	<p><b>Customer ID: </b>{{customer.id}}</p>
-        		    	<p><b>Customer Name: </b>{{customer.name}}</p>
-        		    	<p><b>Customer Phone: </b>{{customer.phone}}</p>
-        		    	<p><b>Customer gender: </b>{{customer.gender}}</p>
-        		</td></td></tr>
+	    <h2> Return Schedule</h2>
+        <div id="chart"></div><br>
+        <hr><br>
+        <table id="table">
+            {% for orders, car, customer, store in zippedResults %}
+            {% for order in orders %}
+            <tr id="box">
+            <td><b>Return Date:</b>
+                <p>{{order.returndate}}</p>
+                <td><p><b>Car ID:</b>{{order.carid_id}}</p>
+                    <p><b>Brand</b>: {{car.car_makename}}</p>
+                    <p><b>Model</b>: {{car.car_model}}</p>
+                    <p><b>Series</b>: {{car.car_series}}</p>
+                    <p><b>Year</b>: {{car.car_seriesyear}}</p>
+                </td><td><p><b>Return store: </b>{{store.city}}</p>
+                    <p><b>Customer ID: </b>{{customer.id}}</p>
+                    <p><b>Customer Name: </b>{{customer.name}}</p>
+                    <p><b>Customer Phone: </b>{{customer.phone}}</p>
+                    <p><b>Customer gender: </b>{{customer.gender}}</p>
+            </td></td></tr>
+            {% endfor %}
+            <td></td>
+            <td></td>
             {% empty %}
                 <p> No cars to be returned </p>
             {% endfor %}
@@ -105,16 +121,4 @@
 	</div>
 
 	</section>
-
-	<footer>
-	    <div class="footer-main">
-		<nav>
-		    <ul>
-			<li><a href="#">Need help?</a></li>
-		    </ul>
-		</nav>
-	    </div>
-	</footer>
-
-	</body>
-</html>
+    {% include "../includes/footer.html"%}

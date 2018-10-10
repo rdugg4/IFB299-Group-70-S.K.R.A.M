@@ -114,9 +114,9 @@ def staffPortal(request):
 
 def returnPage(request):
     if UserVerification.StaffLoggedIn(request):
-        zippedResults = VehicleReturns.vehicleToBeReturned(request)
+        zippedResults, counterAndNames, graphType, lengthOfGrouping = VehicleReturns.vehicleToBeReturned(request)
         storelist = Stores.objects.all()
-        context = {'zippedResults': zippedResults, 'StoreList': storelist, 'Period': zippedResults}
+        context = {'zippedResults': zippedResults, 'StoreList': storelist, 'counterAndNames': counterAndNames, 'graphTitle': "The upcoming " + lengthOfGrouping +"s car returns", 'graphType': graphType}
         if request.method == 'GET' and 'pdf' in request.GET:
             return renderPDF('testApp/pdf.html', context)
         return render(request, 'testApp/MikeCarReturnPage.html', context)
