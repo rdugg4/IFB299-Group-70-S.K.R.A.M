@@ -137,8 +137,8 @@ footer nav li:hover a {
 }
 
 input[type=text], select, textarea {
-	width: 50%;
-    padding: 10px; /* Some padding */
+	width: 70%;
+    padding: 15px; /* Some padding */
     border: 1px solid #ccc; /* Gray border */
     border-radius: 4px; /* Rounded borders */
     box-sizing: border-box; /* Make sure that padding and width stays in place */
@@ -153,7 +153,7 @@ input[type=text], select, textarea {
 input[type=submit] {
     background-color: #C52225;
     color: white;
-    padding: 10px 100px;
+    padding: 15px 100px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -166,6 +166,7 @@ input[type=submit]:hover {
 
 /* Add a background color and some padding around the form */
 .container {
+	text-align: center;
     border-radius: 8px;
     padding: 80px;
 	width: 1000px;
@@ -177,22 +178,4 @@ pty{
 	font-family:verdana;
 	font-size: 15px;
 	color:green;
-}
-
-/* Create two unequal columns that floats next to each other */
-.column {
-	    box-sizing: border-box;
-    float: left;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
-}
-
-.left {
-  width: 50%;
-  text-align: center;
-}
-
-.right {
-  width: 50%;
-  text-align: center;
 }
