@@ -15,5 +15,6 @@ urlpatterns = [
     path('editUser/', views.editUser, name = 'Edit'),
     path('Locations', views.LocationsView, name="Locations"),
     path('FrequentlyAskedQuestions', views.FAQView, name="FAQs"),
-    path('RecommendCars', views.carRecomView, name="RecommendCars")
+    path('RecommendCars', views.carRecomView, name="RecommendCars"),
+    url(r'^staffPortal/CarPopularity/$', views.CarPopularityView)
 ]

@@ -162,3 +162,11 @@ def carRecomView(request):
     else:
         messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")
+
+def CarPopularityView(request):
+    if UserVerification.StaffLoggedIn(request):
+        
+        return render(request, 'testApp/testCarpopularity.html')
+    else:
+        messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
+        return redirect("/accounts/login/")
