@@ -38,6 +38,7 @@ class CarPopularity(object):
                 setNames.append("Greater than 8")
                 graphTitle = graphTitle + ' divided into seat number groups'
             elif catagory == 'price':
+                graphTitle = graphTitle + ' divided into new price groups'
                 maximumPrice = Cars.objects.aggregate(max_price = Max('car_pricenew'))['max_price'] + 1
                 minimumPrice = Cars.objects.aggregate(min_price = Min('car_pricenew'))['min_price']
                 splitNumber = 10
@@ -48,6 +49,7 @@ class CarPopularity(object):
                     setNames.append(str(minimumPrice + i*splitSize) + "-" + str(minimumPrice + i*splitSize + splitSize))
                     i = i + 1
             elif catagory == 'driveType':
+                graphTitle = graphTitle + ' divided into drive type groups'
                 carGroups.append(carsWithAnnotation.filter(car_drive = "4WD"))
                 setNames.append('4WD')
                 carGroups.append(carsWithAnnotation.filter(car_drive = "RWD"))
@@ -55,6 +57,7 @@ class CarPopularity(object):
                 carGroups.append(carsWithAnnotation.filter(car_drive = "FWD"))
                 setNames.append('FWD')
             elif catagory == 'makeName':
+                graphTitle = graphTitle + ' divided into vehicle make groups'
                 carMakes = carsWithAnnotation.order_by('car_makename').values('car_makename').distinct()
                 for carMake in carMakes:
                     carGroups.append(carsWithAnnotation.filter(car_makename = carMake['car_makename']))
@@ -64,6 +67,7 @@ class CarPopularity(object):
                 messages.add_message(request, messages.INFO, 'Your inputted Catagory was not one of the options and defaulted to driveType')
 
         if len(carGroups) == 0:
+            graphTitle = graphTitle + ' divided into drive type groups'
             carGroups.append(carsWithAnnotation.filter(car_drive = "4WD"))
             setNames.append('4WD')
             carGroups.append(carsWithAnnotation.filter(car_drive = "RWD"))

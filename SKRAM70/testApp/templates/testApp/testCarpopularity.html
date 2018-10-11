@@ -5,15 +5,15 @@
 <form action="/staffPortal/CarPopularity" method="get">
     Catagories:<br>
     <select name="Catagory">
-        <option value="seats">Seat Number</option>
-        <option value="price">Price of Car (new)</option>
         <option value="driveType">Drive Type of Vehicle</option>
-        <option value="makeName">Make of Vehicle</options>
+        <option value="seats" {% if "seat" in graphTitle %} selected {% endif %}>Seat Number</option>
+        <option value="price" {% if "price" in graphTitle %} selected {% endif %}>Price of Car (new)</option>
+        <option value="makeName" {% if "make" in graphTitle %} selected {% endif %}>Make of Vehicle</options>
     </select>
     Graph Type:<br>
     <select name="Graph">
         <option value="Column">Column Graph</option>
-        <option value="Pie">Pie Graph</option>
+        <option value="Pie" {% if graphType == 'Pie'%}selected{% endif %}>Pie Graph</option>
     </select>
     <input type="submit" value="submit">
 </form>
@@ -46,13 +46,5 @@
     chart.draw(data, options);
 }
 </script>
-<body>
-{% for count, name in counterAndNames %}
-{% if forloop.last %}
-    {{name}}, {{count}}
-{% else %}
-    {{name}}, {{count}}
-{% endif %}
-{% endfor %}
+
 {% include "../includes/footer.html"%}
-</body>
