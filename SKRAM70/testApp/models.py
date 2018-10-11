@@ -54,6 +54,10 @@ class Stores(models.Model):
     class Meta:
         db_table = 'stores'
 
+class StaffMembers(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    storeid = models.ForeignKey(Stores, models.DO_NOTHING, db_column='StoreID', blank=True, null=True)
+
 class Orders(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     createdate = models.IntegerField(db_column='CreateDate', blank=True, null=True)  # Field name made lowercase.

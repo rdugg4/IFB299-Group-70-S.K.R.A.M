@@ -2,10 +2,7 @@
         <title> Vechicle Return views</title>
         {% load static %}
         <link rel="stylesheet" href="{% static "testApp/css/MikeCarReturnCSS.css" %}">
-        {% if counterAndNames %}
         {% for count, name in counterAndNames %}
-            {{name}}, {{count}}
-        {% endfor %}
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             // Load google charts
@@ -34,10 +31,7 @@
             chart.draw(data, options);
         }
         </script>
-        {% else %}
-        test123
-        {% endif %}
-        test123
+        {% endfor %}
 
         {% include "../includes/Header.html" %}
 
@@ -53,14 +47,14 @@
     <form action="/staffPortal/vehicleReturns" method="GET">
        	    <select name="ordering">
       			<option value="daily">View by: Daily</option>
-      			<option value="weekly">View by: weekly</option>
-                <option value="monthly">View by: monthly</option>
+      			<option value="weekly" {% if "Week" in graphTitle %} selected {% endif %}>View by: weekly</option>
+                <option value="monthly" {% if "Month" in graphTitle %} selected {% endif %}>View by: monthly</option>
 			</select>
 			<br>
 			<br>
   		    <label for="date"><b>Choose return date<br></b></label>
-    		<input type="date" name="start_date">
-
+    		<input type="date" name="start_date" value="{{startDate}}">
+            {% if perms.auth.board_member %}
     		<br>
     		<br>
     		<b>Select Return City</b>
@@ -68,16 +62,17 @@
        	    <select name="returnStore">
                 <option value="allStores">All stores</option>
                 {% for store in StoreList %}
-                    <option value="{{store.id}}">{{store.city}}</option>
+                    <option value="{{store.id}}" {% if storeIDformatted == store.id|stringformat:"i" %} selected {% endif %}>{{store.city}}</option>
                 {% endfor %}
   			</select>
+            {% endif %}
             <br>
     		<br>
             <b>Type of Graph</b><br>
             <select name="Graph">
                 <option value="None">No Graph</option>
-                <option value="Column">Column Graph</option>
-                <option value="Pie">Pie Graph</option>
+                <option value="Column" {% if graphType == 'Column'%}selected{% endif %}>Column Graph</option>
+                <option value="Pie" {% if graphType == 'Pie'%}selected{% endif %}>Pie Graph</option>
             </select>
   				<br>
   				<br>
@@ -94,8 +89,8 @@
         <div id="chart"></div><br>
         <hr><br>
         <table id="table">
-            {% for orders, car, customer, store in zippedResults %}
-            {% for order in orders %}
+            {% for orders in zippedResults %}
+            {% for order, car, customer, store in orders %}
             <tr id="box">
             <td><b>Return Date:</b>
                 <p>{{order.returndate}}</p>
