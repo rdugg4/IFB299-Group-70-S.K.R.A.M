@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Navbar </title>
+		<link rel="stylesheet" href="./public/css/navbar-style.css">
+		<link href="https://fonts.googleapis.com/css?family=Poppins"
+		rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	  rel="stylesheet">
+
+	</head>
+
+	<body>
+
+		<header>
+		    <div class="topnav"> <img src="./public/images/NewCarLogo.png"
+					alt="logo" class="logo">
+		    <nav>
+			<ul class="menu-main">
+			    <li><a href="#"> Home </a></li>
+			    <li><a href="#"> Locations </a></li>
+			    <li><a href="#"> Hire Cars </a></li>
+			    <li><a href="#"> Help </a>
+	          <div class="menu-sub">
+	            <ul>
+	              <li><a href="#"> FAQ </a></li>
+	      				<li><a href="#"> Contact Us </a></li>
+	            </ul>
+	          </div>
+			    <li><a href="#"> EN </a></li>
+			    <li><a href="#"> <i class="material-icons"
+	          style="vertical-align:middle">person_outline</i>Sign In </a>
+			    	<div class="menu-sub">
+				    <ul>
+					<li><a href="#"> Sign In </a></li>
+					<li><a href="#"> Create New Account </a></li>
+				    </ul>
+				</div>
+			    </li>
+			</ul>
+		    </nav>
+		    </div>
+		</header>
+
+<!-- Search section goes here -->
+		<section>
+			<div class="row">
+				<h1 align="center" style="margin-top:8%;"> Our Locations </h1>
+					<br>
+				<br>
+			</div>
+
+			<div class="row">
+				<div class="leftcolumn">
+					<button class="accordion"> ACT </button>
+					<div class="panel">
+						<br>
+						<p> 15 Concessions Lane, <br>
+							Canberra ACT 2601 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> NSW </button>
+					<div class="panel">
+						<br>
+						<p> 223 Anzac Parade, <br>
+							Kensington NSW 2033 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> NT </button>
+					<div class="panel">
+						<br>
+						<p> 13 Ellengown Dr, <br>
+							Brinkin NT 0810 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> QLD </button>
+					<div class="panel">
+						<br>
+						<p> 2 George St, <br>
+							Brisbane QLD 4000 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> SA </button>
+					<div class="panel">
+						<br>
+						<p> 101 Currie St, <br>
+							Adelaide SA 5001 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> TAS </button>
+					<div class="panel">
+						<br>
+						<p> 1 Churchill Ave, <br>
+							Hobart TAS 7005 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> VIC </button>
+					<div class="panel">
+						<br>
+						<p> 813 Swanston St, <br>
+							Parkville, VIC 3010 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> WA </button>
+					<div class="panel">
+						<br>
+						<p> 2 Bradford St, <br>
+							Mount Lawley WA 6050 </p>
+						<br>
+					</div>
+
+				</div>
+
+				<div class="rightcolumn">
+					<!-- Google maps goes here -->
+					<div id="googleMap" style="width:100%;height:500px;"></div>
+
+						<!-- <script>
+						function myMap() {
+						var mapProp= {
+						    center:new google.maps.LatLng(-27.477376, 153.028169),
+						    zoom:5,
+						};
+						var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+						}
+						</script> -->
+
+						<script>
+function myMap() {
+  var myCenter = new google.maps.LatLng(-27.477376, 153.028169);
+  var mapCanvas = document.getElementById("googleMap");
+  var mapOptions = {center: myCenter, zoom: 5};
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  var marker = new google.maps.Marker({position:myCenter});
+  marker.setMap(map);
+}
+</script>
+
+
+
+				<!--	 <script>
+//     var locations = [
+//       ['Canberra', -35.277736, 149.120668, 4],
+//       ['Sydney', -33.918416, 151.225770, 5],
+//       ['Darwin', -12.372265, 130.868820, 3],
+//       ['Brisbane', -27.477376, 153.028169, 2],
+//       ['Adelaide', -34.924787, 138.595701, 1]
+//     ];
+//
+//     var map = new google.maps.Map(document.getElementById('googleMap'), {
+//        zoom: 10,
+//        center: new google.maps.LatLng(-27.47, 153.02),
+//        mapTypeId: google.maps.MapTypeId.ROADMAP
+//      });
+//
+//     var infowindow = new google.maps.InfoWindow();
+//
+//     var marker, i;
+//
+//     for (i = 0; i < locations.length; i++) {
+//       marker = new google.maps.Marker({
+//         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+//         map: map
+//       });
+//
+//       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+//         return function() {
+//           infowindow.setContent(locations[i][0]);
+//           infowindow.open(map, marker);
+//         }
+//       })(marker, i));
+//     }
+//   </script> -->
+
+						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVArWOV0RwGEHyQPfSOFJiUsgs5E5Q_yw&callback=myMap">
+						</script>
+				</div>
+			</div>
+
+			<div class="row">
+			</div>
+		</section>
+
+		<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var panel = this.nextElementSibling;
+		    if (panel.style.maxHeight){
+		      panel.style.maxHeight = null;
+		    } else {
+		      panel.style.maxHeight = panel.scrollHeight + "px";
+		    }
+		  });
+		}
+		</script>
+
+		<footer>
+			<div class="footer-main">
+				<nav>
+					<ul>
+						<li><a href="#">Need help?</a></li>
+					</ul>
+				</nav>
+			</div>
+		</footer>
+
+	</body>
+</html>
