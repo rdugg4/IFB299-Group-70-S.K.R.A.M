@@ -24,7 +24,18 @@ rel="stylesheet">
                     </li>
                     <li><a href="#"> EN </a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}"> Sign Out </a></li>
+                    <li><a href="#"> <i class="material-icons" style="vertical-align:middle">person_outline</i> </a>
+                        <div class="menu-sub">
+                            <ul>
+                                {% if perms.auth.customer %}
+                                <li><a href="\editUser"> Edit Your Details </a></li>
+                                {% else %}
+                                <li><a href="\staffPortal"> Staff Portal </a></li>
+                                {% endif %}
+                                <li><a href="{% url 'logout' %}"> Sign Out </a></li>
+                            </ul>
+                        </div>
+                    </li>
                     {% else %}
                     <li><a href="#"> Sign In </a>
                         <div class="menu-sub">
