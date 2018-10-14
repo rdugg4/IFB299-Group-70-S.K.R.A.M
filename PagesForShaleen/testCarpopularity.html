@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+<link href="navbar-style.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Poppins"
+rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="topnav">
+            <img src="{% static "testApp/images/NewCarLogo.png" %}" alt="logo" class="logo" height="40px" width="160px">
+            <nav>
+                <ul class="menu-main">
+                    <li><a href="\"> Home </a></li>
+                    <li><a href="\Locations"> Locations </a></li>
+                    <li><a href="#"> Hire Cars </a></li>
+                    <li><a href="#"> Help </a>
+                        <div class="menu-sub">
+                            <ul>
+                                <li><a href="\FrequentlyAskedQuestions"> FAQ </a></li>
+                                <li><a href="\ContactUs"> Contact Us </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#"> EN </a></li>
+                    <li><a href="#"> Sign In </a>
+                        <div class="menu-sub">
+                            <ul>
+                                <li><a href="{% url 'login' %}"> Sign In </a></li>
+                                <li><a href="\create_account"> Create New Account </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<form action="/staffPortal/CarPopularity" method="get">
+    Catagories:<br>
+    <select name="Catagory">
+        <option value="driveType">Drive Type of Vehicle</option>
+        <option value="seats" {% if "seat" in graphTitle %} selected {% endif %}>Seat Number</option>
+        <option value="price" {% if "price" in graphTitle %} selected {% endif %}>Price of Car (new)</option>
+        <option value="makeName" {% if "make" in graphTitle %} selected {% endif %}>Make of Vehicle</options>
+    </select>
+    Graph Type:<br>
+    <select name="Graph">
+        <option value="Column">Column Graph</option>
+        <option value="Pie" {% if graphType == 'Pie'%}selected{% endif %}>Pie Graph</option>
+    </select>
+    <input type="submit" value="submit">
+</form>
+<div id="chart"></div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Test', 'Number Of Cars'],
+                ['CarName', 20],
+                ['CarName2', 30],
+                ['CarName3', 40],
+                ['CarName4', 50],
+                ['CarName5', 10]
+    ]);
+
+    var options = {'title':'{{graphTitle}}', 'width':550, 'height':400};
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+    chart.draw(data, options);
+}
+</script>
+
+<div style="height: 50px"></div>
+<footer>
+    <div class="footer-main">
+        <nav>
+            <ul>
+                <li><a href="#">Need help?</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Vechicle Return views</title>
+        <link rel="stylesheet" href="MikeCarReturnCSS.css">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            // Draw the chart and set the chart values
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Test', 'Cars to be returned'],
+                    ['CarName', 20],
+                    ['CarName2', 30],
+                    ['CarName3', 40],
+                    ['CarName4', 50],
+                    ['CarName5', 10]
+            ]);
+
+            var options = {'title':'{{graphTitle}}', 'width':550, 'height':400};
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+            chart.draw(data, options);
+        }
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=Poppins"
+        rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+        </head>
+
+        <body>
+            <header>
+                <div class="topnav">
+                    <img src="{% static "testApp/images/NewCarLogo.png" %}" alt="logo" class="logo" height="40px" width="160px">
+                    <nav>
+                        <ul class="menu-main">
+                            <li><a href="\"> Home </a></li>
+                            <li><a href="\Locations"> Locations </a></li>
+                            <li><a href="#"> Hire Cars </a></li>
+                            <li><a href="#"> Help </a>
+                                <div class="menu-sub">
+                                    <ul>
+                                        <li><a href="\FrequentlyAskedQuestions"> FAQ </a></li>
+                                        <li><a href="\ContactUs"> Contact Us </a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li><a href="#"> EN </a></li>
+                            <li><a href="#"> Sign In </a>
+                                <div class="menu-sub">
+                                    <ul>
+                                        <li><a href="{% url 'login' %}"> Sign In </a></li>
+                                        <li><a href="\create_account"> Create New Account </a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+	<section>
+    <div class="row">
+    <div class="column left">
+    <div class = "listbox1" align="center">
+	<br>
+	<br>
+	<br>
+	<br>
+	<h2>Please select your preference</h2>
+    <form action="/staffPortal/vehicleReturns" method="GET">
+       	    <select name="ordering">
+      			<option value="daily">View by: Daily</option>
+      			<option value="weekly" {% if "Week" in graphTitle %} selected {% endif %}>View by: weekly</option>
+                <option value="monthly" {% if "Month" in graphTitle %} selected {% endif %}>View by: monthly</option>
+			</select>
+			<br>
+			<br>
+  		    <label for="date"><b>Choose return date<br></b></label>
+    		<input type="date" name="start_date" value="{{startDate}}">
+    		<br>
+    		<br>
+    		<b>Select Return City</b>
+    		<nav class = "listbox2" align="center">
+       	    <select name="returnStore">
+                <option value="allStores">All stores</option>
+                {% for store in StoreList %}
+                    <option value="{{store.id}}" {% if storeIDformatted == store.id|stringformat:"i" %} selected {% endif %}>{{store.city}}</option>
+                {% endfor %}
+  			</select>
+            <br>
+    		<br>
+            <b>Type of Graph</b><br>
+            <select name="Graph">
+                <option value="None">No Graph</option>
+                <option value="Column" {% if graphType == 'Column'%}selected{% endif %}>Column Graph</option>
+                <option value="Pie" {% if graphType == 'Pie'%}selected{% endif %}>Pie Graph</option>
+            </select>
+  				<br>
+  				<br>
+			<input type="submit" name="refresh"value="Refresh">
+            <br><br>
+            <input type="submit" name="pdf" value="Create PDF of results">
+           </div>
+       </form>
+  </div>
+    <div class="column right">
+
+	<div class="searchcontainer">
+	    <h2> Return Schedule</h2>
+        <div id="chart"></div><br>
+        <hr><br>
+        <table id="table">
+            <tr id="box">
+            <td><b>Return Date:</b>
+                <p>{{order.returndate}}</p>
+                <td><p><b>Car ID:</b>{{order.carid_id}}</p>
+                    <p><b>Brand</b>: {{car.car_makename}}</p>
+                    <p><b>Model</b>: {{car.car_model}}</p>
+                    <p><b>Series</b>: {{car.car_series}}</p>
+                    <p><b>Year</b>: {{car.car_seriesyear}}</p>
+                </td><td><p><b>Return store: </b>{{store.city}}</p>
+                    <p><b>Customer ID: </b>{{customer.id}}</p>
+                    <p><b>Customer Name: </b>{{customer.name}}</p>
+                    <p><b>Customer Phone: </b>{{customer.phone}}</p>
+                    <p><b>Customer gender: </b>{{customer.gender}}</p>
+            </td></td></tr>
+            <td></td>
+            <td></td>
+	    </table>
+	</div>
+	</div>
+
+	</section>
+    {% include "../includes/footer.html"%}
