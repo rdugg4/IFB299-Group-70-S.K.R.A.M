@@ -2,7 +2,7 @@
         <title> Vechicle Returns </title>
         {% load static %}
         <link rel="stylesheet" href="{% static "testApp/css/MikeCarReturnCSS.css" %}">
-        {% for count, name in counterAndNames %}
+        {% if graphType != 'None'%}
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             // Load google charts
@@ -31,8 +31,7 @@
             chart.draw(data, options);
         }
         </script>
-        {% endfor %}
-
+        {% endif %}
         {% include "../includes/Header.html" %}
 
 	<section>
