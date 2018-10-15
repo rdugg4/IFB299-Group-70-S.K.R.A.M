@@ -1,43 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-	<meta charset="UTF-8">
-	<title> Car Information </title>
-	<link rel="stylesheet" href="./public/css/MikeUserLandingPageCSS.css">
-	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet">
-    </head>
-
-    <body>
-	<header>
-	    <div class="topnav"> <img src="./public/images/NewCarLogo.png" alt="logo" class="logo">
-	    <nav>
-		<ul class="menu-main">
-		    <li><a href="#"> Home </a></li>
-		    <li><a href="#"> Locations </a></li>
-		    <li><a href="#"> Hire Cars </a></li>
-		    <li><a href="#"> Help </a>
-          <div class="menu-sub">
-            <ul>
-              <li><a href="#"> FAQ </a></li>
-      				<li><a href="#"> Contact Us </a></li>
-            </ul>
-          </div>
-		    <li><a href="#"> EN </a></li>
-		    <li><a href="#"> <i class="material-icons"
-          style="vertical-align:middle">person_outline</i>Sign In </a>
-		    	<div class="menu-sub">
-			    <ul>
-				<li><a href="#"> Sign Out </a></li>
-				<li><a href="#"> Create New Account </a></li>
-			    </ul>
-			</div>
-		    </li>
-		</ul>
-	    </nav>
-	    </div>
-	</header>
+{% include "../includes/HTMLOpener.html" %}
+<title> Edit Your Information </title>
+{% load static %}
+<link href="{% static "testApp/css/MikeUserLandingPageCSS.css" %}" rel="stylesheet" type="text/css">
+{% include "../includes/Header.html" %}
 
 	<section>
 <div class="row">
@@ -54,18 +19,18 @@
       <input type="text" id="Mname" name="Middlename" placeholder="Please type your Middle name (optional)">
       <label for="Lastname"><br>Last Name<br></label>
       <input type="text" id="Lname" name="Lastname" placeholder="Please type your last name">
-      
+
       <label for="Gender"><br>Gender<br></label>
       <select>
   			<option value="Daily">Male</option>
   			<option value="Weekly">Female</option>
 	  </select>
-	  
+
       <label for="DOB"><br>Date of Birth<br></label>
 	  <input type="date" placeholder="Birth Date">
 	  <br>
-      
-      <label for="Email"><br>Email address<br></label>      
+
+      <label for="Email"><br>Email address<br></label>
       <input type="text" disabled="disabled" id="youremail" name="youremail" placeholder="*******@***.com">
 
         <br>
@@ -76,8 +41,8 @@
 
 </div>
 </div>
-	  		
-  <div class="column right"align="center">     	 
+
+  <div class="column right"align="center">
 	<br>
 	<br>
 	<br>
@@ -91,7 +56,7 @@
 	  <input type="text" id="Pnumber" name="Phonenumber" placeholder="Please type your phone number">
 	<br>
 	<H2><i>Vehicle preference</i></H2>
-	 <label for="Typecar"><br>please select what type of cars you prefer<br></label> 
+	 <label for="Typecar"><br>please select what type of cars you prefer<br></label>
 	  <select>
   			<option value="EconomicCar">Economic</option>
   			<option value="Sedan">Sedan</option>
@@ -99,7 +64,7 @@
   			<option value="OffRoad">Off-Road</option>
   			<option value="Coupe">Coupe</option>
 	  </select>
-	 <label for="Brand"><br>please select Your preferred brand<br></label> 
+	 <label for="Brand"><br>please select Your preferred brand<br></label>
 	  <select>
   			<option value="ALFA ROMEO">ALFA ROMEO</option>
   			<option value="AUDI">AUDI</option>
@@ -119,29 +84,18 @@
   			<option value="TOYOTA">TOYOTA</option>
   			<option value="VOLKSWAGEN">VOLKSWAGEN</option>
   			<option value="VOLVO">VOLVO</option>
-  			
+
 	  </select>
-	  
-	  
-	  
+
+
+
 	  <input type="Update" value="Update">
 	  <br>
 	  <label for="Clicktip"><br><i>Click update button to save changes</i><br></label>
-	  
-	  
-	  
+
+
+
  </div>
  </div>
  	</section>
-	<footer>
-	    <div class="footer-main">
-		<nav>
-		    <ul>
-			<li><a href="#">Need help?</a></li>
-		    </ul>
-		</nav>
-	    </div>
-	</footer>
-
-	</body>
-</html>
+	{% include "../includes/footer.html"%}
