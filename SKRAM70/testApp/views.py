@@ -10,7 +10,7 @@ from .functions.inputVerification import *
 from django.contrib import messages
 from .forms import *
 from .functions.vehicleReturns import *
-from django.core.mail import se nd_mail
+from django.core.mail import send_mail
 from .functions.renderPdf import renderPDF
 from django.contrib.auth import logout
 from django.shortcuts import redirect
@@ -26,7 +26,8 @@ def index(request):
     return render(request, 'testApp/AlanaCustomerHomepage.html', context)
 
 def detail(request, car_id):
-    if not UserVerification.StaffLoggedIn(request):
+    # if not UserVerification.StaffLoggedIn(request):
+    #     return redirect("/")
     if request.method == 'POST':
         form = forms.CharField()
         form = forms.IntegerField()

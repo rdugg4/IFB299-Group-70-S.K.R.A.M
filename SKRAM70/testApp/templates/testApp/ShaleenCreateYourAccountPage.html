@@ -1,43 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-	<meta charset="UTF-8">
+{% include "../includes/HTMLOpener.html" %}
 	<title> Create Your Account </title>
     {% load static %}
 	<link href="{% static "testApp/css/Createyouraccount.css" %}" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-    </head>
-
-    <body>
-	<header>
-	    <div class="topnav">
-            <img src="{% static "testApp/images/NewCarLogo.png" %}" alt="logo" class="logo" height="40px" width="160px">
-            <nav>
-    			<ul class="menu-main">
-    			    <li><a href="\"> Home </a></li>
-    			    <li><a href="#"> Locations </a></li>
-    			    <li><a href="#"> Hire Cars </a></li>
-    			    <li><a href="#"> Help </a>
-    					<div class="menu-sub">
-    	                    <ul>
-    	                        <li><a href="#"> FAQ </a></li>
-    	      				    <li><a href="\ContactUs"> Contact Us </a></li>
-    	                    </ul>
-    	                </div>
-    				</li>
-    			    <li><a href="#"> EN </a></li>
-    			    <li><a href="#"> Sign In </a>
-    			    	<div class="menu-sub">
-    					    <ul>
-    							<li><a href="\staffPortal"> Sign In </a></li>
-    							<li><a href="\create_account"> Create New Account </a></li>
-    					    </ul>
-    					</div>
-    			    </li>
-    			</ul>
-    	    </nav>
-	    </div>
-	</header>
+    {% include "../includes/Header.html" %}
 
 	<section>
 <form action="/create_account/" method="POST">
@@ -80,16 +45,4 @@
 </form>
 
 	</section>
-
-	<footer>
-	    <div class="footer-main">
-		<nav>
-		    <ul>
-			<li><a href="#">Need help?</a></li>
-		    </ul>
-		</nav>
-	    </div>
-	</footer>
-
-	</body>
-</html>
+{% include "../includes/footer.html"%}
