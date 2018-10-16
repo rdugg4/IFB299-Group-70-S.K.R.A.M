@@ -1,0 +1,111 @@
+{% include "../includes/HTMLOpener.html" %}
+	<title> Car Information </title>
+    {% load static %}
+	<link href="{% static "testApp/css/navbar-style.css" %}" rel="stylesheet" type="text/css">
+	{% include "../includes/Header.html" %}
+
+	<section>
+        {% for car in CarInfo %}
+            <h1 align="center" style="padding-top:20px;"> {{car.car_makename}}, {{car.car_model}} </h1>
+            <br> <!-- need a break in between image box and specific info -->
+            <div class="row">
+              <div class="reviewcontainer">
+                <div class="fakeimg" style="height:200px;">Image</div>
+              </div>
+            </div>
+
+            <!--This is where the information that is pulled from the database absolute
+            the car will be filled in -->
+            <div class="row">
+              <div class="leftcolumn">
+                <h2> Specific Information</h2>
+                <p>Series: {{car.car_series}}</p>
+                <p>Series Year: {{car.car_seriesyear}}</p>
+                <p>Transmission: {{car.car_standardtransmission}}</p>
+                <p>Number of seats: {{car.car_seatingcapacity}}</p>
+                <p>Engine: {{car.car_enginesize}}</p>
+                <p>Tank Capacity: {{car.car_tankcapacity}}</p>
+              </div>
+              <div class ="rightcolumn">
+                <br>
+                <br>
+                <p>Power: {{car.car_power}}</p>
+                <p>Body: {{car.car_bodytype}}</p>
+                <p>Drive: {{car.car_drive}}</p>
+                <p>Fuel System: {{car.car_fuelsystem}}</p>
+                <p>Wheel base: {{car.car_wheelbase}}</p>
+              </div>
+            </div>
+         <form action = "/CarInfo/{{car.id}}/" method = "POST" >
+          {% csrf_token %}
+          <label for="car_makename"><b>Car make name</b></label>
+          <input id = "car_makename" type="text" placeholder="car.car_makename" name="carname" required value="{{car.car_makename}}" maxlength="255">
+          <br>
+          <label for="car_model"><b>Car Model</b></label>
+          <input id = "car_model" type="text" placeholder="car.car_model" name="carmodel" required value="{{car.car_model}}" maxlength="255">
+          <br>
+          <label for="car_series"><b>Car Series</b></label>
+          <input id = "car_series" type="text" placeholder="car_series" name="carseries" required value="{{car.car_series}}" maxlength="255">
+          <br>
+          <label for="car_seriesyear"><b>Car Series Year</b></label>
+          <input id = "car_seriesyear" type="text" placeholder="car_seriesyear" name="carseriesyear" required value="{{car.car_seriesyear}}">
+          <br>
+          <label for="car_pricenew"><b>Car price new</b></label>
+          <input id = "car_pricenew" type="text" placeholder="car_pricenew" name="carpricenew" required value="{{car.car_pricenew}}">
+          <br>
+          <label for="car_enginesize"><b>Car engine size</b></label>
+          <input id = "car_enginesize" type="text" placeholder="car_enginesize" name="carenginesize" required value="{{car.car_enginesize}}" maxlength="255">
+          <br>
+          <label for="car_fuelsystem"><b>Car fuel system</b></label>
+          <input id = "car_fuelsystem" type="text" placeholder="car_fuelsystem" name="carfuelsystem" required value="{{car.car_fuelsystem}}" maxlength="255">
+          <br>
+          <label for="car_tankcapacity"><b>Car tank capacity</b></label>
+          <input id = "car_tankcapacity" type="text" placeholder="car_tankcapacity" name="cartankcapacity" required value="{{car.car_tankcapacity}}" maxlength="255">
+          <br>
+          <label for="car_power"><b>Car power</b></label>
+          <input id = "car_power" type="text" placeholder="car_power" name="carpower" required value="{{car.car_power}}" maxlength="255">
+          <br>
+          <label for="car_seatingcapacity"><b>Car seating capacity</b></label>
+          <input id = "car_seatingcapacity" type="text" placeholder="car_seatingcapacity" name="carseatingcapacity" required value="{{car.car_seatingcapacity}}">
+          <br>
+          <label for="car_standardtransmission"><b>Car standard transmission</b></label>
+          <input id = "car_standardtransmission" type="text" placeholder="car_standardtransmission" name="carstandardtransmission" required value="{{car.car_standardtransmission}}" maxlength="255">
+          <br>
+          <label for="car_bodytype"><b>Car BOdytype</b></label>
+          <input id = "car_bodytype" type="text" placeholder="car_bodytype" name="carbodytype" required value="{{car.car_bodytype}}" maxlength="255">
+          <br>
+          <label for="car_drive"><b>Car Drive</b></label>
+          <input id = "car_drive" type="text" placeholder="car_drive" name="cardrive" required value="{{car.car_drive}}" maxlength="3">
+          <br>
+          <label for="car_wheelbase"><b>Car Wheelbase</b></label>
+          <input id = "car_wheelbase" type="text" placeholder="car_wheelbase" name="wheelbase" required value="{{car.car_wheelbase}}" maxlength="255">
+          <br>
+          <input type="submit" value="Submit">
+         </form>
+            <!-- Need to fix this as it doesn't quite align in the center, align is
+            not working?? -->
+            <a href="" class="btn" style="margin-left:50%"> Reserve now! </a>
+        {% empty %}
+            <h1 align = "center" style="padding-top:20px;"> The Car you are referencing does not exist </h1>
+        {% endfor %}
+        <br>
+        
+
+    <div class="row">
+      <div class="leftcolumn">
+        <h2> Reviews </h2>
+        <p> See what our customers think! </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="reviewcontainer">
+        <h3><i> Love it! </i></h3>
+        <p><span> John D </span></p>
+        <br>
+        <p>Great car, very fuel efficient. Would definitely hire again </p>
+      </div>
+    </div>
+
+	</section>
+{% include "../includes/footer.html"%}

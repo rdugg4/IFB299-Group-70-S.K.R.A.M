@@ -26,14 +26,34 @@ def index(request):
     return render(request, 'testApp/AlanaCustomerHomepage.html', context)
 
 def detail(request, car_id):
-    # if not UserVerification.StaffLoggedIn(request):
-    #     return redirect("/")
+    if not UserVerification.StaffLoggedIn(request):
+         return redirect("/showcaroriginal.html")
+    userProfile = Profile.objects.get(user = request.user)
+    post = Cars.objects.get(pk = car_id)
     if request.method == 'POST':
-        form = forms.CharField()
-        form = forms.IntegerField()
+        if (request.POST.get('carname') and request.POST.get('carmodel') and request.POST.get('carseries') and request.POST.get('carseriesyear') and request.POST.get('carpricenew') and request.POST.get('carenginesize') and request.POST.get('carfuelsystem') and request.POST.get('cartankcapacity') and request.POST.get('carpower') and request.POST.get('carseatingcapacity') and request.POST.get('carstandardtransmission') and request.POST.get('carbodytype') and request.POST.get('cardrive') and request.POST.get('wheelbase')):
+            #post = Cars()
+            f = forms.CharField()
+            g = forms.IntegerField()
+            post.car_makename = f.clean(request.POST.get('carname'))
+            post.car_model = f.clean(request.POST.get('carmodel'))
+            post.car_series = f.clean(request.POST.get('carseries'))
+            post.car_seriesyear = g.clean(request.POST.get('carseriesyear'))
+            post.car_pricenew = g.clean(request.POST.get('carpricenew'))
+            post.car_enginesize = f.clean(request.POST.get('carenginesize'))
+            post.car_fuelsystem = f.clean(request.POST.get('carfuelsystem'))
+            post.car_tankcapacity = f.clean(request.POST.get('cartankcapacity'))
+            post.car_power = f.clean(request.POST.get('carpower'))
+            post.car_seatingcapacity = g.clean(request.POST.get('carseatingcapacity'))
+            post.car_standardtransmission = f.clean(request.POST.get('carstandardtransmission'))
+            post.car_bodytype = f.clean(request.POST.get('carbodytype'))
+            post.car_drive = f.clean(request.POST.get('cardrive'))
+            post.car_wheelbase = f.clean(request.POST.get('wheelbase'))
+            post.save()
+            return render(request,'testApp/carstaff.html')
     carInfo = Cars.objects.filter(id=car_id)
     context = {'CarInfo': carInfo}
-    return render(request, 'testApp/showcaroriginal.html', context)
+    return render(request, 'testApp/carstaff.html', context)
 
 
 def contactUs(request):
