@@ -1,44 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-	<meta charset="UTF-8">
+    {% include "../includes/HTMLOpener.html" %}
 	<title> Car Information </title>
-	<link href="./public/css/navbar-style.css" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet">
-    </head>
-
-    <body>
-	<header>
-	    <div class="topnav"> <img src="./public/images/NewCarLogo.png"
-        alt="logo" class="logo">
-	    <nav>
-		<ul class="menu-main">
-		    <li><a href="#"> Home </a></li>
-		    <li><a href="#"> Locations </a></li>
-		    <li><a href="#"> Hire Cars </a></li>
-		    <li><a href="#"> Help </a>
-          <div class="menu-sub">
-            <ul>
-              <li><a href="#"> FAQ </a></li>
-      				<li><a href="#"> Contact Us </a></li>
-            </ul>
-          </div>
-		    <li><a href="#"> EN </a></li>
-		    <li><a href="#"> <i class="material-icons"
-          style="vertical-align:middle">person_outline</i>Sign In </a>
-		    	<div class="menu-sub">
-			    <ul>
-				<li><a href="#"> Sign In </a></li>
-				<li><a href="#"> Create New Account </a></li>
-			    </ul>
-			</div>
-		    </li>
-		</ul>
-	    </nav>
-	    </div>
-	</header>
+    {% load static %}
+    <link href="{% static "testApp/css/navbar-style.css" %}" rel="stylesheet" type="text/css">
+	{% include "../includes/Header.html" %}
 
 	<section>
     <h1 align="center" style="padding-top:20px;"> Example Car </h1> <!-- This
@@ -72,10 +36,10 @@
 <!-- Need to fix this as it doesn't quite align in the center, align is
 not working?? -->
       <a href="" class="btn" style="margin-left:50%"> Reserve now! </a>
- 
- 
- 
- 
+
+
+
+
 <!----------------------------------------------------------------->
     <!--Mike addon codes starts from here-->
     <div class="row">
@@ -126,15 +90,4 @@ not working?? -->
 
 	</section>
 
-	<footer>
-	    <div class="footer-main">
-		<nav>
-		    <ul>
-			<li><a href="#">Need help?</a></li>
-		    </ul>
-		</nav>
-	    </div>
-	</footer>
-
-	</body>
-</html>
+	{% include "../includes/footer.html"%}
