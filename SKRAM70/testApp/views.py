@@ -146,7 +146,7 @@ def returnPage(request):
         context = {'zippedResults': zippedResults, 'StoreList': storelist, 'counterAndNames': counterAndNames, 'graphTitle': graphTitle, 'graphType': graphType, 'startDate': startDate, 'storeIDformatted': storeIDformatted}
         if request.method == 'GET' and 'pdf' in request.GET:
             return renderPDF('testApp/pdf.html', context)
-        return render(request, 'testApp/MikeCarReturnPage.html', context)
+        return render(request, 'testApp/CarReturnsUpdatedShaleen.html', context)
     else:
         messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")

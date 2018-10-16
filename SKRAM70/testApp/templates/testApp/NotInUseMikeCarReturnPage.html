@@ -22,7 +22,7 @@
                     {% endfor %}
             ]);
 
-            var options = {'title':'{{graphTitle}}', 'width':550, 'height':400};
+            var options = {'title':'{{graphTitle}}', 'width':800, 'height':400};
             {% if graphType == 'Pie'%}
             var chart = new google.visualization.PieChart(document.getElementById('chart'));
             {% elif graphType == 'Column' %}
@@ -38,10 +38,6 @@
     <div class="row">
     <div class="column left">
     <div class = "listbox1" align="center">
-	<br>
-	<br>
-	<br>
-	<br>
 	<h2>Please select your preference</h2>
     <form action="/staffPortal/vehicleReturns" method="GET">
        	    <select name="ordering">

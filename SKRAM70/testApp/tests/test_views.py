@@ -171,7 +171,7 @@ class test_VehicleReturnsView(TestCase):
         self.client.login(username="staff", password="1234")
         response = self.client.get('/staffPortal/vehicleReturns/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'testApp/MikeCarReturnPage.html')
+        self.assertTemplateUsed(response, 'testApp/CarReturnsUpdatedShaleen.html')
 
 # class test_LogoutView(TestCase):
 #     @classmethod
@@ -261,6 +261,11 @@ class test_CarRecomView(TestCase):
         response = self.client.get('/RecommendCars')
         self.assertEqual(response.status_code, 200)
 
+    def test_Template(self):
+        self.client.login(username="customer", password="1234")
+        response = self.client.get('/RecommendCars')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'testApp/ShaleenSearchresults.html')
 
 
 ## KAUSHAL'S TEST CASES TO DO
