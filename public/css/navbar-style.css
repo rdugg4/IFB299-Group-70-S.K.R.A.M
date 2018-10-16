@@ -393,3 +393,18 @@ Car Information' page */
 }
 
 /* Google API key is AIzaSyAVArWOV0RwGEHyQPfSOFJiUsgs5E5Q_yw */
+
+/*-------------------------------------------------------------*/
+/* Mike addon CSS code starts from here*/
+input[type=text], select, textarea {
+	width: 80%;
+    padding: 10px; /* Some padding */
+    border: 2px solid #ccc; /* Gray border */
+    border-radius: 8px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 5px; /* Add a top margin */
+    margin-bottom: 10px; /* Bottom margin */
+    resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
+	text-align: left;
+
+}
