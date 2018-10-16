@@ -177,11 +177,10 @@ class test_EditCustomersView(TestCase):
 
 
     def test_LoggedOut(self):
-        response = self.client.post('/editUser')
+        response = self.client.post('/editUser/')
         self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
 
     def test_LoggedInAsCustomer(self):
         self.client.login(username="customer", password="customer")
-        response = self.client.post('/editUser')
+        response = self.client.post('/editUser/')
         self.assertEqual(response.status_code, 200)
-        

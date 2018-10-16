@@ -28,7 +28,7 @@ def index(request):
 def detail(request, car_id):
     carInfo = Cars.objects.filter(id=car_id)
     context = {'CarInfo': carInfo}
-    
+
     if not UserVerification.StaffLoggedIn(request):
         return render(request, 'testApp/showcaroriginal.html', context)
     #userProfile = Profile.objects.get(user = request.user)
