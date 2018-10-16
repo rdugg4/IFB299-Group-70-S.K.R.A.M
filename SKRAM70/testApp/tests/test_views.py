@@ -62,7 +62,7 @@ class test_searchResultsView(TestCase):
             car_fuelsystem = 'fuelsystem {carid}',
             car_tankcapacity = 'tankcapacity {carid}',
             car_power = 'power {carid}',
-            car_seatingcapacity = carid,
+            car_seatingcapacity = 6,
             car_standardtransmission = 'Standardtransmission {carid}',
             car_bodytype = 'hatchback {carid}',
             car_drive = '4WD',
@@ -157,3 +157,31 @@ class test_CarPopularityView(TestCase):
         response = self.client.get('/staffPortal/CarPopularity/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/testCarpopularity.html')
+
+class test_EditCustomersView(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Customers.objects.create(name='Kaushal Kishorbhai Limbasiya',
+        phone = 1234567890,
+        dob = 19970909,
+        email = 'abcd@gmail.com',
+        password = 'abcd1234')
+
+        customerUser = User.objects.create_user(username = 'customer', email = 'test@email.com', password = 'customer')
+        customer_group, created = Group.objects.get_or_create(name = 'customer_group')
+        customer_group.user_set.add(customerUser)
+
+        for customerObject in Customers.objects.all():
+            Profile.objects.create(user = customerUser, customerid = customerObject)
+
+
+
+    def test_LoggedOut(self):
+        response = self.client.post('/editUser')
+        self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+    def test_LoggedInAsCustomer(self):
+        self.client.login(username="customer", password="customer")
+        response = self.client.post('/editUser')
+        self.assertEqual(response.status_code, 200)
+        

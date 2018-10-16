@@ -105,7 +105,7 @@ def accounts(request):
 
 def editUser(request):
     if not UserVerification.CustomerLoggedIn(request):
-        return redirect("/")
+        return redirect("/accounts/login/")
     userProfile = Profile.objects.get(user = request.user)
     post = Customers.objects.get(pk = userProfile.customerid_id)
     if request.method == 'POST':
