@@ -5,8 +5,8 @@ from django.contrib.auth.models import User, Group
 from django.contrib.messages import get_messages
 from testApp.create_users.CreateTestUsers import *
 
+# Complete
 class test_indexView(TestCase):
-
     def test_Location(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
@@ -44,6 +44,7 @@ class test_searchResultsView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/ShaleenSearchresults.html')
 
+# Complete
 class test_StaffPortalView(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -57,7 +58,12 @@ class test_StaffPortalView(TestCase):
         self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
 
     def test_LoggedInCustomer(self):
+        self.client.login(username="customer", password="1234")
         response = self.client.post('/staffPortal')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged in to access that page')
+        self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
 
     def test_LoggedInStaff(self):
         self.client.login(username="staff", password="1234")
@@ -75,6 +81,7 @@ class test_StaffPortalView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/MikeStaffHomePage.html')
 
+# Complete
 class test_FAQView(TestCase):
     def test_Location(self):
         response = self.client.get('/FrequentlyAskedQuestions')
@@ -120,6 +127,141 @@ class test_CarPopularityView(TestCase):
         response = self.client.get('/staffPortal/CarPopularity/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/testCarpopularity.html')
+
+class test_ContactUsView(TestCase):
+    def test_Location(self):
+        response = self.client.post('/ContactUs')
+        self.assertEqual(response.status_code, 200)
+
+    def test_Template(self):
+        response = self.client.post('/ContactUs')
+        self.assertTemplateUsed(response, 'testApp/MikeContactPage draft.html')
+
+class test_VehicleReturnsView(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        CreateUsers()
+
+    def test_NotLoggedIn(self):
+        response = self.client.post('/staffPortal/vehicleReturns/')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged in to access that page')
+        self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+    def test_LoggedInCustomer(self):
+        self.client.login(username="customer", password="1234")
+        response = self.client.post('/staffPortal/vehicleReturns/')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged in to access that page')
+        self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+    def test_LoggedInStaff(self):
+        self.client.login(username="staff", password="1234")
+        response = self.client.get('/staffPortal/vehicleReturns/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_LoggedInBM(self):
+        self.client.login(username="BM", password="1234")
+        response = self.client.get('/staffPortal/vehicleReturns/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_Template(self):
+        self.client.login(username="staff", password="1234")
+        response = self.client.get('/staffPortal/vehicleReturns/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'testApp/MikeCarReturnPage.html')
+
+# class test_LogoutView(TestCase):
+#     @classmethod
+#     def setUpTestData(cls):
+#         CreateUsers()
+#
+#     def test_loggedIn(self):
+#         self.client.login(username="staff", password="1234")
+#         response = self.client.post('/successfulLogin')
+#         messages = list(get_messages(response.wsgi_request))
+#         self.assertEqual(len(messages), 1)
+#         self.assertEqual(str(messages[0]), 'Logged Out')
+#         self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+#
+#     def test_NotLoggedIn(self):
+
+
+class test_SuccessfulLogin(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        CreateUsers()
+
+    def test_LoggedInStaff(self):
+        self.client.login(username="staff", password="1234")
+        response = self.client.post('/successfulLogin')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Login successful')
+        self.assertRedirects(response, '/staffPortal', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+    def test_LoggedInBM(self):
+        self.client.login(username="BM", password="1234")
+        response = self.client.post('/successfulLogin')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Login successful')
+        self.assertRedirects(response, '/staffPortal', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+    def test_LoggedInCustomer(self):
+        self.client.login(username="customer", password="1234")
+        response = self.client.post('/successfulLogin')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Login successful')
+        self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+class test_LocationsView(TestCase):
+    def test_Location(self):
+        response = self.client.post('/Locations')
+        self.assertEqual(response.status_code, 200)
+
+    def test_Template(self):
+        response = self.client.post('/Locations')
+        self.assertTemplateUsed(response, 'testApp/LocationsPage.html')
+
+    # This section needs to be done
+    # def test_context(self):
+
+class test_CarRecomView(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        CreateUsers()
+
+    def test_NotLoggedInCustomer(self):
+        response = self.client.post('/RecommendCars')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged in to access that page')
+        self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+        self.client.login(username="staff", password="1234")
+        response = self.client.post('/RecommendCars')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged in to access that page')
+        self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+        self.client.login(username="BM", password="1234")
+        response = self.client.post('/RecommendCars')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged in to access that page')
+        self.assertRedirects(response, '/accounts/login/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+    def test_LoggedInCustomer(self):
+        self.client.login(username="customer", password="1234")
+        response = self.client.get('/RecommendCars')
+        self.assertEqual(response.status_code, 200)
+
+
 
 ## KAUSHAL'S TEST CASES TO DO
 class test_EditCustomersView(TestCase):

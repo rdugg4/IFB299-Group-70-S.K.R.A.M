@@ -162,8 +162,9 @@ def search(request):
     return render(request, 'testApp/ShaleenSearchresults.html', context)
 
 def logoutView(request):
+    messages.add_message(request, messages.SUCCESS, 'Logged Out')
     logout(request)
-    return redirect('/ContactUs')
+    return redirect('/')
 
 def successfulLogin(request):
     messages.add_message(request, messages.SUCCESS, 'Login successful')
@@ -182,9 +183,9 @@ def carRecomView(request):
     if UserVerification.CustomerLoggedIn(request):
         resultantCars = carSets.reccomendCars(request)
         storelist = Stores.objects.all()
-        paginator = Paginator(resultantCars, 10)
-        page = 2
-        resultantCars = paginator.get_page(page)
+        # paginator = Paginator(resultantCars, 10)
+        # page = 2
+        # resultantCars = paginator.get_page(page)
         context = {'resultantCars': resultantCars, 'StoreList': storelist}
         return render(request, 'testApp/ShaleenSearchresults.html', context)
     else:
