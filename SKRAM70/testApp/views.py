@@ -26,13 +26,15 @@ def index(request):
     return render(request, 'testApp/AlanaCustomerHomepage.html', context)
 
 def detail(request, car_id):
+    carInfo = Cars.objects.filter(id=car_id)
+    context = {'CarInfo': carInfo}
+    
     if not UserVerification.StaffLoggedIn(request):
-         return redirect("/showcaroriginal.html")
-    userProfile = Profile.objects.get(user = request.user)
+        return render(request, 'testApp/showcaroriginal.html', context)
+    #userProfile = Profile.objects.get(user = request.user)
     post = Cars.objects.get(pk = car_id)
     if request.method == 'POST':
         if (request.POST.get('carname') and request.POST.get('carmodel') and request.POST.get('carseries') and request.POST.get('carseriesyear') and request.POST.get('carpricenew') and request.POST.get('carenginesize') and request.POST.get('carfuelsystem') and request.POST.get('cartankcapacity') and request.POST.get('carpower') and request.POST.get('carseatingcapacity') and request.POST.get('carstandardtransmission') and request.POST.get('carbodytype') and request.POST.get('cardrive') and request.POST.get('wheelbase')):
-            #post = Cars()
             f = forms.CharField()
             g = forms.IntegerField()
             post.car_makename = f.clean(request.POST.get('carname'))
@@ -50,7 +52,7 @@ def detail(request, car_id):
             post.car_drive = f.clean(request.POST.get('cardrive'))
             post.car_wheelbase = f.clean(request.POST.get('wheelbase'))
             post.save()
-            return render(request,'testApp/carstaff.html')
+            #return render(request,'testApp/carstaff.html')
     carInfo = Cars.objects.filter(id=car_id)
     context = {'CarInfo': carInfo}
     return render(request, 'testApp/carstaff.html', context)
@@ -108,7 +110,6 @@ def editUser(request):
     post = Customers.objects.get(pk = userProfile.customerid_id)
     if request.method == 'POST':
         if (request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email')):
-            # post = Customers()
             f = forms.CharField()
             post.name = f.clean(request.POST.get('Name'))
             post.phone = f.clean(request.POST.get('Phone'))
