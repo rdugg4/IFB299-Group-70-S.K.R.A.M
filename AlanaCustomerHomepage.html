@@ -46,14 +46,14 @@
 <!-- Search section goes here -->
 		<section>
 			<div class="row">
-				<h1 align="center" style="margin-top:8%;"> Start Your Search
+				<h1 align="center" style="margin-top:3%;"> Start Your Search
 					Here </h1>
 					<form action="/action_page.php" target="_blank">
 						<input type="text" name="pickup"
 						placeholder="Enter Pick Up Location Here" class="inputsearch">
 						<br>
-						<p class="droptext"> Drop off location is same as pick up? <input type="checkbox"
-						name="dropoff" value="droplocation"></p>
+						<!-- <p class="droptext"> Drop off location is same as pick up? <input type="checkbox"
+						name="dropoff" value="droplocation"></p> -->
 					<!-- Don't know how to make this checked by default? Also if this
 					isn't checked another box will have to appear
 					asking for drop off location (same as pick up). Maybe consider
@@ -66,12 +66,12 @@
 			<div class="row">
 				<div class="leftcolumn">
 					<h2 class="datetext">Pick Up Date:</h2>
-					<input type="date" name="pickdate"><br>
+					<input type="date" name="pickupDate"><br>
 				</div>
 
 				<div class="rightcolumn">
 					<h2 class="datetext">Drop Off Date:</h2>
-					<input type="date" name="dropdate">
+					<input type="date" name="dropoffDate">
 					<!-- drop off date should have an error message if the date is before
 					pick up -->
 				</div>
@@ -82,6 +82,48 @@
 			</div>
 		</section>
 
+		<div class="row">
+			<h1 class="datetext" align="center"> Advanced Search Options </h1>
+		</div>
+
+		<div class="row">
+			<div class="leftcolumn">
+				number of seats:<br>
+					<select class="advsearch" name="seats">
+							<option value="3">below 4</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8 and above</option>
+					</select>
+					<br>
+					Make of car:<br>
+					<input type="text" name="makeOfCar" class="advsearch">
+					<br>
+					Model of car:<br>
+					<input type="text" name="carModel" class="advsearch">
+					<br>
+				</div>
+
+				<div class="rightcolumn">
+					Body type:<br>
+					<input type="text" name="bodyType" class="advsearch">
+					<br>
+					Drive:<br>
+					<select name="driveType" class="advsearch">
+							<option value="4WD">4WD</option>
+							<option value="FWD">FWD</option>
+							<option value="RWD">RWD</option>
+					</select>
+					<br>
+				</div>
+			</form>
+		</div>
+
+		<div class="row">
+			<input type="submit" value="Search" class="submitbtn">
+		</div>
 
 		<footer>
 			<div class="footer-main">
