@@ -272,7 +272,13 @@ class test_CarRecomView(TestCase):
 class test_EditCustomersView(TestCase):
     @classmethod
     def setUpTestData(cls):
-        CreateUsers()
+        Customers.objects.create(name = 'Kaushal',
+        phone = '1234567890',
+        address = 'nvdfkvnk vksvb k',
+        dob = 19970606,
+        occupation = 'student',
+        gender = 'M',
+        email = 'abc@email.com')
 
     def test_LoggedOut(self):
         response = self.client.post('/editUser/')
@@ -282,6 +288,16 @@ class test_EditCustomersView(TestCase):
         self.client.login(username="customer", password="1234")
         response = self.client.post('/editUser/')
         self.assertEqual(response.status_code, 200)
+
+    def test_Context(self):
+        customersDB = Customers.objects.get(Customers.customerid_id)
+        response = self.client.get('/editUser/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('editUser' in response.context)
+        self.assertEqual(response.context['editUser'].count(), 1)
+        for customer in response.context['editUser']:
+            self.assertEqual(customer.id, customersDB.id)
+
 
 class test_carDetailView(TestCase):
     @classmethod
