@@ -46,7 +46,7 @@ class CarPopularity(object):
                 i = 0
                 while i < splitNumber:
                     carGroups.append(carsWithAnnotation.filter(car_pricenew__gte = (minimumPrice + i*splitSize), car_pricenew__lt = (minimumPrice + i*splitSize + splitSize)))
-                    setNames.append(str(minimumPrice + i*splitSize) + "-" + str(minimumPrice + i*splitSize + splitSize))
+                    setNames.append("$" + str(minimumPrice + i*splitSize) + "-$" + str(minimumPrice + i*splitSize + splitSize))
                     i = i + 1
             elif catagory == 'driveType':
                 graphTitle = graphTitle + ' divided into drive type groups'
