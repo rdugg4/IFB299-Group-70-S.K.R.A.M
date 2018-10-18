@@ -53,6 +53,9 @@
 
 			<div class="row">
 				<div class="leftcolumn">
+					<!-- This is the list of locations separated by state, hard coded
+					for the moment to test markers in google maps however will need
+					to be pulled from the database -->
 					<button class="accordion"> ACT </button>
 					<div class="panel">
 						<br>
@@ -64,8 +67,11 @@
 					<button class="accordion"> NSW </button>
 					<div class="panel">
 						<br>
-						<p> 223 Anzac Parade, <br>
-							Kensington NSW 2033 </p>
+						<p> 5844 Linden Land, <br>
+							Darlinghurst NSW </p>
+						<br>
+						<p> 4785 Scott Street, <br>
+							Port Macquarie NSW </p>
 						<br>
 					</div>
 
@@ -80,8 +86,8 @@
 					<button class="accordion"> QLD </button>
 					<div class="panel">
 						<br>
-						<p> 2 George St, <br>
-							Brisbane QLD 4000 </p>
+						<p> 7832 Landing Dr, <br>
+							Brisbane QLD </p>
 						<br>
 					</div>
 
@@ -121,7 +127,7 @@
 
 				<div class="rightcolumn">
 					<!-- Google maps goes here -->
-					<div id="googleMap" style="width:100%;height:500px;"></div>
+					<div id="map" style="width:100%; height:500px;"></div>
 
 						<!-- <script>
 						function myMap() {
@@ -133,52 +139,60 @@
 						}
 						</script> -->
 
-						<script>
-function myMap() {
-  var myCenter = new google.maps.LatLng(-27.477376, 153.028169);
-  var mapCanvas = document.getElementById("googleMap");
-  var mapOptions = {center: myCenter, zoom: 5};
-  var map = new google.maps.Map(mapCanvas, mapOptions);
-  var marker = new google.maps.Marker({position:myCenter});
-  marker.setMap(map);
+<!-- This is how to transform address into lat & lng co-ordinates
+Need to add to list possibly after execution?? -->
+
+<!-- <script>
+function geocodeAddress (geocoder, resultsMap) {
+	var address = document.getElementById('address').value;
+	geocoder.geocode({'address': address}, function(results, status) {
+		if (status === 'OK') {
+			resultsMap.setCenter(results[0].geometry.location);
+			var marker = new google.maps.Marker({
+				map: resultsMap,
+				position: results[0].geometry.location
+			});
+		} else {
+			alert('Geocode was not successful for the following reason: ' + status);
+		}
+	})
 }
-</script>
+</script> -->
 
+	<script>
+	function myMap() {
+     var locations = [
+       ['Canberra', -35.277736, 149.120668, 4],
+       ['Sydney', -33.918416, 151.225770, 5],
+       ['Darwin', -12.372265, 130.868820, 3],
+       ['Brisbane', -27.477376, 153.028169, 2],
+       ['Adelaide', -34.924787, 138.595701, 1]
+     ];
 
+     var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: new google.maps.LatLng(-27.47, 153.02),
+      });
 
-				<!--	 <script>
-//     var locations = [
-//       ['Canberra', -35.277736, 149.120668, 4],
-//       ['Sydney', -33.918416, 151.225770, 5],
-//       ['Darwin', -12.372265, 130.868820, 3],
-//       ['Brisbane', -27.477376, 153.028169, 2],
-//       ['Adelaide', -34.924787, 138.595701, 1]
-//     ];
-//
-//     var map = new google.maps.Map(document.getElementById('googleMap'), {
-//        zoom: 10,
-//        center: new google.maps.LatLng(-27.47, 153.02),
-//        mapTypeId: google.maps.MapTypeId.ROADMAP
-//      });
-//
-//     var infowindow = new google.maps.InfoWindow();
-//
-//     var marker, i;
-//
-//     for (i = 0; i < locations.length; i++) {
-//       marker = new google.maps.Marker({
-//         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-//         map: map
-//       });
-//
-//       google.maps.event.addListener(marker, 'click', (function(marker, i) {
-//         return function() {
-//           infowindow.setContent(locations[i][0]);
-//           infowindow.open(map, marker);
-//         }
-//       })(marker, i));
-//     }
-//   </script> -->
+     var infowindow = new google.maps.InfoWindow();
+
+     var marker, i;
+
+     for (i = 0; i < locations.length; i++) {
+       marker = new google.maps.Marker({
+         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         map: map
+       });
+
+       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+         return function() {
+           infowindow.setContent(locations[i][0]);
+           infowindow.open(map, marker);
+         }
+       })(marker, i));
+     }
+	 }
+   </script> -->
 
 						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVArWOV0RwGEHyQPfSOFJiUsgs5E5Q_yw&callback=myMap">
 						</script>
