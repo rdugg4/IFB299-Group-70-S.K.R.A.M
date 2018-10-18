@@ -167,29 +167,17 @@ input[type=Update]:hover {
 
 /* Add a background color and some padding around the form */
 .container {
-	text-align: left;
+	text-align: center;
     border-radius: 8px;
-    padding: 40px;
+    padding: 20px;
 	width: 1000px;
     /* Change this value to customize the content area*/
     margin: 0 auto;
 }
 
-/* Create two columns here */
-.column {
-	box-sizing: border-box;
-    float: left;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
-}
 
-.left {
-  width: 50%;
-}
 
-.right {
-  width: 50%;
-}
+
 
 /* Clear floats */
 .row:after {
