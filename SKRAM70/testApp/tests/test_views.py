@@ -143,7 +143,7 @@ class test_CarPopularityView(TestCase):
         self.client.login(username="BM", password="1234")
         response = self.client.get('/staffPortal/CarPopularity/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'testApp/testCarpopularity.html')
+        self.assertTemplateUsed(response, 'testApp/CarpopularityupdatedShaleen.html')
 
     def test_Context(self):
         self.client.login(username="BM", password="1234")
@@ -227,7 +227,7 @@ class test_VehicleReturnsView(TestCase):
         self.assertIsInstance(graphTitle, str)
         self.assertIsInstance(graphType, str)
         self.assertIsInstance(counterAndNames, zip)
-        self.assertIsInstance(zippedResults, zip)
+        self.assertIsInstance(zippedResults, list)
         self.assertIsInstance(startDate, str)
         self.assertIsInstance(storeIDformatted, str)
 
@@ -246,7 +246,7 @@ class test_VehicleReturnsView(TestCase):
         self.assertIsInstance(graphTitle, str)
         self.assertIsInstance(graphType, str)
         self.assertIsInstance(counterAndNames, zip)
-        self.assertIsInstance(zippedResults, zip)
+        self.assertIsInstance(zippedResults, list)
         self.assertIsInstance(startDate, str)
         self.assertIsInstance(storeIDformatted, str)
 

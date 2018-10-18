@@ -196,7 +196,7 @@ def CarPopularityView(request):
     if UserVerification.BoardMemberLoggedIn(request):
         counterAndNames, graphTitle, graphType = CarPopularity.CountCars(request)
         context = {'counterAndNames': counterAndNames, 'graphTitle': graphTitle, 'graphType': graphType}
-        return render(request, 'testApp/testCarpopularity.html', context)
+        return render(request, 'testApp/CarpopularityupdatedShaleen.html', context)
     else:
         messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")

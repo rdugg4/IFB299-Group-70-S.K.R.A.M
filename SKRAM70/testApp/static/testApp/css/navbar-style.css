@@ -305,6 +305,15 @@ Car Information' page */
 	width: 50%;
 }
 
+.advsearch {
+	padding: 10px;
+	border: none;
+	margin-top: 8px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	width: 20%;
+}
+
 .datetext {
 	color: steelblue;
 	font-size: 16px;
