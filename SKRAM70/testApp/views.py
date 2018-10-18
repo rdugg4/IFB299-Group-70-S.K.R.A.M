@@ -109,17 +109,17 @@ def editUser(request):
     userProfile = Profile.objects.get(user = request.user)
     post = Customers.objects.get(pk = userProfile.customerid_id)
     if request.method == 'POST':
-        if (request.POST.get('Name') and request.POST.get('Phone') and request.POST.get('Address') and request.POST.get('DOB') and request.POST.get('Occupation') and request.POST.get('Gender') and request.POST.get('Email')):
+        if (request.POST.get('firstname') and request.POST.get('Middlename') and request.POST.get('Lastname') and request.POST.get('Phonenumber') and request.POST.get('Homeaddress') and request.POST.get('Homeaddress2') and request.POST.get('Homeaddress3') and request.POST.get('DOB') and request.POST.get('youremail') and request.POST.get('Gender') ):
             f = forms.CharField()
-            post.name = f.clean(request.POST.get('Name'))
-            post.phone = f.clean(request.POST.get('Phone'))
-            post.address = f.clean(request.POST.get('Address'))
+            post.name = (f.clean(request.POST.get('firstname')) + ' ' + f.clean(request.POST.get('Middlename')) + ' ' + f.clean(request.POST.get('Lastname')))
+            post.phone = f.clean(request.POST.get('Phonenumber'))
+            post.address = (f.clean(request.POST.get('Homeaddress')) + ' ' + f.clean(request.POST.get('Homeaddress2')) + ' ' + f.clean(request.POST.get('Homeaddress3')))
             post.dob = f.clean(request.POST.get('DOB'))
             post.occupation = f.clean(request.POST.get('Occupation'))
             post.gender = f.clean(request.POST.get('Gender'))
-            post.email = f.clean(request.POST.get('Email'))
+            post.email = f.clean(request.POST.get('youremail'))
             post.save()
-            return render(request,'testApp/NotInUsesignup.html')
+            return render(request,'testApp/MikeUserLandingPage.html')
     dob = post.dob
     if len(post.dob) == 9:
         if int(dob[6:8]) < 20:
@@ -128,7 +128,7 @@ def editUser(request):
             dob = "19" + dob[6:8] + "-" + dob[3:5] + "-" + dob[0:2]
 
     context = {'customer': post, 'dob': dob}
-    return render(request,'testApp/NotInUsesignup.html', context)
+    return render(request,'testApp/MikeUserLandingPage.html', context)
 
 def staffPortal(request):
     if UserVerification.StaffLoggedIn(request):

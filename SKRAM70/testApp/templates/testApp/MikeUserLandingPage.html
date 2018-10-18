@@ -9,25 +9,35 @@
  <div class="column left">
 <div class="container">
   <H1><strong>Greetings!</strong></H1>
-     <label for="FullName"><b>Sydney B</b><br></label>
+     <label for="FullName"><b>Jacquelyn S</b><br></label>
          <label for="CustomerIDText">Customer ID: </label>
-    	 <label for="CustomerID">11014</label>
+    	 <label for="CustomerID">11010</label>
      <br>
       <label for="Firstname"><br>First Name<br></label>
-      <input type="text" id="fname" name="firstname" placeholder="Please type your First name">
+      <input type="text" id="fname" name="firstname" placeholder="Please type your First name" maxlength="225" value="{{customer.name}}" required>
       <label for="Middlename"><br>Middle Name<br></label>
       <input type="text" id="Mname" name="Middlename" placeholder="Please type your Middle name (optional)">
       <label for="Lastname"><br>Last Name<br></label>
       <input type="text" id="Lname" name="Lastname" placeholder="Please type your last name">
 
-      <label for="Gender"><br>Gender<br></label>
+      <!-- <label for="Gender"><br>Gender<br></label>
       <select>
   			<option value="Daily">Male</option>
   			<option value="Weekly">Female</option>
-	  </select>
+	  </select> -->
+
+
+	  <label for="gender"><br>Gender<br></label>
+    <input id="gender" type="radio" name="Gender" value="M" maxlength="3"> Male<br>
+    {%if customer.gender == M%}
+    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" > Female
+    {%else%}
+    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" checked = "checked" > Female
+    {%endif%}
+    <br>
 
       <label for="DOB"><br>Date of Birth<br></label>
-	  <input type="date" placeholder="Birth Date">
+	  <input type="date" placeholder="Birth Date" name="DOB" maxlength="20" value = "{{customers.dob}}" required>
 	  <br>
 
       <label for="Email"><br>Email address<br></label>
@@ -49,11 +59,11 @@
 
 
 	  <label for="HomeAddress"><br>Home Address<br></label>
-      <input type="text" id="Haddress" name="Homeaddress" placeholder="Please type your Home address">
+      <input type="text" id="Haddress" name="Homeaddress" placeholder="Please type your Home address" maxlength="255" value="{{customer.address}}" required>
       <input type="text" id="Haddress2" name="Homeaddress2" placeholder="Optional">
       <input type="text" id="Haddress3" name="Homeaddress3" placeholder="Optional">
       <label for="Phonenumber"><br>Phone number<br></label>
-	  <input type="text" id="Pnumber" name="Phonenumber" placeholder="Please type your phone number">
+	  <input type="text" id="Pnumber" name="Phonenumber" placeholder="Please type your phone number" maxlength="20" value="{{customer.phone}}" required>
 	<br>
 	<H2><i>Vehicle preference</i></H2>
 	 <label for="Typecar"><br>please select what type of cars you prefer<br></label>
