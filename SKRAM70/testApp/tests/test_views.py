@@ -343,13 +343,7 @@ class test_CarRecomView(TestCase):
 class test_EditCustomersView(TestCase):
     @classmethod
     def setUpTestData(cls):
-        Customers.objects.create(name = 'Kaushal',
-        phone = '1234567890',
-        address = 'nvdfkvnk vksvb k',
-        dob = 19970606,
-        occupation = 'student',
-        gender = 'M',
-        email = 'abc@email.com')
+        CreateUsers()
 
     def test_LoggedOut(self):
         response = self.client.post('/editUser/')
@@ -357,18 +351,29 @@ class test_EditCustomersView(TestCase):
 
     def test_LoggedInAsCustomer(self):
         self.client.login(username="customer", password="1234")
-        response = self.client.post('/editUser/')
+        response = self.client.get('/editUser/')
         self.assertEqual(response.status_code, 200)
 
     def test_Context(self):
-        customersDB = Customers.objects.all()
+        self.client.login(username="customer", password="1234")
         response = self.client.get('/editUser/')
-        self.assertIsInstance(response.context['editUser'], Queryset)
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('editUser' in response.context)
-        self.assertEqual(response.context['editUser'].count(), 1)
-        for customer in response.context['customer']:
-            self.assertEqual(customer.id, customersDB.id)
+        customer = response.context['customer']
+        dob = response.context['dob']
+        self.assertIsInstance(customer, Customers)
+        self.assertIsInstance(dob, str)
+
+    
+    def test_LoggedInAsBM(self):
+        self.client.login(username="BM", password="1234")
+        response = self.client.get('/accounts/login/')
+        self.assertEqual(response.status_code, 200)
+
+    
+    def test_LoggedInAsStaff(self):
+        self.client.login(username="staff", password="1234")
+        response = self.client.get('/accounts/login/')
+        self.assertEqual(response.status_code, 200)
 
 
 class test_carDetailView(TestCase):
