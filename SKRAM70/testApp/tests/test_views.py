@@ -14,7 +14,7 @@ class test_indexView(TestCase):
 
     def test_Template(self):
         response = self.client.get('/')
-        self.assertTemplateUsed(response, 'testApp/AlanaCustomerHomepage.html')
+        self.assertTemplateUsed(response, 'testApp/AlanaCustomerHomepageUpdated.html')
 
 class test_searchResultsView(TestCase):
     @classmethod
@@ -363,13 +363,13 @@ class test_EditCustomersView(TestCase):
         self.assertIsInstance(customer, Customers)
         self.assertIsInstance(dob, str)
 
-    
+
     def test_LoggedInAsBM(self):
         self.client.login(username="BM", password="1234")
         response = self.client.get('/accounts/login/')
         self.assertEqual(response.status_code, 200)
 
-    
+
     def test_LoggedInAsStaff(self):
         self.client.login(username="staff", password="1234")
         response = self.client.get('/accounts/login/')
