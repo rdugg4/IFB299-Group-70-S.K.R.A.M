@@ -1,19 +1,25 @@
-<!-- templates/registration/login.html -->
-<head>
-    {% if messages %}
-        {% for message in messages %}
-        <script type="text/javascript">
-        function popupMessage() {
-            alert("{{ message }}");
-        }
-        window.onload = popupMessage;
-        </script>
-        {% endfor %}
-    {% endif %}
-    </head>
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
+{% include "../includes/HTMLOpener.html" %}
+<title> Login </title>
+{% load static %}
+<link href="{% static "testApp/css/login.css" %}" rel="stylesheet" type="text/css">
+{% include "../includes/Header.html" %}
+<div id="resultbox">
+    <div id=loginbox>
+        <h2>Login to your account</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="Your Email"><br>Email:<br></label>
+            {{ form.username.errors }}
+            {{ form.username }}
+            <br>
+            <label><br>Password:<br></label>
+            {{ form.password.errors }}
+            {{ form.password }}
+            <br>
+            <br>
+            <button type="submit" class="submit"> Login </button>
+        </form>
+    </div>
+</div>
+
+{% include "../includes/footer.html"%}
