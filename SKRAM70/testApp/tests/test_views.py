@@ -290,12 +290,13 @@ class test_EditCustomersView(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_Context(self):
-        customersDB = Customers.objects.get(Customers.customerid_id)
+        customersDB = Customers.objects.all()
         response = self.client.get('/editUser/')
+        self.assertIsInstance(response.context['editUser'], Queryset)
         self.assertEqual(response.status_code, 200)
         self.assertTrue('editUser' in response.context)
         self.assertEqual(response.context['editUser'].count(), 1)
-        for customer in response.context['editUser']:
+        for customer in response.context['customer']:
             self.assertEqual(customer.id, customersDB.id)
 
 
