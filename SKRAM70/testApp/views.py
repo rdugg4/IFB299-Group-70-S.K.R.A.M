@@ -23,7 +23,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 def index(request):
     storelist = Stores.objects.all()
     context = {'StoreList': storelist}
-    return render(request, 'testApp/AlanaCustomerHomepage.html', context)
+    return render(request, 'testApp/AlanaCustomerHomepageUpdated.html', context)
 
 def detail(request, car_id):
     carInfo = Cars.objects.filter(id=car_id)
