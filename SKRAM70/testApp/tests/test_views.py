@@ -414,3 +414,8 @@ class test_CreateAccountView(TestCase):
     @classmethod
     def setUpTestData(cls):
         CreateUsers()
+    
+    def test_FirstnameLabel(self):
+        customer = Customers.objects.get(id = 1)
+        field_label = customer._meta.get_field('firstname').verbose_name
+        self.assertEquals(field_label, 'first name')
