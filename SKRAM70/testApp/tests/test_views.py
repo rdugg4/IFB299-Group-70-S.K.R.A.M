@@ -415,7 +415,18 @@ class test_CreateAccountView(TestCase):
     def setUpTestData(cls):
         CreateUsers()
     
-    def test_FirstnameLabel(self):
-        customer = Customers.objects.get(id = 1)
-        field_label = customer._meta.get_field('firstname').verbose_name
-        self.assertEquals(field_label, 'first name')
+
+    def test_LoggedInAsCustomer(self):
+        self.client.login(username="customer", password="1234")
+        response = self.client.get('/accounts/login/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_LoggedOut(self):
+        response = self.client.get('/accounts/login/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_Template(self):
+        # self.client.login(username="customer", password="1234")
+        response = self.client.get('/accounts/login/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'testApp/login.html')
