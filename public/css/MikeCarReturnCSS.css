@@ -219,7 +219,9 @@ td {
 }
 
 /* print button */
-input[type=submit] {
+input[type=print] {
+	text-align: center;
+	width: 20%;
     background-color: pink;
     color: white;
     padding: 10px 50px;
@@ -229,5 +231,5 @@ input[type=submit] {
 }
 
 /* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
+input[type=print]:hover {
     background-color: #AAAAAA;
