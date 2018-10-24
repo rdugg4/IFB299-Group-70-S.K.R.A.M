@@ -262,6 +262,7 @@ function geocodeAddress (geocoder, resultsMap) {
 </script> -->
 
 	<script>
+	// This is the function that implements the google map and adds markers to it
 	function myMap() {
      var locations = [
        ['Wollongong', -34.425135, 150.894603, 4],
@@ -271,6 +272,7 @@ function geocodeAddress (geocoder, resultsMap) {
        ['Adelaide', -34.924787, 138.595701, 1]
      ];
 
+// This part loads the google map and sets the default location
      var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,
         center: new google.maps.LatLng(-27.47, 153.02),
@@ -280,6 +282,7 @@ function geocodeAddress (geocoder, resultsMap) {
 
      var marker, i;
 
+// This pulls from the list of locations above to know where to place the markers
      for (i = 0; i < locations.length; i++) {
        marker = new google.maps.Marker({
          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
