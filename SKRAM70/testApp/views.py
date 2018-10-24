@@ -132,7 +132,7 @@ def editUser(request):
 
 def staffPortal(request):
     if UserVerification.StaffLoggedIn(request):
-        return render(request, 'testApp/MikeStaffHomePage.html')
+        return render(request, 'testApp/AlanaStaffHomePage.html')
     else:
         messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")
@@ -177,7 +177,7 @@ def FAQView(request):
     return render(request, 'testApp/FAQpage.html')
 
 def LocationsView(request):
-    return render(request, 'testApp/LocationsPage.html')
+    return render(request, 'testApp/AlanaLocations.html')
 
 def carRecomView(request):
     if UserVerification.CustomerLoggedIn(request):

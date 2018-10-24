@@ -243,15 +243,11 @@ Car Information' page */
 	display: inline-block;
 	text-decoration: none;
 	color: white;
-	background: steelblue;
+	background-color: #00264d;
 	padding: 1em 4em;
-	border-radius: 8px;
+	/* border-radius: 8px; */
 	margin-left:auto;
 	margin-right: auto;
-}
-
-.btn:hover {
-	background-color: royalblue;
 }
 
 .empbutton {
@@ -283,8 +279,8 @@ Car Information' page */
 }
 
 .submitbtn {
-	background-color:steelblue;
-	border: none;
+	background-color: #00264d;
+	/* border: none; */
 	color: white;
 	padding: 15px 32px;
 	text-align: center;
@@ -294,6 +290,7 @@ Car Information' page */
 	width: 15%;
 	margin-left: 43%;
 	align: center;
+	cursor: pointer;
 }
 
 .inputsearch {
@@ -386,7 +383,7 @@ Car Information' page */
 
 .accordion:after {
     content: '\002B';
-    color: #777;
+    color: white;
     font-weight: bold;
     float: right;
     margin-left: 5px;
@@ -405,23 +402,18 @@ Car Information' page */
 }
 
 .homeaccordion {
-	background-color: steelblue;
+	background-color: #00264d;
 	color: white;
 	cursor: pointer;
 	padding: 18px;
 	width: 50%;
-	border: none;
+	/* border: none; */
 	text-align: center;
 	outline: none;
 	font-size: 16px;
 	transition: 0.4s;
 	text-decoration: none;
 	margin-left: 25%;
-}
-
-
-.active, .homeaccordion:hover {
-    background-color: #ccc;
 }
 
 .homeaccordion:after {

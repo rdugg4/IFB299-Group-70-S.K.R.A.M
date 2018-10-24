@@ -8,9 +8,7 @@
 	<div class="container">
 
   <H1><strong>Contact us today!</strong></H1>
-    <ptb>
     <label for="Your Name">Name</label>
-    </ptb>
 	<form action="\ContactUs" method="post">
 	{% csrf_token %}
     <p>
@@ -28,27 +26,22 @@
 	  {{ form.question }}
 
       <label for="Thanks for submitting!">
-	</form>
-	<ptextarea>
-	</ptextarea>
 
         <br>
       </label>
 
       <input type="submit" value="Submit">
+	  	</form>
     </p>
-    <pty>
 		{% if querySuccesfullySubmitted %}
-	  	<label for="Thanks for submitting!">Thanks for submitting!</label>
+	  	<label for="Thanks for submitting!"style = "color: green">Thanks for submitting!</label>
 		{% endif %}
 		{% if failedToSubmit %}
 	  	<label for="Sorry your problem could not be submitted for some reason">
 			Sorry your problem could not be submitted for some reason
 		</label>
 		{% endif %}
-
-    </pty>
-		</form>
+		<!-- </form> -->
 </div>
 
 
