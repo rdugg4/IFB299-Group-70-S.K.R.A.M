@@ -426,7 +426,6 @@ class test_CreateAccountView(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_Template(self):
-        # self.client.login(username="customer", password="1234")
         response = self.client.get('/create_account/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/ShaleenCreateYourAccountPage.html')

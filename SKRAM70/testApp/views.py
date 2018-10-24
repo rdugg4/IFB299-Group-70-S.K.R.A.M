@@ -53,8 +53,8 @@ def detail(request, car_id):
             post.car_wheelbase = f.clean(request.POST.get('wheelbase'))
             post.save()
             #return render(request,'testApp/carstaff.html')
-    carInfo = Cars.objects.filter(id=car_id)
-    context = {'CarInfo': carInfo}
+    # carInfo = Cars.objects.filter(id=car_id)
+    # context = {'CarInfo': carInfo}
     return render(request, 'testApp/showcaroriginalMikeUpdate.html', context)
 
 
