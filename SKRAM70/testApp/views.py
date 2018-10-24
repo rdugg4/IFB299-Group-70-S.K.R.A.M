@@ -31,7 +31,6 @@ def detail(request, car_id):
 
     if not UserVerification.StaffLoggedIn(request):
         return render(request, 'testApp/showcaroriginal.html', context)
-    #userProfile = Profile.objects.get(user = request.user)
     post = Cars.objects.get(pk = car_id)
     if request.method == 'POST':
         if (request.POST.get('carname') and request.POST.get('carmodel') and request.POST.get('carseries') and request.POST.get('carseriesyear') and request.POST.get('carpricenew') and request.POST.get('carenginesize') and request.POST.get('carfuelsystem') and request.POST.get('cartankcapacity') and request.POST.get('carpower') and request.POST.get('carseatingcapacity') and request.POST.get('carstandardtransmission') and request.POST.get('carbodytype') and request.POST.get('cardrive') and request.POST.get('wheelbase')):
@@ -52,9 +51,7 @@ def detail(request, car_id):
             post.car_drive = f.clean(request.POST.get('cardrive'))
             post.car_wheelbase = f.clean(request.POST.get('wheelbase'))
             post.save()
-            #return render(request,'testApp/carstaff.html')
-    # carInfo = Cars.objects.filter(id=car_id)
-    # context = {'CarInfo': carInfo}
+            messages.add_message(request, messages.INFO, 'Succefully updated car info')
     return render(request, 'testApp/showcaroriginalMikeUpdate.html', context)
 
 
@@ -80,7 +77,7 @@ def contactUs(request):
 def accounts(request):
     if not UserVerification.LoggedIn(request):
         if request.method == "POST":
-            if (request.POST.get('firstname') and request.POST.get('middlename') and request.POST.get('lastname') and request.POST.get('tel') and request.POST.get('bday') and request.POST.get('email') and request.POST.get('Password')):
+            if (request.POST.get('firstname') and request.POST.get('lastname') and request.POST.get('tel') and request.POST.get('bday') and request.POST.get('email') and request.POST.get('Password')):
 
                 post = Customers()
                 f = forms.CharField()
@@ -94,6 +91,7 @@ def accounts(request):
                 customer_group.user_set.add(customerUser)
                 customer = Profile(user=customerUser, customerid=post)
                 customer.save()
+                messages.add_message(request, messages.INFO, 'Account successfully created, Try logging in')
                 return redirect("/")
             else:
                 return render(request,'testApp/ShaleenCreateYourAccountPage.html')
@@ -105,23 +103,26 @@ def accounts(request):
 
 def editUser(request):
     if not UserVerification.CustomerLoggedIn(request):
+        messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
         return redirect("/accounts/login/")
     userProfile = Profile.objects.get(user = request.user)
     post = Customers.objects.get(pk = userProfile.customerid_id)
     if request.method == 'POST':
-        if (request.POST.get('firstname') and request.POST.get('Middlename') and request.POST.get('Lastname') and request.POST.get('Phonenumber') and request.POST.get('Homeaddress') and request.POST.get('Homeaddress2') and request.POST.get('Homeaddress3') and request.POST.get('DOB') and request.POST.get('youremail') and request.POST.get('Gender') ):
+        if (request.POST.get('firstname') and request.POST.get('Phonenumber') and request.POST.get('Homeaddress') and request.POST.get('DOB') and request.POST.get('youremail') and request.POST.get('Gender') and request.POST.get('Occupation')):
             f = forms.CharField()
-            post.name = (f.clean(request.POST.get('firstname')) + ' ' + f.clean(request.POST.get('Middlename')) + ' ' + f.clean(request.POST.get('Lastname')))
+            post.name = f.clean(request.POST.get('firstname'))
             post.phone = f.clean(request.POST.get('Phonenumber'))
-            post.address = (f.clean(request.POST.get('Homeaddress')) + ' ' + f.clean(request.POST.get('Homeaddress2')) + ' ' + f.clean(request.POST.get('Homeaddress3')))
+            post.address = f.clean(request.POST.get('Homeaddress'))
             post.dob = f.clean(request.POST.get('DOB'))
             post.occupation = f.clean(request.POST.get('Occupation'))
             post.gender = f.clean(request.POST.get('Gender'))
             post.email = f.clean(request.POST.get('youremail'))
             post.save()
-            return render(request,'testApp/MikeUserLandingPage.html')
+            messages.add_message(request, messages.INFO, 'Succefully updated your information')
+        else:
+            messages.add_message(request, messages.INFO, 'Failed to updated your information')
     dob = post.dob
-    if len(post.dob) == 9:
+    if dob[2] == "-":
         if int(dob[6:8]) < 20:
             dob = "20" + dob[6:8] + "-" + dob[3:5] + "-" + dob[0:2]
         else:
@@ -186,7 +187,7 @@ def carRecomView(request):
         # paginator = Paginator(resultantCars, 10)
         # page = 2
         # resultantCars = paginator.get_page(page)
-        context = {'resultantCars': resultantCars, 'StoreList': storelist}
+        context = {'resultantCars': resultantCars, 'StoreList': storelist, 'PageType': True}
         return render(request, 'testApp/ShaleenSearchresults.html', context)
     else:
         messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')

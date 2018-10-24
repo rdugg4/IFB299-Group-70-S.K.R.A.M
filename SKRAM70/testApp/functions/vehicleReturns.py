@@ -97,5 +97,5 @@ class VehicleReturns(object):
 
 
         # zippedResults = zip(ordersGrouped, carInfo, customerInfo, storeInfo)
-        counterAndNames = zip(counter, setNames)
+        counterAndNames = list(zip(counter, setNames))
         return (ordersGrouped, counterAndNames, graphType, lengthOfGrouping, startDateFormattedForReturn, storeIDformatted)

@@ -1,5 +1,6 @@
 {% include "../includes/HTMLOpener.html" %}
 {% load static %}
+<title> Car Popularity </title>
 <link href="{% static "testApp/css/testCarpopularityupdatedShaleen.css" %}" rel="stylesheet" type="text/css">
 {% include "../includes/Header.html" %}
 <div class="container">
@@ -11,7 +12,7 @@
         <option value="driveType">Drive Type of Vehicle</option>
         <option value="seats" {% if "seat" in graphTitle %} selected {% endif %}>Seat Number</option>
         <option value="price" {% if "price" in graphTitle %} selected {% endif %}>Price of Car (new)</option>
-        <option value="makeName" {% if "make" in graphTitle %} selected {% endif %}>Make of Vehicle</options>
+        <option value="makeName" {% if "make" in graphTitle %} selected {% endif %}>Make of Vehicle</option>
     </select> &nbsp; &nbsp;
     Graph Type:
     <select name="Graph">

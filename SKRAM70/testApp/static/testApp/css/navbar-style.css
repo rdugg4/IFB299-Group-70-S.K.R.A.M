@@ -309,7 +309,8 @@ Car Information' page */
 	margin-top: 8px;
 	margin-bottom: 10px;
 	font-size: 12px;
-	width: 150px;
+	width: 50%;
+	margin-left: 25%;
 }
 
 .datetext {
@@ -459,4 +460,16 @@ input[type=text], select, textarea {
     resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
 	text-align: left;
 
+}
+
+input[type=date] {
+	width: 100%;
+    padding: 10px; /* Some padding */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 10px; /* Add a top margin */
+    margin-bottom: 10px; /* Bottom margin */
+    resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
+	text-align: left;
 }

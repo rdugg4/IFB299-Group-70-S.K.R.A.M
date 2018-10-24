@@ -12,31 +12,26 @@
 	 <br><br>
     	 <label for="Description"style="color: green"><b>Please edit information below and click "update" button to save changes!</b></label>
      <br>
+	 <form action = "/editUser/" method = "POST" >
+       {% csrf_token %}
       <label for="Firstname"><br>Name<br></label>
       <input type="text" id="fname" name="firstname" placeholder="Please type your First name" maxlength="225" value="{{customer.name}}" required>
 
-      <!-- <label for="Gender"><br>Gender<br></label>
-      <select>
-  			<option value="Daily">Male</option>
-  			<option value="Weekly">Female</option>
-	  </select> -->
-
-
 	  <label for="gender"><br>Gender<br></label>
-    <input id="gender" type="radio" name="Gender" value="M" maxlength="3"> Male<br>
+    <input id="gender" type="radio" name="Gender" value="M" maxlength="3"> Male </input>
     {%if customer.gender == M%}
-    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" > Female
+    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" > Female </input>
     {%else%}
-    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" checked = "checked" > Female
+    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" checked = "checked" > Female </input>
     {%endif%}
     <br>
 
       <label for="DOB"><br>Date of Birth<br></label>
-	  <input type="date" placeholder="Birth Date" name="DOB" maxlength="20" value = "{{customers.dob}}" required>
+	  <input type="date" name="DOB" maxlength="20" value="{{dob}}" required>
 	  <br>
 
       <label for="Email"><br>Email address<br></label>
-      <input type="text" disabled="disabled" id="youremail" name="youremail" placeholder="*******@***.com">
+      <input type="text" id="youremail" name="youremail" placeholder="*******@***.com" value="{{customer.email}}">
 	  <label for="HomeAddress"><br>Home Address<br></label>
       <input type="text" id="Haddress" name="Homeaddress" placeholder="Please type your Home address" maxlength="255" value="{{customer.address}}" required>
       <label for="Phonenumber"><br>Phone number<br></label>
@@ -44,38 +39,8 @@
 	  <label for="Phonenumber"><br>Occupation<br></label>
 	  <input type="text" id="Occupation" name="Occupation" placeholder="Please type your occupation" maxlength="255" value="{{customer.occupation}}" required>
 	<br>
-	<!-- <H2><i>Vehicle preference</i></H2>
-	 <label for="Typecar"><br>please select what type of cars you prefer<br></label>
-	  <select>
-  			<option value="EconomicCar">Economic</option>
-  			<option value="Sedan">Sedan</option>
-  			<option value="Classic">Classic</option>
-  			<option value="OffRoad">Off-Road</option>
-  			<option value="Coupe">Coupe</option>
-	  </select>
-	 <label for="Brand"><br>please select Your preferred brand<br></label>
-	  <select>
-  			<option value="ALFA ROMEO">ALFA ROMEO</option>
-  			<option value="AUDI">AUDI</option>
-  			<option value="BMW">BMW</option>
-  			<option value="CHRYSLER">CHRYSLER</option>
-  			<option value="DATSUN">DATSUN</option>
-  			<option value="EUNOS">EUNOS</option>
-  			<option value="HONDA">HONDA</option>
-  			<option value="LAND ROVER">LAND ROVER</option>
-  			<option value="MAZDA">MAZDA</option>
-  			<option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
-  			<option value="MITSUBISHI">MITSUBISHI</option>
-  			<option value="NISSAN">NISSAN</option>
-  			<option value="PEUGEOT">PEUGEOT</option>
-  			<option value="RENAULT">RENAULT</option>
-  			<option value="SAAB">SAAB</option>
-  			<option value="TOYOTA">TOYOTA</option>
-  			<option value="VOLKSWAGEN">VOLKSWAGEN</option>
-  			<option value="VOLVO">VOLVO</option>
-
-	  </select> -->
-	  <input type="Update" value="Update">
+	  <input type="submit" value="Update">
+	  </form>
 	  <br>
 	  <label for="Clicktip"><br><i>Click update button to save changes</i><br></label>
  </div>

@@ -150,7 +150,7 @@ input[type=text], select, textarea {
 }
 
 /* Style the submit button with a specific background color etc */
-input[type=Update] {
+input[type=submit] {
 	text-align: center;
     background-color: #00264d;
     color: white;
@@ -185,5 +185,4 @@ input[type=date] {
     margin-bottom: 16px; /* Bottom margin */
     resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
 	text-align: left;
-
 }

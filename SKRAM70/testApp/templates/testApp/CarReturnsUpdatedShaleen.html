@@ -2,7 +2,8 @@
         <title> Vechicle Return </title>
         {% load static %}
         <link rel="stylesheet" href="{% static "testApp/css/CarReturnsUpdatedShaleen.css" %}">
-        {% if graphType != 'None'%}
+
+        {% if graphType != 'None' and counterAndNames %}
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             // Load google charts

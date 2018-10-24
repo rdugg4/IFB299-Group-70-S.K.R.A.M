@@ -1,5 +1,9 @@
 {% include "../includes/HTMLOpener.html" %}
+	{% if PageType %}
+	<title> Recomended Cars </title>
+	{% else %}
 	<title> Search Results </title>
+	{% endif %}
     {% load static %}
 	<link rel="stylesheet" href="{% static "testApp/css/Searchresults.css" %}">
 	{% include "../includes/Header.html" %}
@@ -15,8 +19,13 @@
 		    <p>Tank size: {{car.car_tankcapacity}}</p>
 		    <p>{{car.car_drive}}</p>
 		    <p>{{car.car_fuelsystem}}</p>
-		    <p><a href="/CarInfo/{{ car.id }}/">[+] Vehicle Details</a></p></td>
+			{% if perms.auth.staff_member or perms.auth.board_member %}
+		    <p><a href="/CarInfo/{{ car.id }}/">[+] Edit Vehicle Details</a></p></td>
+			{% else %}
+			<p><a href="/CarInfo/{{ car.id }}/">[+] Vehicle Details</a></p></td>
+			{% endif %}
 		    <td><p><button id="reservenow" onclick="">Reserve now!</button></p></td>
+
 		</tr>
 		<td></td>
         {% empty %}

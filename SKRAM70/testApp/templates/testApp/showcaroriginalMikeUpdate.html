@@ -37,13 +37,7 @@
         <p>Wheel base: {{car.car_wheelbase}}</p>
       </div>
     </div>
-
-<!-- Need to fix this as it doesn't quite align in the center, align is
-not working?? -->
-      <a href="" class="btn" style="margin-left:50%"> Reserve now! </a>
-
-
-
+    <button type="button" href="" class="submitbtn"> Reserve now! </button>
 
 <!----------------------------------------------------------------->
     <!--Mike addon codes starts from here-->
@@ -68,8 +62,7 @@ not working?? -->
         <input id = "car_drive" type="text" placeholder="car_drive" name="cardrive" required value="{{car.car_drive}}" maxlength="3">
       </div>
         <div class ="rightcolumn">
-        <br>
-        <br>
+            <h2 style="visibility: hidden"> Text to indent correctly </h2>
         <p>Model</p>
         <input id = "car_model" type="text" placeholder="car.car_model" name="carmodel" required value="{{car.car_model}}" maxlength="255">
         <p>Series Year</p>
@@ -84,72 +77,10 @@ not working?? -->
         <input id = "car_bodytype" type="text" placeholder="car_bodytype" name="carbodytype" required value="{{car.car_bodytype}}" maxlength="255">
         <p>Wheelbase</p>
         <input id = "car_wheelbase" type="text" placeholder="car_wheelbase" name="wheelbase" required value="{{car.car_wheelbase}}" maxlength="255">
-        <input class = "btn" type="submit" value="Update">
       </div>
     </div>
-    <!-- <a href="" class="btn" style="margin-left:50%"> Update now! </a> -->
+    <input class="submitbtn" type="submit" value="Update">
     </form>
-
-    <!-- <div class="row">
-      <div class="leftcolumn">
-        <h2> Staff edit area </h2>
-        <p>Transmission</p>
-        <input id = "car_makename" type="text" placeholder="car.car_makename" name="carname" required value="{{car.car_makename}}" maxlength="255">
-      </div>
-      <div class="rightcolumn">
-        <p>Power</p>
-        <input id = "car_power" type="text" placeholder="car_power" name="carpower" required value="{{car.car_power}}" maxlength="255">
-      </div>
-    </div> -->
-
-    <!-- <form action = "/CarInfo/{{car.id}}/" method = "POST" >
-      {% csrf_token %}
-      <label for="car_makename"><b>Car make name</b></label>
-      <input id = "car_makename" type="text" placeholder="car.car_makename" name="carname" required value="{{car.car_makename}}" maxlength="255">
-      <br>
-      <label for="car_model"><b>Car Model</b></label>
-      <input id = "car_model" type="text" placeholder="car.car_model" name="carmodel" required value="{{car.car_model}}" maxlength="255">
-      <br>
-      <label for="car_series"><b>Car Series</b></label>
-      <input id = "car_series" type="text" placeholder="car_series" name="carseries" required value="{{car.car_series}}" maxlength="255">
-      <br>
-      <label for="car_seriesyear"><b>Car Series Year</b></label>
-      <input id = "car_seriesyear" type="text" placeholder="car_seriesyear" name="carseriesyear" required value="{{car.car_seriesyear}}">
-      <br>
-      <label for="car_pricenew"><b>Car price new</b></label>
-      <input id = "car_pricenew" type="text" placeholder="car_pricenew" name="carpricenew" required value="{{car.car_pricenew}}">
-      <br>
-      <label for="car_enginesize"><b>Car engine size</b></label>
-      <input id = "car_enginesize" type="text" placeholder="car_enginesize" name="carenginesize" required value="{{car.car_enginesize}}" maxlength="255">
-      <br>
-      <label for="car_fuelsystem"><b>Car fuel system</b></label>
-      
-      <br>
-      <label for="car_tankcapacity"><b>Car tank capacity</b></label>
-      <input id = "car_tankcapacity" type="text" placeholder="car_tankcapacity" name="cartankcapacity" required value="{{car.car_tankcapacity}}" maxlength="255">
-      <br>
-      <label for="car_power"><b>Car power</b></label>
-      <input id = "car_power" type="text" placeholder="car_power" name="carpower" required value="{{car.car_power}}" maxlength="255">
-      <br>
-      <label for="car_seatingcapacity"><b>Car seating capacity</b></label>
-      <input id = "car_seatingcapacity" type="text" placeholder="car_seatingcapacity" name="carseatingcapacity" required value="{{car.car_seatingcapacity}}">
-      <br>
-      <label for="car_standardtransmission"><b>Car standard transmission</b></label>
-      <input id = "car_standardtransmission" type="text" placeholder="car_standardtransmission" name="carstandardtransmission" required value="{{car.car_standardtransmission}}" maxlength="255">
-      <br>
-      <label for="car_bodytype"><b>Car BOdytype</b></label>
-      <input id = "car_bodytype" type="text" placeholder="car_bodytype" name="carbodytype" required value="{{car.car_bodytype}}" maxlength="255">
-      <br>
-      <label for="car_drive"><b>Car Drive</b></label>
-      <input id = "car_drive" type="text" placeholder="car_drive" name="cardrive" required value="{{car.car_drive}}" maxlength="3">
-      <br>
-      <label for="car_wheelbase"><b>Car Wheelbase</b></label>
-      <input id = "car_wheelbase" type="text" placeholder="car_wheelbase" name="wheelbase" required value="{{car.car_wheelbase}}" maxlength="255">
-      <br>
-      <input type="submit" value="Update">
-     </form> -->
-
-
      {% empty %}
             <h1 align = "center" style="padding-top:20px;"> The Car you are referencing does not exist </h1>
         {% endfor %}

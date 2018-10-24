@@ -225,16 +225,17 @@ function geocodeAddress (geocoder, resultsMap) {
 	<script>
 	function myMap() {
      var locations = [
-       ['Wollongong', -34.425135, 150.894603, 4],
-       ['Sydney', -33.918416, 151.225770, 5],
-       ['Melbourne', -37.831699, 144.964333, 3],
-       ['Brisbane', -27.477376, 153.028169, 2],
-       ['Adelaide', -34.924787, 138.595701, 1]
+       ['Wollongong', -34.425135, 150.894603],
+       ['Sydney', -33.918416, 151.225770],
+       ['Melbourne', -37.831699, 144.964333],
+       ['Brisbane', -27.477376, 153.028169],
+       ['Adelaide', -34.924787, 138.595701],
+	   ['Test', -33, 138.595701]
      ];
 
      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: new google.maps.LatLng(-27.47, 153.02),
+        zoom: 3,
+        center: new google.maps.LatLng(-27.47, 135.02),
       });
 
      var infowindow = new google.maps.InfoWindow();
