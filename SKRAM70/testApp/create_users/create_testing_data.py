@@ -199,7 +199,7 @@ def CreateTestData():
         car_bodytype = '2D COUPE',
         car_drive = 'RWD',
         car_wheelbase = '2525mm')
-    car11save()
+    car11.save()
 
 	# Car 12
     car12 = Cars(car_makename='AUDI',
@@ -446,3 +446,298 @@ def CreateTestData():
         email = 'zoe@gmail.com',
         password = 'Zoe')
     customer8.save()
+
+    # All needed stores are already created
+    store1 = Stores(name = "testName",
+        address = "testAdress",
+        phone = "045555555",
+        city = "testCity",
+        state = "testState")
+    store1.save()
+
+    store2 = Stores(name = "testName2",
+        address = "testAdress2",
+        phone = "045555556",
+        city = "testCity2",
+        state = "testState2")
+    store2.save()
+
+    # Finally Orders. I will need 20-30. Orders is the part that is a bit more complex.
+    # This complextity comes from the fact that the inputs into the pickupstore,
+    # returnstore, customerid and carid columns need to be previously created
+    # store, customer and car objects respectively. For this reason I have given
+    # a couple of examples.
+    # As for the inputs, please make a 5-10 have a return date in the future.
+    # Some have both start and return date in the past
+    # Have the same cars hired a few times
+    # Have a variety of customers hire cars
+    # Dates of format YYYYMMDD
+    order1 = Orders(createdate = 20180703,
+        pickupdate = 20180704,
+        pickupstore = store1,
+        returndate = 20180820,
+        returnstore = store1,
+        droppedoff = 'TRUE',
+        customerid = customer1,
+        carid = car16)
+    order1.save()
+
+    order2 = Orders(createdate = 20180703,
+        pickupdate = 20180704,
+        pickupstore = store2,
+        returndate = 20180820,
+        returnstore = store1,
+        droppedoff = 'FALSE',
+        customerid = customer1,
+        carid = car15)
+    order2.save()
+
+    order3 = Orders(createdate = 20181018,
+        pickupdate = 20181020,
+        pickupstore = store1,
+        returndate = 20181103,
+        returnstore = store1,
+        droppedoff = 'FALSE',
+        customerid = customer1,
+        carid = car14)
+    order3.save()
+
+    order4 = Orders(createdate = 20180101,
+        pickupdate = 20180101,
+        pickupstore = store1,
+        returndate = 20180901,
+        returnstore = store1,
+        droppedoff = 'TRUE',
+        customerid = customer1,
+        carid = car13)
+    order4.save()
+
+    order5 = Orders(createdate = 20180201,
+        pickupdate = 20180214,
+        pickupstore = store1,
+        returndate = 20180217,
+        returnstore = store1,
+        droppedoff = 'TRUE',
+        customerid = customer1,
+        carid = car12)
+    order5.save()
+
+    order6 = Orders(createdate = 20180217,
+        pickupdate = 20180221,
+        pickupstore = store1,
+        returndate = 20180228,
+        returnstore = store2,
+        droppedoff = 'TRUE',
+        customerid = customer1,
+        carid = car11)
+    order6.save()
+
+    order7 = Orders(createdate = 20180228,
+        pickupdate = 20180305,
+        pickupstore = store2,
+        returndate = 20180401,
+        returnstore = store2,
+        droppedoff = 'FALSE',
+        customerid = customer1,
+        carid = car11)
+    order7.save()
+
+    order8 = Orders(createdate = 20180301,
+        pickupdate = 20180303,
+        pickupstore = store1,
+        returndate = 20180320,
+        returnstore = store2,
+        droppedoff = 'TRUE',
+        customerid = customer1,
+        carid = car10)
+    order8.save()
+
+    order9 = Orders(createdate = 20180404,
+        pickupdate = 20180422,
+        pickupstore = store2,
+        returndate = 20180423,
+        returnstore = store1,
+        droppedoff = 'TRUE',
+        customerid = customer1,
+        carid = car9)
+    order9.save()
+
+    order10 = Orders(createdate = 20180404,
+        pickupdate = 20180504,
+        pickupstore = store1,
+        returndate = 20180513,
+        returnstore = store1,
+        droppedoff = 'TRUE',
+        customerid = customer2,
+        carid = car8)
+    order10.save()
+
+    order11 = Orders(createdate = 20180601,
+        pickupdate = 20180617,
+        pickupstore = store2,
+        returndate = 20180820,
+        returnstore = store2,
+        droppedoff = 'TRUE',
+        customerid = customer2,
+        carid = car7)
+    order11.save()
+
+    order12 = Orders(createdate = 20180509,
+        pickupdate = 20180522,
+        pickupstore = store2,
+        returndate = 2018601,
+        returnstore = store2,
+        droppedoff = 'TRUE',
+        customerid = customer2,
+        carid = car6)
+    order12.save()
+
+    order13 = Orders(createdate = 20180625,
+        pickupdate = 20180723,
+        pickupstore = store2,
+        returndate = 20180808,
+        returnstore = store1,
+        droppedoff = 'TRUE',
+        customerid = customer3,
+        carid = car6)
+    order13.save()
+
+    order14 = Orders(createdate = 20180419,
+        pickupdate = 20180722,
+        pickupstore = store1,
+        returndate = 20180723,
+        returnstore = store1,
+        droppedoff = 'FALSE',
+        customerid = customer3,
+        carid = car6)
+    order14.save()
+
+    order15 = Orders(createdate = 20180812,
+        pickupdate = 20180828,
+        pickupstore = store1,
+        returndate = 20180901,
+        returnstore = store1,
+        droppedoff = 'TRUE',
+        customerid = customer3,
+        carid = car5)
+    order15.save()
+
+    order16 = Orders(createdate = 20180829,
+        pickupdate = 20180902,
+        pickupstore = store2,
+        returndate = 20180905,
+        returnstore = store1,
+        droppedoff = 'TRUE',
+        customerid = customer4,
+        carid = car4)
+    order16.save()
+
+    order17 = Orders(createdate = 20180914,
+        pickupdate = 20180915,
+        pickupstore = store2,
+        returndate = 20180930,
+        returnstore = store2,
+        droppedoff = 'TRUE',
+        customerid = customer4,
+        carid = car3)
+    order17.save()
+
+    order18 = Orders(createdate = 20180909,
+        pickupdate = 20180930,
+        pickupstore = store1,
+        returndate = 20181031,
+        returnstore = store1,
+        droppedoff = 'FALSE',
+        customerid = customer5,
+        carid = car2)
+    order18.save()
+
+    order19 = Orders(createdate = 20180605,
+        pickupdate = 20181007,
+        pickupstore = store1,
+        returndate = 20181112,
+        returnstore = store1,
+        droppedoff = 'FALSE',
+        customerid = customer6,
+        carid = car2)
+    order19.save()
+
+    order20 = Orders(createdate = 20180512,
+        pickupdate = 20181023,
+        pickupstore = store2,
+        returndate = 20181028,
+        returnstore = store1,
+        droppedoff = 'FALSE',
+        customerid = customer6,
+        carid = car2)
+    order20.save()
+
+    order21 = Orders(createdate = 20181001,
+        pickupdate = 20181003,
+        pickupstore = store1,
+        returndate = 20181103,
+        returnstore = store2,
+        droppedoff = 'FALSE',
+        customerid = customer7,
+        carid = car2)
+    order21.save()
+
+    order22 = Orders(createdate = 20180808,
+        pickupdate = 20181020,
+        pickupstore = store2,
+        returndate = 20181101,
+        returnstore = store2,
+        droppedoff = 'FALSE',
+        customerid = customer7,
+        carid = car1)
+    order22.save()
+
+    order23 = Orders(createdate = 20180831,
+        pickupdate = 20181017,
+        pickupstore = store2,
+        returndate = 20181105,
+        returnstore = store2,
+        droppedoff = 'FALSE',
+        customerid = customer8,
+        carid = car1)
+    order23.save()
+
+    order24 = Orders(createdate = 20181001,
+        pickupdate = 20181003,
+        pickupstore = store1,
+        returndate = 20181103,
+        returnstore = store2,
+        droppedoff = 'FALSE',
+        customerid = customer7,
+        carid = car20)
+    order24.save()
+
+    order25 = Orders(createdate = 20180808,
+        pickupdate = 20181020,
+        pickupstore = store2,
+        returndate = 20181101,
+        returnstore = store2,
+        droppedoff = 'FALSE',
+        customerid = customer7,
+        carid = car19)
+    order25.save()
+
+    order26 = Orders(createdate = 20180831,
+        pickupdate = 20181017,
+        pickupstore = store2,
+        returndate = 20181105,
+        returnstore = store2,
+        droppedoff = 'FALSE',
+        customerid = customer8,
+        carid = car18)
+    order26.save()
+
+    order27 = Orders(createdate = 20180831,
+        pickupdate = 20181017,
+        pickupstore = store2,
+        returndate = 20181105,
+        returnstore = store2,
+        droppedoff = 'FALSE',
+        customerid = customer8,
+        carid = car17)
+    order27.save()
