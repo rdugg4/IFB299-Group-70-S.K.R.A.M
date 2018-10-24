@@ -152,7 +152,7 @@ input[type=text], select, textarea {
 /* Style the submit button with a specific background color etc */
 input[type=Update] {
 	text-align: center;
-    background-color: #C52225;
+    background-color: #00264d;
     color: white;
     padding: 20px 100px;
     border: none;
