@@ -55,7 +55,7 @@ def detail(request, car_id):
             #return render(request,'testApp/carstaff.html')
     carInfo = Cars.objects.filter(id=car_id)
     context = {'CarInfo': carInfo}
-    return render(request, 'testApp/carstaff.html', context)
+    return render(request, 'testApp/showcaroriginalMikeUpdate.html', context)
 
 
 def contactUs(request):
