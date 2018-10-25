@@ -8,6 +8,22 @@
 		rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	  rel="stylesheet">
+		<script>
+			function showHide() {
+				var checkbox = document.getElementbyId("chk")
+				var hiddeninputs = document.getElementsByClassName("hidden")
+
+				for var i = 0; i!= hiddeninputs.length; 1++) {
+					if(checkbox.checked){
+						hiddeninputs[i].style.display = "block";
+					}
+					else{
+						hiddeninputs.style.display = "none";
+					}
+				}
+
+			}
+			</script>
 
 	</head>
 
@@ -46,14 +62,16 @@
 <!-- Search section goes here -->
 		<section>
 			<div class="row">
-				<h1 align="center" style="margin-top:8%;"> Start Your Search
+				<br>
+				<br>
+				<h1 align="center" style="margin-top:3%;"> Start Your Search
 					Here </h1>
 					<form action="/action_page.php" target="_blank">
 						<input type="text" name="pickup"
 						placeholder="Enter Pick Up Location Here" class="inputsearch">
 						<br>
-						<p class="droptext"> Drop off location is same as pick up? <input type="checkbox"
-						name="dropoff" value="droplocation"></p>
+						<!-- <p class="droptext"> Drop off location is same as pick up? <input type="checkbox"
+						name="dropoff" value="droplocation"></p> -->
 					<!-- Don't know how to make this checked by default? Also if this
 					isn't checked another box will have to appear
 					asking for drop off location (same as pick up). Maybe consider
@@ -66,12 +84,12 @@
 			<div class="row">
 				<div class="leftcolumn">
 					<h2 class="datetext">Pick Up Date:</h2>
-					<input type="date" name="pickdate"><br>
+					<input type="date" name="pickupDate"><br>
 				</div>
 
 				<div class="rightcolumn">
 					<h2 class="datetext">Drop Off Date:</h2>
-					<input type="date" name="dropdate">
+					<input type="date" name="dropoffDate">
 					<!-- drop off date should have an error message if the date is before
 					pick up -->
 				</div>
@@ -81,6 +99,71 @@
 				<button type="submit" class="submitbtn"> Search </button>
 			</div>
 		</section>
+
+<br>
+
+		<button class="homeaccordion"> Advanced Options </button>
+		<div class="homepanel">
+
+			<div class="leftcolumn">
+					<br>
+					Body type:<br>
+					<input type="text" name="bodyType" class="advsearch">
+					<br>
+					Make of car:<br>
+					<input type="text" name="makeOfCar" class="advsearch">
+					<br>
+					Model of car:<br>
+					<input type="text" name="carModel" class="advsearch">
+					<br>
+				</div>
+
+				<div class="rightcolumn">
+					<br>
+					Number of seats:<br>
+						<select class="advsearch" name="seats">
+								<option value="3">below 4</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8 and above</option>
+						</select>
+						<br>
+					Drive:<br>
+					<select name="driveType" class="advsearch">
+							<option value="4WD">4WD</option>
+							<option value="FWD">FWD</option>
+							<option value="RWD">RWD</option>
+					</select>
+					<br>
+				</div>
+
+				<div class="row">
+					<input type="submit" value="Search" class="submitbtn">
+				<!-- probably don't need first search button?? Didn't delete yet in case it
+				is linked to something else -->
+				</div>
+			</form>
+		</div>
+
+
+				<script>
+				var acc = document.getElementsByClassName("homeaccordion");
+				var i;
+
+				for (i = 0; i < acc.length; i++) {
+				  acc[i].addEventListener("click", function() {
+				    this.classList.toggle("active");
+				    var panel = this.nextElementSibling;
+				    if (panel.style.maxHeight){
+				      panel.style.maxHeight = null;
+				    } else {
+				      panel.style.maxHeight = panel.scrollHeight + "px";
+				    }
+				  });
+				}
+				</script>
 
 
 		<footer>

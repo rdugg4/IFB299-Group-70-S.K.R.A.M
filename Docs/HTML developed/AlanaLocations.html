@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Navbar </title>
+		<link rel="stylesheet" href="./public/css/navbar-style.css">
+		<link href="https://fonts.googleapis.com/css?family=Poppins"
+		rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	  rel="stylesheet">
+
+	</head>
+
+	<body>
+
+		<header>
+		    <div class="topnav"> <img src="./public/images/NewCarLogo.png"
+					alt="logo" class="logo">
+		    <nav>
+			<ul class="menu-main">
+			    <li><a href="#"> Home </a></li>
+			    <li><a href="#"> Locations </a></li>
+			    <li><a href="#"> Hire Cars </a></li>
+			    <li><a href="#"> Help </a>
+	          <div class="menu-sub">
+	            <ul>
+	              <li><a href="#"> FAQ </a></li>
+	      				<li><a href="#"> Contact Us </a></li>
+	            </ul>
+	          </div>
+			    <li><a href="#"> EN </a></li>
+			    <li><a href="#"> <i class="material-icons"
+	          style="vertical-align:middle">person_outline</i>Sign In </a>
+			    	<div class="menu-sub">
+				    <ul>
+					<li><a href="#"> Sign In </a></li>
+					<li><a href="#"> Create New Account </a></li>
+				    </ul>
+				</div>
+			    </li>
+			</ul>
+		    </nav>
+		    </div>
+		</header>
+
+<!-- Search section goes here -->
+		<section>
+			<div class="row">
+				<h1 align="center" style="margin-top:8%;"> Our Locations </h1>
+					<br>
+				<br>
+			</div>
+
+			<div class="row">
+				<div class="leftcolumn">
+					<!-- This is the list of locations separated by state, hard coded
+					for the moment to test markers in google maps however will need
+					to be pulled from the database -->
+					<button class="accordion"> ACT </button>
+					<div class="panel">
+						<br>
+						<p> Sorry! We don't have any locations here yet <br>
+						</p>
+						<br>
+					</div>
+
+					<button class="accordion"> NSW </button>
+					<div class="panel">
+						<br>
+						<p> 3761 N. 14th St, <br>
+							Alexandria NSW </p>
+						<br>
+						<p> 2243 W St. <br>
+							Coffs Harbour NSW </p>
+						<br>
+						<p> 5844 Linden Land, <br>
+							Darlinghurst NSW </p>
+						<br>
+						<p> 1825 Village Pl., <br>
+							Goulbourn NSW </p>
+						<br>
+						<p> 7553 Harness Circle, <br>
+							Lane Cove NSW </p>
+						<br>
+						<p> 7305 Humphrey Drive, <br>
+							Lavender Bay NSW </p>
+						<br>
+						<p> 2612 Berry Dr, <br>
+							Malabar NSW </p>
+						<br>
+						<p> 942 Brook Street, <br>
+							Matraville NSW </p>
+						<br>
+						<p> 624 Peabody Road, <br>
+							Milsons Point NSW </p>
+						<br>
+						<p> 3839 Northgate Road, <br>
+							Newcastle NSW </p>
+						<br>
+						<p> 7800 Corrinne Court, <br>
+							North Ryde NSW </p>
+						<br>
+						<p> 1224 Shoenic, <br>
+							North Sydney NSW </p>
+						<br>
+						<p> 4785 Scott Street, <br>
+							Port Macquarie NSW </p>
+						<br>
+						<p> 7902 Hudson Ave., <br>
+							Rhodes NSW </p>
+						<br>
+						<p> 9011 Tank Drive, <br>
+							Silverwater NSW </p>
+						<br>
+						<p> 244 Willow Pass Road, <br>
+							Springwood NSW </p>
+						<br>
+						<p> 9666 Northridge Ct., <br>
+							St. Leondards NSW </p>
+						<br>
+						<p> 7330 Saddlehill Lane, <br>
+							Sydney NSW </p>
+						<br>
+						<p> 244 Rivewview, <br>
+							Wollongong NSW </p>
+						<br>
+					</div>
+
+					<button class="accordion"> NT </button>
+					<div class="panel">
+						<br>
+						<p> Sorry! We aren't in this area yet <br>
+						</p>
+						<br>
+					</div>
+
+					<button class="accordion"> QLD </button>
+					<div class="panel">
+						<br>
+						<p> 7832 Landing Dr, <br>
+							Brisbane QLD </p>
+						<br>
+						<p> 7156 Rose Dr., <br>
+							Caloundra QLD </p>
+						<br>
+						<p> 8148 W. Lake Dr., <br>
+							East Brisbane QLD </p>
+						<br>
+						<p> 1769 Nicholas Drive, <br>
+							Gold Coast QLD </p>
+						<br>
+						<p> 4499 Valley Crest, <br>
+							Hawthorne QLD </p>
+						<br>
+						<p> 8734 Oxford Place, <br>
+							Hervey Bay QLD </p>
+						<br>
+						<p> 2596 Franklin Canyon Road, <br>
+							Rockhampton QLD </p>
+						<br>
+						<p> 8211 Leeds Ct., <br>
+							Townsville QLD </p>
+						<br>
+					</div>
+
+					<button class="accordion"> SA </button>
+					<div class="panel">
+						<br>
+						<p> 213 Valencia Place, <br>
+							Cloverdale SA </p>
+						<br>
+						<p> 9111 Rose Ann Ave, <br>
+							Findon SA </p>
+						<br>
+						<p> 6385 Mark Twain, <br>
+							Perth SA </p>
+						<br>
+					</div>
+
+					<button class="accordion"> TAS </button>
+					<div class="panel">
+						<br>
+						<p> 636 Vine Hill Way, <br>
+							Hobart TAS 7005 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> VIC </button>
+					<div class="panel">
+						<br>
+						<p> 6465 Detroit Ave., <br>
+							Bendigo, VIC  </p>
+						<br>
+						<p> 626 Bentley Street, <br>
+							Cranbourne, VIC  </p>
+						<br>
+						<p> 5927 Rainbow Dr, <br>
+							Geelong, VIC </p>
+						<br>
+						<p> 5167 Condor Place, <br>
+							Melbourne, VIC  </p>
+						<br>
+						<p> 1873 Mt. Whitney Dr, <br>
+							Melton, VIC  </p>
+						<br>
+						<p> 3981 Augustine Drive, <br>
+							Seaford, VIC  </p>
+						<br>
+						<p> 8915 Woodside Way, <br>
+							South Melbourne, VIC </p>
+						<br>
+						<p> 8357 Sandy Cove Lane, <br>
+							South Melbourne, VIC </p>
+						<br>
+						<p> 9353 Creekside Dr., <br>
+							Warrnambool, VIC </p>
+						<br>
+					</div>
+
+					<button class="accordion"> WA </button>
+					<div class="panel">
+						<br>
+						<p> Sorry! We aren't in this area yet <br>
+						</p>
+						<br>
+					</div>
+
+				</div>
+
+				<div class="rightcolumn">
+					<!-- Google maps goes here -->
+					<div id="map" style="width:100%; height:500px;"></div>
+
+						<!-- <script>
+						function myMap() {
+						var mapProp= {
+						    center:new google.maps.LatLng(-27.477376, 153.028169),
+						    zoom:5,
+						};
+						var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+						}
+						</script> -->
+
+<!-- This is how to transform address into lat & lng co-ordinates
+Need to add to list possibly after execution?? -->
+
+<!-- <script>
+function geocodeAddress (geocoder, resultsMap) {
+	var address = document.getElementById('address').value;
+	geocoder.geocode({'address': address}, function(results, status) {
+		if (status === 'OK') {
+			resultsMap.setCenter(results[0].geometry.location);
+			var marker = new google.maps.Marker({
+				map: resultsMap,
+				position: results[0].geometry.location
+			});
+		} else {
+			alert('Geocode was not successful for the following reason: ' + status);
+		}
+	})
+}
+</script> -->
+
+	<script>
+	// This is the function that implements the google map and adds markers to it
+	function myMap() {
+     var locations = [
+       ['Wollongong', -34.425135, 150.894603, 4],
+       ['Sydney', -33.918416, 151.225770, 5],
+       ['Melbourne', -37.831699, 144.964333, 3],
+       ['Brisbane', -27.477376, 153.028169, 2],
+       ['Adelaide', -34.924787, 138.595701, 1]
+     ];
+
+// This part loads the google map and sets the default location
+     var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: new google.maps.LatLng(-27.47, 153.02),
+      });
+
+     var infowindow = new google.maps.InfoWindow();
+
+     var marker, i;
+
+// This pulls from the list of locations above to know where to place the markers
+     for (i = 0; i < locations.length; i++) {
+       marker = new google.maps.Marker({
+         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         map: map
+       });
+
+       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+         return function() {
+           infowindow.setContent(locations[i][0]);
+           infowindow.open(map, marker);
+         }
+       })(marker, i));
+     }
+	 }
+   </script>
+
+						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVArWOV0RwGEHyQPfSOFJiUsgs5E5Q_yw&callback=myMap">
+						</script>
+				</div>
+			</div>
+
+			<div class="row">
+			</div>
+		</section>
+
+		<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var panel = this.nextElementSibling;
+		    if (panel.style.maxHeight){
+		      panel.style.maxHeight = null;
+		    } else {
+		      panel.style.maxHeight = panel.scrollHeight + "px";
+		    }
+		  });
+		}
+		</script>
+
+		<footer>
+			<div class="footer-main">
+				<nav>
+					<ul>
+						<li><a href="#">Need help?</a></li>
+					</ul>
+				</nav>
+			</div>
+		</footer>
+
+	</body>
+</html>
