@@ -28,6 +28,8 @@ header::after {
 .logo {
 	float:left;
 	padding: 15px 0;
+	height:40px;
+	width:160px;
 }
 
 header nav {
@@ -241,15 +243,11 @@ Car Information' page */
 	display: inline-block;
 	text-decoration: none;
 	color: white;
-	background: steelblue;
+	background-color: #00264d;
 	padding: 1em 4em;
-	border-radius: 8px;
+	/* border-radius: 8px; */
 	margin-left:auto;
 	margin-right: auto;
-}
-
-.btn:hover {
-	background-color: royalblue;
 }
 
 .empbutton {
@@ -280,26 +278,207 @@ Car Information' page */
 	color: white;
 }
 
-input[type=text], input[type=date], select {
+.submitbtn {
+	background-color: #00264d;
+	/* border: none; */
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	display:inline-block;
+	width: 15%;
+	margin-left: 43%;
 	align: center;
+	cursor: pointer;
+}
+
+.inputsearch {
+	padding: 15px;
+	border:none;
+	margin-top:8px;
+	margin-bottom: 10px;
+	margin-left: 25%;
+	font-size: 20px;
 	width: 50%;
+}
+
+.advsearch {
+	padding: 10px;
+	border: none;
+	margin-top: 8px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	width: 80%;
+	border: 2px solid #ccc; /* Gray border */
+}
+
+.advsearch2 {
+	padding: 10px;
+	border: none;
+	margin-top: 8px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	width: 50%;
+	margin-left: 25%;
+}
+
+.datetext {
+	color: steelblue;
+	font-size: 16px;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+.droptext {
+	margin-left: 25%;
+	font-size: 16px;
+}
+
+/* .wrapper {
+	margin: 10% auto;
+	width: 400px;
+}
+
+.label {
+	display: block;
+	cursor: pointer;
+	padding: 10px;
+	border: none;
+}
+
+.label:hover{
+	color: steelblue;
+}
+
+.accordion {
+	padding: 10px;
+	background: 59ABE3;
+}
+
+.input[type="checkbox"] ~ ul{
+  height: 0;
+  transform: scaleY(0);
+}
+
+.input[type="checkbox"]:checked ~ ul{
+  height: 100%;
+  transform-origin: top;
+  transition: transform .2s ease-out;
+  transform: scaleY(1);
+}
+
+.input[type="checkbox"]:checked + label{
+  background: #26C281;
+  border-bottom: 1px solid #fff;
+} */
+
+.accordion {
+	background-color: steelblue;
+	color: black;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 16px;
+	transition: 0.4s;
+	text-decoration: none;
+
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.homeaccordion {
+	background-color: #00264d;
+	color: white;
+	cursor: pointer;
+	padding: 18px;
+	width: 50%;
+	/* border: none; */
+	text-align: center;
+	outline: none;
+	font-size: 16px;
+	transition: 0.4s;
+	text-decoration: none;
+	margin-left: 25%;
+}
+
+.homeaccordion:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.homepanel {
+    padding: 0px 0px;
+		width: 50%;
+		margin-left: 25%;
+    background-color: #D5DBE5;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.hidden {
+	display: none;
+}
+
+/* Google API key is AIzaSyAVArWOV0RwGEHyQPfSOFJiUsgs5E5Q_yw */
+
+
+
+/*-------------------------------------------------------------*/
+/* Mike addon CSS code starts from here*/
+input[type=text], select, textarea {
+	width: 80%;
+    padding: 10px; /* Some padding */
+    border: 2px solid #ccc; /* Gray border */
+    border-radius: 8px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 5px; /* Add a top margin */
+    margin-bottom: 10px; /* Bottom margin */
+    resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
+	text-align: left;
+}
+
+input[type=date] {
+	width: 100%;
     padding: 10px; /* Some padding */
     border: 1px solid #ccc; /* Gray border */
     border-radius: 4px; /* Rounded borders */
     box-sizing: border-box; /* Make sure that padding and width stays in place */
     margin-top: 10px; /* Add a top margin */
-    margin-bottom: 16px; /* Bottom margin */
+    margin-bottom: 10px; /* Bottom margin */
     resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
-	/* text-align: left; */
-}
-
-input[type=submit] {
-	color: white;
-	background: steelblue;
-	padding: 1em 4em;
-	border-radius: 8px;
-}
-
-.row2 {
-	text-align: center
+	text-align: left;
 }

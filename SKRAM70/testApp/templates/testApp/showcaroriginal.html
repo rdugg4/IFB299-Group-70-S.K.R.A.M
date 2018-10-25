@@ -1,45 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-	<meta charset="UTF-8">
+{% include "../includes/HTMLOpener.html" %}
 	<title> Car Information </title>
     {% load static %}
 	<link href="{% static "testApp/css/navbar-style.css" %}" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet">
-    </head>
-
-    <body>
-	<header>
-	    <div class="topnav">
-            <img src="{% static "testApp/images/NewCarLogo.png" %}" alt="logo" class="logo" height="40px" width="160px">
-            <nav>
-    			<ul class="menu-main">
-    			    <li><a href="\CRC"> Home </a></li>
-    			    <li><a href="#"> Locations </a></li>
-    			    <li><a href="#"> Hire Cars </a></li>
-    			    <li><a href="#"> Help </a>
-    					<div class="menu-sub">
-    	                    <ul>
-    	                        <li><a href="#"> FAQ </a></li>
-    	      				    <li><a href="\CRC\ContactUs"> Contact Us </a></li>
-    	                    </ul>
-    	                </div>
-    				</li>
-    			    <li><a href="#"> EN </a></li>
-    			    <li><a href="#"> Sign In </a>
-    			    	<div class="menu-sub">
-    					    <ul>
-    							<li><a href="\CRC\staffPortal"> Sign In </a></li>
-    							<li><a href="\CRC\create_account"> Create New Account </a></li>
-    					    </ul>
-    					</div>
-    			    </li>
-    			</ul>
-    	    </nav>
-	    </div>
-	</header>
+	{% include "../includes/Header.html" %}
 
 	<section>
         {% for car in CarInfo %}
@@ -75,11 +38,11 @@
             </div>
             <!-- Need to fix this as it doesn't quite align in the center, align is
             not working?? -->
-            <a href="" class="btn" style="margin-left:50%"> Reserve now! </a>
+            <button href="" class="submitbtn"> Reserve now! </button>
         {% empty %}
-            <h1 align="center" style="padding-top:20px;"> The Car you are referencing does not exist </h1>
+            <h1 align = "center" style="padding-top:20px;"> The Car you are referencing does not exist </h1>
         {% endfor %}
-
+        <br>
     <div class="row">
       <div class="leftcolumn">
         <h2> Reviews </h2>
@@ -97,16 +60,4 @@
     </div>
 
 	</section>
-
-	<footer>
-	    <div class="footer-main">
-		<nav>
-		    <ul>
-			<li><a href="#">Need help?</a></li>
-		    </ul>
-		</nav>
-	    </div>
-	</footer>
-
-	</body>
-</html>
+{% include "../includes/footer.html"%}

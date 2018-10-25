@@ -24,6 +24,8 @@ header::after {
 .logo {
 	float:left;
 	padding: 15px 0;
+	height:40px;
+	width:160px;
 }
 
 header nav {
@@ -166,16 +168,15 @@ footer nav li:hover a {
 
 #reservenow {
 	position: relative;
-	background-color: #FEDE3F;
+	background-color: #00264d;
+	color: white;
 	width: 9em;
-	border: none;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	font-size:14px;
 	font-weight: 500;
-	border:  solid 1px #414141;
-	border-radius: 4px;
+	padding: 11px;
 }
 
 .searchcontainer {

@@ -1,0 +1,57 @@
+{% include "../includes/HTMLOpener.html" %}
+{% load static %}
+<title> Car Popularity </title>
+<link href="{% static "testApp/css/testCarpopularityupdatedShaleen.css" %}" rel="stylesheet" type="text/css">
+{% include "../includes/Header.html" %}
+<div class="container">
+	<div id="resultbox">
+<form action="/staffPortal/CarPopularity" method="get">
+	<h1>Car Popularity</h1><br>
+    <p>Catagories:
+    <select name="Catagory">
+        <option value="driveType">Drive Type of Vehicle</option>
+        <option value="seats" {% if "seat" in graphTitle %} selected {% endif %}>Seat Number</option>
+        <option value="price" {% if "price" in graphTitle %} selected {% endif %}>Price of Car (new)</option>
+        <option value="makeName" {% if "make" in graphTitle %} selected {% endif %}>Make of Vehicle</option>
+    </select> &nbsp; &nbsp;
+    Graph Type:
+    <select name="Graph">
+        <option value="Column">Column Graph</option>
+        <option value="Pie" {% if graphType == 'Pie'%}selected{% endif %}>Pie Graph</option>
+    </select>&nbsp; &nbsp;
+    <button type="submit" class="submit" value="Refresh">Submit</button>
+    </p> <br><br>
+</form>
+<div id="chart"></div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+			['Test', 'Number Of Cars'],
+            {% for count, name in counterAndNames %}
+            {% if forloop.last %}
+                ['{{name}}', {{count}}]
+            {% else %}
+                ['{{name}}', {{count}}],
+            {% endif %}
+            {% endfor %}
+    ]);
+
+    var options = {'title':'{{graphTitle}}', 'width':800, 'height':400};
+	{% if graphType == 'Pie'%}
+    var chart = new google.visualization.PieChart(document.getElementById('chart'));
+    {% elif graphType == 'Column' %}
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+    {% endif %}
+    chart.draw(data, options);
+}
+</script>
+</div>
+</div>
+
+{% include "../includes/footer.html"%}

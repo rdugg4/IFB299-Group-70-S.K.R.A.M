@@ -1,0 +1,289 @@
+		{% include "../includes/HTMLOpener.html" %}
+		<title> CRC </title>
+		{% load static %}
+		<link href="{% static "testApp/css/navbar-style.css" %}" rel="stylesheet" type="text/css">
+		<title> Store Locations </title>
+		{% include "../includes/Header.html" %}
+<!-- Search section goes here -->
+		<section>
+			<div class="row">
+				<h1 align="center" style="margin-top:8%;"> Our Locations </h1>
+					<br>
+				<br>
+			</div>
+
+			<div class="row">
+				<div class="leftcolumn">
+					<!-- This is the list of locations separated by state, hard coded
+					for the moment to test markers in google maps however will need
+					to be pulled from the database -->
+					<button class="accordion"> ACT </button>
+					<div class="panel">
+						<br>
+						<p> Sorry! We don't have any locations here yet <br>
+						</p>
+						<br>
+					</div>
+
+					<button class="accordion"> NSW </button>
+					<div class="panel">
+						<br>
+						<p> 3761 N. 14th St, <br>
+							Alexandria NSW </p>
+						<br>
+						<p> 2243 W St. <br>
+							Coffs Harbour NSW </p>
+						<br>
+						<p> 5844 Linden Land, <br>
+							Darlinghurst NSW </p>
+						<br>
+						<p> 1825 Village Pl., <br>
+							Goulbourn NSW </p>
+						<br>
+						<p> 7553 Harness Circle, <br>
+							Lane Cove NSW </p>
+						<br>
+						<p> 7305 Humphrey Drive, <br>
+							Lavender Bay NSW </p>
+						<br>
+						<p> 2612 Berry Dr, <br>
+							Malabar NSW </p>
+						<br>
+						<p> 942 Brook Street, <br>
+							Matraville NSW </p>
+						<br>
+						<p> 624 Peabody Road, <br>
+							Milsons Point NSW </p>
+						<br>
+						<p> 3839 Northgate Road, <br>
+							Newcastle NSW </p>
+						<br>
+						<p> 7800 Corrinne Court, <br>
+							North Ryde NSW </p>
+						<br>
+						<p> 1224 Shoenic, <br>
+							North Sydney NSW </p>
+						<br>
+						<p> 4785 Scott Street, <br>
+							Port Macquarie NSW </p>
+						<br>
+						<p> 7902 Hudson Ave., <br>
+							Rhodes NSW </p>
+						<br>
+						<p> 9011 Tank Drive, <br>
+							Silverwater NSW </p>
+						<br>
+						<p> 244 Willow Pass Road, <br>
+							Springwood NSW </p>
+						<br>
+						<p> 9666 Northridge Ct., <br>
+							St. Leondards NSW </p>
+						<br>
+						<p> 7330 Saddlehill Lane, <br>
+							Sydney NSW </p>
+						<br>
+						<p> 244 Rivewview, <br>
+							Wollongong NSW </p>
+						<br>
+					</div>
+
+					<button class="accordion"> NT </button>
+					<div class="panel">
+						<br>
+						<p> Sorry! We aren't in this area yet <br>
+						</p>
+						<br>
+					</div>
+
+					<button class="accordion"> QLD </button>
+					<div class="panel">
+						<br>
+						<p> 7832 Landing Dr, <br>
+							Brisbane QLD </p>
+						<br>
+						<p> 7156 Rose Dr., <br>
+							Caloundra QLD </p>
+						<br>
+						<p> 8148 W. Lake Dr., <br>
+							East Brisbane QLD </p>
+						<br>
+						<p> 1769 Nicholas Drive, <br>
+							Gold Coast QLD </p>
+						<br>
+						<p> 4499 Valley Crest, <br>
+							Hawthorne QLD </p>
+						<br>
+						<p> 8734 Oxford Place, <br>
+							Hervey Bay QLD </p>
+						<br>
+						<p> 2596 Franklin Canyon Road, <br>
+							Rockhampton QLD </p>
+						<br>
+						<p> 8211 Leeds Ct., <br>
+							Townsville QLD </p>
+						<br>
+					</div>
+
+					<button class="accordion"> SA </button>
+					<div class="panel">
+						<br>
+						<p> 213 Valencia Place, <br>
+							Cloverdale SA </p>
+						<br>
+						<p> 9111 Rose Ann Ave, <br>
+							Findon SA </p>
+						<br>
+						<p> 6385 Mark Twain, <br>
+							Perth SA </p>
+						<br>
+					</div>
+
+					<button class="accordion"> TAS </button>
+					<div class="panel">
+						<br>
+						<p> 636 Vine Hill Way, <br>
+							Hobart TAS 7005 </p>
+						<br>
+					</div>
+
+					<button class="accordion"> VIC </button>
+					<div class="panel">
+						<br>
+						<p> 6465 Detroit Ave., <br>
+							Bendigo, VIC  </p>
+						<br>
+						<p> 626 Bentley Street, <br>
+							Cranbourne, VIC  </p>
+						<br>
+						<p> 5927 Rainbow Dr, <br>
+							Geelong, VIC </p>
+						<br>
+						<p> 5167 Condor Place, <br>
+							Melbourne, VIC  </p>
+						<br>
+						<p> 1873 Mt. Whitney Dr, <br>
+							Melton, VIC  </p>
+						<br>
+						<p> 3981 Augustine Drive, <br>
+							Seaford, VIC  </p>
+						<br>
+						<p> 8915 Woodside Way, <br>
+							South Melbourne, VIC </p>
+						<br>
+						<p> 8357 Sandy Cove Lane, <br>
+							South Melbourne, VIC </p>
+						<br>
+						<p> 9353 Creekside Dr., <br>
+							Warrnambool, VIC </p>
+						<br>
+					</div>
+
+					<button class="accordion"> WA </button>
+					<div class="panel">
+						<br>
+						<p> Sorry! We aren't in this area yet <br>
+						</p>
+						<br>
+					</div>
+
+				</div>
+
+				<div class="rightcolumn">
+					<!-- Google maps goes here -->
+					<div id="map" style="width:100%; height:500px;"></div>
+
+	<script>
+	function myMap() {
+     var locations = [
+	   ['Darlinghurst',-33.8794075,151.2164518],
+	   ['Springwood',-33.692011,150.5397621],
+	   ['North Sydney', -33.8365981,151.2008305],
+	   ['Matraville',-33.9640097,151.2160084],
+	   ['Lane Cove', -33.8179956,151.147523],
+	   ['Lavender Bay', -33.8438452,151.2032339],
+	   ['Hervey Bay', -25.2900115,152.6667897],
+	   ['Malabar',-33.9642173,151.2365495],
+	   ['Rhodes',-33.8300019,151.0799181],
+	   ['Findon',-34.8984402,138.5174083],
+	   ['Milsons Point',-33.8471022,151.2093658],
+	   ['Sydney',-33.8458353,150.3715628],
+	   ['North Ryde',-33.796689,151.098182],
+	   ['Port Macquarie',-31.4610498,152.8236612],
+	   ['Silverwater',-33.833869,151.0277053],
+	   ['Melbourne',-37.9701544,144.4927319],
+	   ['St. Leonards',-33.8223236,151.1841452],
+	   ['Sunbury',-37.5532351,144.6364503],
+	   ['Wollongong',-34.428216,150.8755489],
+	   ['Caloundra',-26.7974025,153.1105081],
+	   ['Newcastle',-32.9762968,151.5496177],
+	   ['Hawthorne',-27.4646088,153.0498721],
+	   ['Cranbourne',-38.11271,145.2372957],
+	   ['Gold Coast',-27.9533313,153.0891804],
+	   ['Seaford',-38.1061855,145.1071068],
+	   ['Warrnambool',-38.3784988,142.4066658],
+	   ['Alexandria',-33.9081748,151.1743431],
+	   ['East Brisbane',-27.4830662,153.0392293],
+	   ['Rockhampton',-23.3392997,150.4500988],
+	   ['Townsville',-19.2964247,146.6151534],
+	   ['Hobart',-42.8823074,147.3110468],
+	   ['Bendigo',-36.7368013,144.1422423],
+	   ['South Melbourne',-37.8340229,144.9385456],
+	   ['Goulburn',-34.7445504,149.6450667],
+	   ['Brisbane',-27.3798039,152.4327726],
+	   ['Geelong',-38.1320476,144.229382],
+	   ['Melton',-37.6775736,144.4937963],
+	   ['Coffs Harbour',-30.2972461,153.0286015]
+     ];
+
+     var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 3,
+        center: new google.maps.LatLng(-27.47, 135.02),
+      });
+
+     var infowindow = new google.maps.InfoWindow();
+
+     var marker, i;
+
+     for (i = 0; i < locations.length; i++) {
+       marker = new google.maps.Marker({
+         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         map: map
+       });
+
+       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+         return function() {
+           infowindow.setContent(locations[i][0]);
+           infowindow.open(map, marker);
+         }
+       })(marker, i));
+     }
+	 }
+   </script>
+
+						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVArWOV0RwGEHyQPfSOFJiUsgs5E5Q_yw&callback=myMap">
+						</script>
+				</div>
+			</div>
+
+			<div class="row">
+			</div>
+		</section>
+
+		<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var panel = this.nextElementSibling;
+		    if (panel.style.maxHeight){
+		      panel.style.maxHeight = null;
+		    } else {
+		      panel.style.maxHeight = panel.scrollHeight + "px";
+		    }
+		  });
+		}
+		</script>
+
+		{% include "../includes/footer.html"%}

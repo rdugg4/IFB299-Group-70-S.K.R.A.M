@@ -28,6 +28,8 @@ header::after {
 .logo {
 	float:left;
 	padding: 15px 0;
+	height:40px;
+	width:160px;
 }
 
 header nav {
@@ -135,8 +137,8 @@ footer nav li:hover a {
 }
 
 input[type=text], select, textarea, input[type=email] {
-	width: 50%;
-    padding: 10px; /* Some padding */
+	width: 70%;
+    padding: 15px; /* Some padding */
     border: 1px solid #ccc; /* Gray border */
     border-radius: 4px; /* Rounded borders */
     box-sizing: border-box; /* Make sure that padding and width stays in place */
@@ -144,54 +146,23 @@ input[type=text], select, textarea, input[type=email] {
     margin-bottom: 16px; /* Bottom margin */
     resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
 	text-align: left;
+
 }
 
 /* Style the submit button with a specific background color etc */
 input[type=submit] {
-    background-color: #C52225;
+    background-color: #00264d;
     color: white;
-    padding: 10px 100px;
-    border: none;
-    border-radius: 4px;
+    padding: 15px 100px;
     cursor: pointer;
-}
-
-/* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
-    background-color: #AAAAAA;
 }
 
 /* Add a background color and some padding around the form */
 .container {
+	text-align: center;
     border-radius: 8px;
-    background-color: #D5DBE5;
     padding: 80px;
 	width: 1000px;
     /* Change this value to customize the content area*/
     margin: 0 auto;
-}
-
-pty{
-	font-family:verdana;
-	font-size: 15px;
-	color:green;
-}
-
-/* Create two unequal columns that floats next to each other */
-.column {
-	background-color: #D5DBE5;
-    float: left;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
-	box-sizing: border-box;
-}
-
-.left {
-  width: 50%;
-  text-align: center;
-}
-
-.right {
-  width: 50%;
-  text-align: center;
 }

@@ -1,0 +1,53 @@
+<link href="https://fonts.googleapis.com/css?family=Poppins"
+rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+rel="stylesheet">
+{% load static %}
+<link rel="icon" href="{% static 'testApp/images/favicon.ico' %}">
+</head>
+
+<body>
+    <header>
+        <div class="topnav">
+            <img src="{% static "testApp/images/NewCarLogo.png" %}" alt="logo" class="logo" height="40px" width="160px">
+            <nav>
+                <ul class="menu-main">
+                    <li><a href="\"> Home </a></li>
+                    <li><a href="\Locations"> Locations </a></li>
+                    <li><a href="#"> Hire Cars </a></li>
+                    <li><a href="#"> Help </a>
+                        <div class="menu-sub">
+                            <ul>
+                                <li><a href="\FrequentlyAskedQuestions"> FAQ </a></li>
+                                <li><a href="\ContactUs"> Contact Us </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#"> EN </a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="#"> <i class="material-icons" style="vertical-align:middle">person_outline</i> </a>
+                        <div class="menu-sub">
+                            <ul>
+                                {% if perms.auth.customer %}
+                                <li><a href="\editUser"> Edit Your Details </a></li>
+                                {% else %}
+                                <li><a href="\staffPortal"> Staff Portal </a></li>
+                                {% endif %}
+                                <li><a href="{% url 'logout' %}"> Sign Out </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li><a href="#"> Sign In </a>
+                        <div class="menu-sub">
+                            <ul>
+                                <li><a href="{% url 'login' %}"> Sign In </a></li>
+                                <li><a href="\create_account"> Create New Account </a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>

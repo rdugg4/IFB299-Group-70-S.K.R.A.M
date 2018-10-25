@@ -1,0 +1,49 @@
+{% include "../includes/HTMLOpener.html" %}
+<title> Edit Your Information </title>
+{% load static %}
+<link href="{% static "testApp/css/MikeUserLandingPageCSS.css" %}" rel="stylesheet" type="text/css">
+{% include "../includes/Header.html" %}
+
+	<section>
+		<div class="row">
+			<div class="container" align="center">
+  <H1><strong>Greetings!</strong></H1>
+     <label for="FullName"><b>Jacquelyn S</b><br></label>
+	 <br><br>
+    	 <label for="Description"style="color: green"><b>Please edit information below and click "update" button to save changes!</b></label>
+     <br>
+	 <form action = "/editUser/" method = "POST" >
+       {% csrf_token %}
+      <label for="Firstname"><br>Name<br></label>
+      <input type="text" id="fname" name="firstname" placeholder="Please type your First name" maxlength="225" value="{{customer.name}}" required>
+
+	  <label for="gender"><br>Gender<br></label>
+    <input id="gender" type="radio" name="Gender" value="M" maxlength="3"> Male </input>
+    {%if customer.gender == M%}
+    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" > Female </input>
+    {%else%}
+    <input id="gender" type="radio" name="Gender" value="F" maxlength="3" checked = "checked" > Female </input>
+    {%endif%}
+    <br>
+
+      <label for="DOB"><br>Date of Birth<br></label>
+	  <input type="date" name="DOB" maxlength="20" value="{{dob}}" required>
+	  <br>
+
+      <label for="Email"><br>Email address<br></label>
+      <input type="text" id="youremail" name="youremail" placeholder="*******@***.com" value="{{customer.email}}">
+	  <label for="HomeAddress"><br>Home Address<br></label>
+      <input type="text" id="Haddress" name="Homeaddress" placeholder="Please type your Home address" maxlength="255" value="{{customer.address}}" required>
+      <label for="Phonenumber"><br>Phone number<br></label>
+	  <input type="text" id="Pnumber" name="Phonenumber" placeholder="Please type your phone number" maxlength="20" value="{{customer.phone}}" required>
+	  <label for="Phonenumber"><br>Occupation<br></label>
+	  <input type="text" id="Occupation" name="Occupation" placeholder="Please type your occupation" maxlength="255" value="{{customer.occupation}}" required>
+	<br>
+	  <input type="submit" value="Update">
+	  </form>
+	  <br>
+	  <label for="Clicktip"><br><i>Click update button to save changes</i><br></label>
+ </div>
+ </div>
+ 	</section>
+	{% include "../includes/footer.html"%}

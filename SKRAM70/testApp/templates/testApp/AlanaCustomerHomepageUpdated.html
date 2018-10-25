@@ -1,0 +1,102 @@
+		{% include "../includes/HTMLOpener.html" %}
+		<title> CRC </title>
+		{% load static %}
+		<link href="{% static "testApp/css/navbar-style.css" %}" rel="stylesheet" type="text/css">
+		{% include "../includes/Header.html" %}
+
+<!-- Search section goes here -->
+		<section>
+			<form action="/search" method="get">
+			<div class="row">
+				<h1 align="center" style="margin-top:3%;"> Start Your Search
+					Here </h1>
+						<select name="pickupLocation" class="advsearch2">
+							<option value="allStores">Any Location</option>
+					        {% for store in StoreList %}
+					            <option value="{{store.id}}">{{store.city}}</option>
+					        {% endfor %}
+					    </select>
+					<br>
+				<br>
+			</div>
+
+			<div class="row">
+				<div class="leftcolumn">
+					<h2 class="datetext">Pick Up Date:</h2>
+					<input type="date" name="pickupDate"><br>
+				</div>
+
+				<div class="rightcolumn">
+					<h2 class="datetext">Drop Off Date:</h2>
+					<input type="date" name="dropoffDate">
+					<!-- drop off date should have an error message if the date is before
+					pick up -->
+				</div>
+			</div>
+
+
+		<br>
+		<button type="button" class="homeaccordion" onclick="showHide()"> Advanced Options </button>
+		<div class="homepanel" id="hideablediv">
+			<div class="leftcolumn">
+				Number of seats:<br>
+					<select class="advsearch" name="seats">
+							<option value="">No Preference</option>
+							<option value="3">Below 4</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8 and above</option>
+					</select>
+					<br>
+					Make of car:<br>
+					<input type="text" name="makeOfCar" class="advsearch">
+					<br>
+					Model of car:<br>
+					<input type="text" name="carModel" class="advsearch">
+					<br>
+				</div>
+
+				<div class="rightcolumn">
+					Body type:<br>
+					<input type="text" name="bodyType" class="advsearch">
+					<br>
+					Drive:<br>
+					<select name="driveType" class="advsearch">
+							<option value="">No Preference</option>
+							<option value="4WD">4WD</option>
+							<option value="FWD">FWD</option>
+							<option value="RWD">RWD</option>
+							<option value="AWD">AWD</option>
+					</select>
+					<br>
+				</div>
+		</div>
+
+		<div class="row">
+			<button type="submit" class="submitbtn"> Search </button>
+		</div>
+		</form>
+		<script>
+		var acc = document.getElementsByClassName("homeaccordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			var panel = this.nextElementSibling;
+			if (panel.style.maxHeight){
+			  panel.style.maxHeight = null;
+			} else {
+			  panel.style.maxHeight = panel.scrollHeight + "px";
+			}
+		  });
+		}
+		</script>
+		{% if perms.auth.customer %}
+		<h1 align="center" style="padding-top:30px;"> Or get recommendations Based on your profile </h1>
+		<button onclick="location.href='/RecommendCars'" class="submitbtn">Recommend Cars</button>
+		</section>
+		{% endif %}
+		{% include "../includes/footer.html"%}

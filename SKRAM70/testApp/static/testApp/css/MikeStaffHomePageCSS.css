@@ -28,6 +28,8 @@ header::after {
 .logo {
 	float:left;
 	padding: 15px 0;
+	height:40px;
+	width:160px;
 }
 
 header nav {
@@ -252,12 +254,13 @@ Car Information' page */
 	background-color: royalblue;
 }
 
+
 /* Create two columns here */
 .column {
+	box-sizing: border-box;
     float: left;
     padding: 10px;
     height: 300px; /* Should be removed. Only for demonstration */
-	box-sizing: border-box;
 }
 
 .left {

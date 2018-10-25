@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{% if messages %}
+	        {% for message in messages %}
+	        <script type="text/javascript">
+	        function popupMessage() {
+	            alert("{{ message }}");
+	        }
+	        window.onload = popupMessage;
+	        </script>
+	        {% endfor %}
+	    {% endif %}

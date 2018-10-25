@@ -1,7 +1,3 @@
-* {
-	margin: 0;
-	padding:0;
-}
 
 body {
 	margin: 0;
@@ -28,6 +24,8 @@ header::after {
 .logo {
 	float:left;
 	padding: 15px 0;
+	height:40px;
+	width:160px;
 }
 
 header nav {
@@ -174,11 +172,14 @@ td {
     background-color: white;
 }
 
+
+
 /* Create two columns */
 .column {
+	box-sizing: border-box;
     float: left;
     padding: 10px;
-	box-sizing: border-box;
+
 }
 
 .left {
