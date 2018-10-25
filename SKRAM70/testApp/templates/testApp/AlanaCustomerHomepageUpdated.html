@@ -10,13 +10,12 @@
 			<div class="row">
 				<h1 align="center" style="margin-top:3%;"> Start Your Search
 					Here </h1>
-						<select name="pickupLocation" class="advsearch">
+						<select name="pickupLocation" class="advsearch2">
 							<option value="allStores">Any Location</option>
 					        {% for store in StoreList %}
 					            <option value="{{store.id}}">{{store.city}}</option>
 					        {% endfor %}
 					    </select>
-						<br>
 					<br>
 				<br>
 			</div>
@@ -40,7 +39,7 @@
 		<button type="button" class="homeaccordion" onclick="showHide()"> Advanced Options </button>
 		<div class="homepanel" id="hideablediv">
 			<div class="leftcolumn">
-				number of seats:<br>
+				Number of seats:<br>
 					<select class="advsearch" name="seats">
 							<option value="">No Preference</option>
 							<option value="3">Below 4</option>
@@ -69,6 +68,7 @@
 							<option value="4WD">4WD</option>
 							<option value="FWD">FWD</option>
 							<option value="RWD">RWD</option>
+							<option value="AWD">AWD</option>
 					</select>
 					<br>
 				</div>

@@ -56,6 +56,8 @@ class CarPopularity(object):
                 setNames.append('RWD')
                 carGroups.append(carsWithAnnotation.filter(car_drive = "FWD"))
                 setNames.append('FWD')
+                carGroups.append(carsWithAnnotation.filter(car_drive = "AWD"))
+                setNames.append('AWD')
             elif catagory == 'makeName':
                 graphTitle = graphTitle + ' divided into vehicle make groups'
                 carMakes = carsWithAnnotation.order_by('car_makename').values('car_makename').distinct()
@@ -74,6 +76,8 @@ class CarPopularity(object):
             setNames.append('RWD')
             carGroups.append(carsWithAnnotation.filter(car_drive = "FWD"))
             setNames.append('FWD')
+            carGroups.append(carsWithAnnotation.filter(car_drive = "AWD"))
+            setNames.append('AWD')
 
         i = 0
         for carGroup in carGroups:

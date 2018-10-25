@@ -61,7 +61,7 @@ def contactUs(request):
     if request.method == 'POST':
         form = CustomerQuery(request.POST)
         if form.is_valid():
-            subject = "issue from: " + form.cleaned_data['your_name']
+            subject = "Issue from: " + form.cleaned_data['your_name']
             sender = form.cleaned_data['email']
             message = form.cleaned_data['question']
             recipients = ['companyEmail@noreply.com']
@@ -81,7 +81,7 @@ def accounts(request):
 
                 post = Customers()
                 f = forms.CharField()
-                post.name = (f.clean(request.POST.get('firstname')) + ' ' + f.clean(request.POST.get('middlename')) + ' ' + f.clean(request.POST.get('lastname')))
+                post.name = (f.clean(request.POST.get('firstname')) + ' ' + f.clean(request.POST.get('lastname')))
                 post.phone = f.clean( request.POST.get('tel'))
                 post.dob = f.clean( request.POST.get('bday'))
                 post.email = f.clean(request.POST.get('email'))
@@ -98,8 +98,8 @@ def accounts(request):
         else:
             return render(request,'testApp/ShaleenCreateYourAccountPage.html')
     else:
-        messages.add_message(request, messages.INFO, 'You MUST be logged in to access that page')
-        return redirect("/accounts/login/")
+        messages.add_message(request, messages.INFO, 'You MUST be logged out to access that page')
+        return redirect("/")
 
 def editUser(request):
     if not UserVerification.CustomerLoggedIn(request):

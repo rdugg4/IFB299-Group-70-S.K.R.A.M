@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.messages import get_messages
 from testApp.create_users.CreateTestUsers import *
 from django.db.models.query import QuerySet
+from django.core import mail
 
 # Complete
 class test_indexView(TestCase):
@@ -174,7 +175,36 @@ class test_ContactUsView(TestCase):
 
     def test_Template(self):
         response = self.client.post('/ContactUs')
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/MikeContactPage draft.html')
+
+    def test_SendEmail(self):
+        response = self.client.post('/ContactUs', {'your_name': 'John Smith', 'email': 'abc@example.com', 'question': 'blah blah blah'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['querySuccesfullySubmitted'])
+        self.assertFalse(response.context['failedToSubmit'])
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Issue from: John Smith')
+        self.assertEqual(mail.outbox[0].body, 'blah blah blah')
+
+    def test_BadInputs(self):
+        response = self.client.post('/ContactUs', {'your_name': '', 'email': 'abc@example.com', 'question': 'blah blah blah'})
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['querySuccesfullySubmitted'])
+        self.assertTrue(response.context['failedToSubmit'])
+        self.assertEqual(len(mail.outbox), 0)
+
+        response = self.client.post('/ContactUs', {'your_name': 'JSmith', 'email': 'abc@example', 'question': 'blah blah blah'})
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['querySuccesfullySubmitted'])
+        self.assertTrue(response.context['failedToSubmit'])
+        self.assertEqual(len(mail.outbox), 0)
+
+        response = self.client.post('/ContactUs', {'your_name': 'JSmith', 'email': 'abc@example.com', 'question': ''})
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['querySuccesfullySubmitted'])
+        self.assertTrue(response.context['failedToSubmit'])
+        self.assertEqual(len(mail.outbox), 0)
 
 class test_VehicleReturnsView(TestCase):
     @classmethod
@@ -281,7 +311,23 @@ class test_SuccessfulLogin(TestCase):
         self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
 
 class test_LocationsView(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        CreateUsers()
+
     def test_Location(self):
+        response = self.client.post('/Locations')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.login(username="customer", password="1234")
+        response = self.client.post('/Locations')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.login(username="staff", password="1234")
+        response = self.client.post('/Locations')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.login(username="BM", password="1234")
         response = self.client.post('/Locations')
         self.assertEqual(response.status_code, 200)
 
@@ -392,6 +438,7 @@ class test_carDetailView(TestCase):
         car_drive = '4WD',
         car_wheelbase = '4000mm')
 
+    #Kaushal's work
     def test_Location(self):
         response = self.client.get('/CarInfo/1/')
         self.assertEqual(response.status_code, 200)
@@ -404,8 +451,8 @@ class test_carDetailView(TestCase):
     def test_Context(self):
         # carDB = Cars.objects.get(id=1)
         response = self.client.get('/CarInfo/1/')
-        # self.assertEqual(response.status_code, 200)
-        # self.assertTrue('CarInfo' in response.context)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('CarInfo' in response.context)
         # self.assertEqual(response.context['CarInfo'].count(), 1)
         # for car in response.context['CarInfo']:
         #     self.assertEqual(car.id, carDB.id)
@@ -415,11 +462,28 @@ class test_CreateAccountView(TestCase):
     def setUpTestData(cls):
         CreateUsers()
 
-
-    def test_LoggedInAsCustomer(self):
+    # Kaushal's work
+    def test_LoggedIn(self):
         self.client.login(username="customer", password="1234")
         response = self.client.get('/create_account/')
-        self.assertEqual(response.status_code, 302)
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged out to access that page')
+        self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+        self.client.login(username="staff", password="1234")
+        response = self.client.get('/create_account/')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged out to access that page')
+        self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+        self.client.login(username="BM", password="1234")
+        response = self.client.get('/create_account/')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You MUST be logged out to access that page')
+        self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
 
     def test_LoggedOut(self):
         response = self.client.get('/create_account/')
@@ -429,3 +493,62 @@ class test_CreateAccountView(TestCase):
         response = self.client.get('/create_account/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/ShaleenCreateYourAccountPage.html')
+
+    # Riley's work
+    def test_Updating(self):
+        response = self.client.post('/create_account/',
+            {'firstname': 'name_first', 'middlename': 'name_middle', 'lastname': 'name_last', 'tel': '0455555555', 'bday': '2018-06-20', 'email': 'test@email.com', 'Password': 'secret'})
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Account successfully created, Try logging in')
+        self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+        for customer in Customers.objects.all():
+            createdCustomer = customer
+            customerName = customer.name
+            customerTelephone = customer.phone
+            customerBirthday = customer.dob
+        self.assertEqual(customerName, 'name_first name_last')
+        self.assertEqual(customerTelephone, '0455555555')
+        self.assertEqual(customerBirthday, '2018-06-20')
+        for customer in Profile.objects.all():
+            customerUser = customer.user
+            customerID = customer.customerid
+        self.assertEqual(customerID, createdCustomer)
+        for user in User.objects.all():
+            mostRecentlyAddedUser = user
+        self.assertEqual(customerUser, mostRecentlyAddedUser)
+
+        response = self.client.post('/create_account/',
+            {'firstname': 'name_first', 'lastname': 'name_last', 'tel': '0455555555', 'bday': '2018-06-20', 'email': 'test2@email.com', 'Password': 'secret'})
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Account successfully created, Try logging in')
+        self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+        for customer in Customers.objects.all():
+            createdCustomer = customer
+            customerName = customer.name
+            customerTelephone = customer.phone
+            customerBirthday = customer.dob
+        self.assertEqual(customerName, 'name_first name_last')
+        self.assertEqual(customerTelephone, '0455555555')
+        self.assertEqual(customerBirthday, '2018-06-20')
+        for customer in Profile.objects.all():
+            customerUser = customer.user
+            customerID = customer.customerid
+        self.assertEqual(customerID, createdCustomer)
+        for user in User.objects.all():
+            mostRecentlyAddedUser = user
+        self.assertEqual(customerUser, mostRecentlyAddedUser)
+
+    def test_IncorrectInputs(self):
+        response = self.client.post('/create_account/',
+            {'middlename': 'name_middle', 'lastname': 'name_last', 'tel': '0455555555', 'bday': '2018-06-20', 'email': 'test@email.com', 'Password': 'secret'})
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post('/create_account/',
+            {'firstname': 'name_first', 'middlename': 'name_middle', 'lastname': 'name_last', 'tel': '0455555555', 'bday': '2018-06-20', 'email': 'test@email.com'})
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post('/create_account/',
+            {'firstname': 'name_first', 'middlename': 'name_middle', 'lastname': 'name_last', 'tel': '0455555555', 'email': 'test@email.com', 'Password': 'secret'})
+        self.assertEqual(response.status_code, 200)

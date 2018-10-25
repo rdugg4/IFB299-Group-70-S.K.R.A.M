@@ -309,6 +309,16 @@ Car Information' page */
 	margin-top: 8px;
 	margin-bottom: 10px;
 	font-size: 12px;
+	width: 80%;
+	border: 2px solid #ccc; /* Gray border */
+}
+
+.advsearch2 {
+	padding: 10px;
+	border: none;
+	margin-top: 8px;
+	margin-bottom: 10px;
+	font-size: 12px;
 	width: 50%;
 	margin-left: 25%;
 }
@@ -459,7 +469,6 @@ input[type=text], select, textarea {
     margin-bottom: 10px; /* Bottom margin */
     resize: horizontal; /* Allow the user to vertically resize the textarea (not horizontally) */
 	text-align: left;
-
 }
 
 input[type=date] {

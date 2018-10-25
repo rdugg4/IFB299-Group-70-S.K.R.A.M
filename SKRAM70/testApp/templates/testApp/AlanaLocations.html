@@ -192,45 +192,47 @@
 					<!-- Google maps goes here -->
 					<div id="map" style="width:100%; height:500px;"></div>
 
-						<!-- <script>
-						function myMap() {
-						var mapProp= {
-						    center:new google.maps.LatLng(-27.477376, 153.028169),
-						    zoom:5,
-						};
-						var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-						}
-						</script> -->
-
-<!-- This is how to transform address into lat & lng co-ordinates
-Need to add to list possibly after execution?? -->
-
-<!-- <script>
-function geocodeAddress (geocoder, resultsMap) {
-	var address = document.getElementById('address').value;
-	geocoder.geocode({'address': address}, function(results, status) {
-		if (status === 'OK') {
-			resultsMap.setCenter(results[0].geometry.location);
-			var marker = new google.maps.Marker({
-				map: resultsMap,
-				position: results[0].geometry.location
-			});
-		} else {
-			alert('Geocode was not successful for the following reason: ' + status);
-		}
-	})
-}
-</script> -->
-
 	<script>
 	function myMap() {
      var locations = [
-       ['Wollongong', -34.425135, 150.894603],
-       ['Sydney', -33.918416, 151.225770],
-       ['Melbourne', -37.831699, 144.964333],
-       ['Brisbane', -27.477376, 153.028169],
-       ['Adelaide', -34.924787, 138.595701],
-	   ['Test', -33, 138.595701]
+	   ['Darlinghurst',-33.8794075,151.2164518],
+	   ['Springwood',-33.692011,150.5397621],
+	   ['North Sydney', -33.8365981,151.2008305],
+	   ['Matraville',-33.9640097,151.2160084],
+	   ['Lane Cove', -33.8179956,151.147523],
+	   ['Lavender Bay', -33.8438452,151.2032339],
+	   ['Hervey Bay', -25.2900115,152.6667897],
+	   ['Malabar',-33.9642173,151.2365495],
+	   ['Rhodes',-33.8300019,151.0799181],
+	   ['Findon',-34.8984402,138.5174083],
+	   ['Milsons Point',-33.8471022,151.2093658],
+	   ['Sydney',-33.8458353,150.3715628],
+	   ['North Ryde',-33.796689,151.098182],
+	   ['Port Macquarie',-31.4610498,152.8236612],
+	   ['Silverwater',-33.833869,151.0277053],
+	   ['Melbourne',-37.9701544,144.4927319],
+	   ['St. Leonards',-33.8223236,151.1841452],
+	   ['Sunbury',-37.5532351,144.6364503],
+	   ['Wollongong',-34.428216,150.8755489],
+	   ['Caloundra',-26.7974025,153.1105081],
+	   ['Newcastle',-32.9762968,151.5496177],
+	   ['Hawthorne',-27.4646088,153.0498721],
+	   ['Cranbourne',-38.11271,145.2372957],
+	   ['Gold Coast',-27.9533313,153.0891804],
+	   ['Seaford',-38.1061855,145.1071068],
+	   ['Warrnambool',-38.3784988,142.4066658],
+	   ['Alexandria',-33.9081748,151.1743431],
+	   ['East Brisbane',-27.4830662,153.0392293],
+	   ['Rockhampton',-23.3392997,150.4500988],
+	   ['Townsville',-19.2964247,146.6151534],
+	   ['Hobart',-42.8823074,147.3110468],
+	   ['Bendigo',-36.7368013,144.1422423],
+	   ['South Melbourne',-37.8340229,144.9385456],
+	   ['Goulburn',-34.7445504,149.6450667],
+	   ['Brisbane',-27.3798039,152.4327726],
+	   ['Geelong',-38.1320476,144.229382],
+	   ['Melton',-37.6775736,144.4937963],
+	   ['Coffs Harbour',-30.2972461,153.0286015]
      ];
 
      var map = new google.maps.Map(document.getElementById('map'), {
