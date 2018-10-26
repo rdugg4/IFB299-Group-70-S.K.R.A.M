@@ -20,6 +20,7 @@ class CarPopularity(object):
                 graphType = "Column"
                 messages.add_message(request, messages.INFO, 'Your inputted Graph Type was not one of the options and defaulted to Column')
 
+        # Define car groups and counts
         carsWithAnnotation = Cars.objects.annotate(numberOfOrders = Count('orders'))
         if inputVeriObj.checkFormGET('Catagory', 'string'):
             catagory = request.GET['Catagory']
@@ -64,7 +65,6 @@ class CarPopularity(object):
                 for carMake in carMakes:
                     carGroups.append(carsWithAnnotation.filter(car_makename = carMake['car_makename']))
                     setNames.append(carMake['car_makename'])
-
             else:
                 messages.add_message(request, messages.INFO, 'Your inputted Catagory was not one of the options and defaulted to driveType')
 

@@ -169,15 +169,18 @@ class test_CarPopularityView(TestCase):
         self.assertIsInstance(counterAndNames, zip)
 
 class test_ContactUsView(TestCase):
+    # Tests the page exists at the correct location
     def test_Location(self):
         response = self.client.post('/ContactUs')
         self.assertEqual(response.status_code, 200)
 
+    # Tests the page is displaying the correct template
     def test_Template(self):
         response = self.client.post('/ContactUs')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'testApp/MikeContactPage draft.html')
 
+    # Test functionality with correct inputs
     def test_SendEmail(self):
         response = self.client.post('/ContactUs', {'your_name': 'John Smith', 'email': 'abc@example.com', 'question': 'blah blah blah'})
         self.assertEqual(response.status_code, 200)
@@ -187,6 +190,7 @@ class test_ContactUsView(TestCase):
         self.assertEqual(mail.outbox[0].subject, 'Issue from: John Smith')
         self.assertEqual(mail.outbox[0].body, 'blah blah blah')
 
+    # Tests functionality when the user inputs incorrect values
     def test_BadInputs(self):
         response = self.client.post('/ContactUs', {'your_name': '', 'email': 'abc@example.com', 'question': 'blah blah blah'})
         self.assertEqual(response.status_code, 200)
@@ -201,6 +205,12 @@ class test_ContactUsView(TestCase):
         self.assertEqual(len(mail.outbox), 0)
 
         response = self.client.post('/ContactUs', {'your_name': 'JSmith', 'email': 'abc@example.com', 'question': ''})
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['querySuccesfullySubmitted'])
+        self.assertTrue(response.context['failedToSubmit'])
+        self.assertEqual(len(mail.outbox), 0)
+
+        response = self.client.post('/ContactUs', {'your_name': 'JSmith', 'email': 'abcexample.com', 'question': 'blah blah blah'})
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.context['querySuccesfullySubmitted'])
         self.assertTrue(response.context['failedToSubmit'])
