@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+	<title> Car Information </title>
+	<link href="./public/css/navbar-style.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+    </head>
+
+    <body>
+	<header>
+	    <div class="topnav"> <img src="./public/images/NewCarLogo.png"
+        alt="logo" class="logo">
+	    <nav>
+		<ul class="menu-main">
+		    <li><a href="#"> Home </a></li>
+		    <li><a href="#"> Locations </a></li>
+		    <li><a href="#"> Hire Cars </a></li>
+		    <li><a href="#"> Help </a>
+          <div class="menu-sub">
+            <ul>
+              <li><a href="#"> FAQ </a></li>
+      				<li><a href="#"> Contact Us </a></li>
+            </ul>
+          </div>
+		    <li><a href="#"> EN </a></li>
+		    <li><a href="#"> <i class="material-icons"
+          style="vertical-align:middle">person_outline</i>Sign In </a>
+		    	<div class="menu-sub">
+			    <ul>
+				<li><a href="#"> Sign In </a></li>
+				<li><a href="#"> Create New Account </a></li>
+			    </ul>
+			</div>
+		    </li>
+		</ul>
+	    </nav>
+	    </div>
+	</header>
+
+	<section>
+    <h1 align="center" style="padding-top:20px;"> Example Car </h1> <!-- This
+      will be dynamic and refer to database -->
+    <br> <!-- need a break in between image box and specific info -->
+    <div class="row">
+      <div class="reviewcontainer">
+        <div class="fakeimg" style="height:200px;">Image</div>
+      </div>
+    </div>
+
+    <!--This is where the information that is pulled from the database absolute
+    the car will be filled in -->
+    <div class="row">
+      <div class="leftcolumn">
+        <h2> Specific Information</h2>
+        <p>Transmission</p>
+        <p>Seats</p>
+        <p>Engine</p>
+        <p>Tank Capacity</p>
+      </div>
+      <div class ="rightcolumn">
+        <br>
+        <br>
+        <p>Power</p>
+        <p>Body</p>
+        <p>Drive</p>
+      </div>
+    </div>
+
+<!-- Need to fix this as it doesn't quite align in the center, align is
+not working?? -->
+      <a href="" class="btn" style="margin-left:50%"> Reserve now! </a>
+ 
+ 
+ 
+ 
+<!----------------------------------------------------------------->
+    <!--Mike addon codes starts from here-->
+    <div class="row">
+      <div class="leftcolumn">
+        <h2> Staff edit area </h2>
+        <p>Transmission</p>
+        <input type="text" id="Transmission" name="transmission" placeholder="">
+        <p>Seats</p>
+        <input type="text" id="Seats" name="Seats" placeholder="">
+        <p>Engine</p>
+        <input type="text" id="Engine" name="Engine" placeholder="">
+        <p>Tank Capacity</p>
+        <input type="text" id="TankCapacity" name="TankCapacity" placeholder="">
+      </div>
+      <div class ="rightcolumn">
+        <br>
+        <br>
+        <p>Power</p>
+        <input type="text" id="Power" name="Power" placeholder="">
+        <p>Body</p>
+        <input type="text" id="Body" name="Body" placeholder="">
+        <p>Drive</p>
+        <input type="text" id="Drive" name="Drive" placeholder="">
+      </div>
+    </div>
+    <a href="" class="btn" style="margin-left:50%"> Update now! </a>
+
+
+
+
+
+
+    <div class="row">
+      <div class="leftcolumn">
+        <h2> Reviews </h2>
+        <p> See what our customers think! </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="reviewcontainer">
+        <h3><i> Love it! </i></h3>
+        <p><span> John D </span></p>
+        <br>
+        <p>Great car, very fuel efficient. Would definitely hire again </p>
+      </div>
+    </div>
+
+	</section>
+
+	<footer>
+	    <div class="footer-main">
+		<nav>
+		    <ul>
+			<li><a href="#">Need help?</a></li>
+		    </ul>
+		</nav>
+	    </div>
+	</footer>
+
+	</body>
+</html>
