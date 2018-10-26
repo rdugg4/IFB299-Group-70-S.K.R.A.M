@@ -1,18 +1,7 @@
 from ..models import *
 
 def CreateTestData():
-    # Any values such as car_model='model' are string based inputs and require
-    # '' around the inputs. Values such as car_seriesyear = 2006 require integer
-    # inputs (numbers without decimal places). I have given and example of each
-    # kind of Object I want created, with details about how many and with what
-    # inputs
 
-    # This defines an object of the cars type. I would like 20 cars. I would
-    # like some of the cars to have similar information, for instance, a couple
-    # of cars should have the same makename, and a couple of cars should have
-    # the same drive type.
-    # Special consideration, car_drive string length cannot be longer than 3
-    # I would recommend values such as 4WD, RWD, FWD
 	
 	# Car 1
     car1 = Cars(car_makename='VOLKSWAGEN',
@@ -354,11 +343,6 @@ def CreateTestData():
         car_wheelbase = '2820mm')
     car20.save()
 	
-
-    # I will need 5-10 customers. Some similar customers will have to be created,
-    # such that they have similar date of births (within 5 years), a few with
-    # the same occupation, and make sure gender is either M or F
-    # dob needs to be of the format DD-MM-YYYY
 	
 	# Customer 1
     customer1 = Customers(name = 'Chloe Smith',
